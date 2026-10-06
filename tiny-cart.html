@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tiny Cart, rewritten — Shani Leibner</title>
+  <meta name="description" content="Turning the Wix mini-cart from a styling afterthought into a designed surface that moves buyers to checkout.">
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..600;1,8..60,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body class="p-cart">
+  <a class="skip" href="#overview">Skip to content</a>
+
+  <header class="site-head wrap">
+    <a class="name" href="/">Shani Leibner</a>
+    <nav aria-label="Main">
+      <a href="/#work" aria-current="page">Work</a>
+      <a href="/#about">About</a>
+      <a href="/#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <header class="cs-head wrap">
+      <a class="back" href="/#work">All work</a>
+      <p class="context">Wix eCommerce, cart and checkout</p>
+      <h1>Tiny Cart, rewritten</h1>
+      <p class="sub">The pop-up a shopper sees right after "Add to cart" is the highest-intent moment in a store. It was barely designable and led nowhere. I rebuilt it as a surface that moves buyers to checkout.</p>
+      <dl class="facts">
+        <div><dt>Role</dt><dd>UX/UI Designer</dd></div>
+        <div><dt>Platform</dt><dd>Wix eCommerce</dd></div>
+        <div><dt>Type</dt><dd>Feature redesign</dd></div>
+        <div><dt>Status</dt><dd>Shipped</dd></div>
+      </dl>
+    </header>
+
+    <div class="cs-layout wrap">
+      <nav class="toc" aria-label="On this page">
+        <ol>
+          <li><a href="#overview">Starting point</a></li>
+          <li><a href="#benchmark">Benchmark</a></li>
+          <li><a href="#added">What changed</a></li>
+          <li><a href="#editor">In the Editor</a></li>
+          <li><a href="#reflection">Reflection</a></li>
+        </ol>
+      </nav>
+
+      <article class="cs-body">
+        <section id="overview">
+          <h2>The starting point: three ways in, one buried panel</h2>
+          <p>Shoppers reached the Tiny Cart from the cart icon, a product page or a category page. But merchants could only customize it from deep inside the cart-icon settings, and only lightly: text, fonts, colors and the button style.</p>
+          <p>Worse, it had no path to checkout, and it showed too little (no discounts, no item details) to give a buyer confidence.</p>
+          <div class="pair">
+            <figure>
+              <p class="tag">Before</p>
+              <div class="ph">Cart-icon settings panel</div>
+              <figcaption>Customization hidden one level too deep.</figcaption>
+            </figure>
+            <figure>
+              <p class="tag">After</p>
+              <div class="ph">The new Tiny Cart</div>
+              <figcaption>A direct path to checkout, with the details a buyer needs.</figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <section id="benchmark">
+          <h2>Benchmark: reassure, then move forward</h2>
+          <p>I studied how leading retailers like Nike and American Eagle handle the add-to-cart moment. They share three things: a direct checkout button, a free-shipping nudge, and clear item details such as price, discount and variant. At this moment, the cart's job isn't to confirm the add. It's to move the buyer forward.</p>
+          <figure>
+            <div class="ph wide">Side carts from Nike and American Eagle, annotated</div>
+            <figcaption><b>Benchmark.</b> What leading carts show at the moment of highest intent.</figcaption>
+          </figure>
+        </section>
+
+        <section id="added">
+          <h2>What changed for shoppers</h2>
+          <ul>
+            <li><strong>A checkout button,</strong> not just "View cart."</li>
+            <li><strong>Discounts and item details,</strong> so buyers see savings and confirm what they picked.</li>
+            <li><strong>Two new slots</strong> merchants can use to extend the cart.</li>
+          </ul>
+        </section>
+
+        <section id="editor">
+          <h2>What changed for merchants</h2>
+          <p>The Tiny Cart got its own page in the Wix Editor, with separate panels for design and customization instead of living inside the cart-icon settings. Merchants can also choose, per entry point, whether shoppers see the Side Cart or the Tiny Cart, and where the button leads: checkout, the cart page or express checkout.</p>
+          <figure>
+            <div class="ph">Settings panel with per-entry-point routing</div>
+            <figcaption><b>Routing.</b> Each entry point gets its own behavior.</figcaption>
+          </figure>
+        </section>
+
+        <section id="reflection">
+          <h2>Reflection</h2>
+          <p class="todo">TODO: 2–3 sentences in your voice. What a small surface taught you about high-intent moments.</p>
+        </section>
+
+        <a class="next" href="/work/checkout-agent">
+          <span>Back to the start</span>
+          <strong>Checkout Recommendation Agent</strong>
+        </a>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-foot wrap">© 2026 Shani Leibner</footer>
+  <script src="/assets/js/main.js" defer></script>
+</body>
+</html>

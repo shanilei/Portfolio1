@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Checkout Recommendation Agent — Shani Leibner</title>
+  <meta name="description" content="An AI agent inside Wix Checkout Settings that tells merchants where they lose buyers, why, and what to change.">
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..600;1,8..60,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body class="p-checkout">
+  <a class="skip" href="#overview">Skip to content</a>
+
+  <header class="site-head wrap">
+    <a class="name" href="/">Shani Leibner</a>
+    <nav aria-label="Main">
+      <a href="/#work" aria-current="page">Work</a>
+      <a href="/#about">About</a>
+      <a href="/#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <header class="cs-head wrap">
+      <a class="back" href="/#work">All work</a>
+      <p class="context">Wix eCommerce, core purchase flow</p>
+      <h1>Checkout Recommendation Agent</h1>
+      <p class="sub">An AI agent inside Checkout Settings that tells merchants where they lose buyers, why, and what to change, then makes the change in one click.</p>
+      <dl class="facts">
+        <div><dt>Role</dt><dd>UX/UI Designer</dd></div>
+        <div><dt>Team</dt><dd>PM, BE, FE, BA, QA</dd></div>
+        <div><dt>System</dt><dd>Wix Design System</dd></div>
+        <div><dt>Year</dt><dd>2025</dd></div>
+      </dl>
+    </header>
+
+    <figure class="cs-cover wrap">
+      <div class="ph wide">Cover: the recommendation card in context, inside Checkout Settings</div>
+    </figure>
+
+    <div class="cs-layout wrap">
+      <nav class="toc" aria-label="On this page">
+        <ol>
+          <li><a href="#overview">Overview</a></li>
+          <li><a href="#problem">The problem</a></li>
+          <li><a href="#role">My role</a></li>
+          <li><a href="#research">Research</a></li>
+          <li><a href="#concept">The concept</a></li>
+          <li><a href="#decision">A key decision</a></li>
+          <li><a href="#design">The design</a></li>
+          <li><a href="#placement">Where it lives</a></li>
+          <li><a href="#iterations">Iterations</a></li>
+          <li><a href="#trust">Making AI trustworthy</a></li>
+          <li><a href="#reflection">Reflection</a></li>
+        </ol>
+      </nav>
+
+      <article class="cs-body">
+        <section id="overview">
+          <h2>Merchants could see they were losing buyers. Not where, why, or what to do.</h2>
+          <p>Checkout analytics told Wix merchants that buyers were dropping off. They never said where in the flow, why it happened, or which setting to change. I designed an AI agent that lives inside Checkout Settings, reads the store's own data, benchmarks it against similar stores, and turns each insight into a single action.</p>
+        </section>
+
+        <section id="problem">
+          <h2>The problem</h2>
+          <p>Checkout is where revenue is won or lost, and where merchants are most blind. They couldn't pinpoint where buyers left, had no guidance on which settings improve conversion, and the reports they had were static and hard to act on.</p>
+          <p>Nothing connected the data to the fix. That gap was the product.</p>
+        </section>
+
+        <section id="role">
+          <h2>My role</h2>
+          <p>UX/UI designer on a cross-functional team. I framed the problem and use cases, led the research synthesis, defined the Collect, Analyze, Recommend model, and designed the recommendation component and its placement inside Checkout Settings, on the Wix Design System.</p>
+          <!-- TODO: adjust after the PM confirms role wording (led vs. contributed) -->
+        </section>
+
+        <section id="research">
+          <h2>Merchants didn't want another chart. They wanted the tool to do the thinking.</h2>
+          <p>I looked at how competitors like Shopify frame cart abandonment, then went to the merchants themselves: logs from the Wix AI assistant and store reviews.</p>
+          <blockquote class="voice">"71 added to cart, 7 checked out. How do I increase conversions?"</blockquote>
+          <p>The logs also exposed the failure mode of the generic assistant: it answered, but it didn't know the store. Advice that applied to everyone helped no one. So the job of the product became a decision, not more data.</p>
+        </section>
+
+        <section id="concept">
+          <h2>The concept: data, insight, recommendation, action</h2>
+          <p>A smart layer that runs in three steps:</p>
+          <ol class="flow">
+            <li><b>Collect</b><span>Buyer, item, locale, industry, season, settings</span></li>
+            <li><b>Analyze</b><span>Against a data model and similar-store benchmarks</span></li>
+            <li><b>Recommend</b><span>A concrete change to a specific setting</span></li>
+          </ol>
+          <p>Every insight belongs to one of three families, and each ends in an action:</p>
+          <ul>
+            <li><strong>Funnel.</strong> "30% drop at Customer Details, higher than similar stores."</li>
+            <li><strong>Fields.</strong> "Company name is required, but most of your buyers are consumers."</li>
+            <li><strong>Configuration.</strong> "Express checkout isn't enabled."</li>
+          </ul>
+          <p class="kicker">Percentages are illustrative.</p>
+        </section>
+
+        <section id="decision">
+          <h2>A key decision: one benchmarked number, one action</h2>
+          <div class="pair">
+            <figure>
+              <p class="tag">Before</p>
+              <div class="ph">Generic assistant answering "Why am I not getting sales?"</div>
+              <figcaption>A menu of generic tips. No benchmark, no clear next step.</figcaption>
+            </figure>
+            <figure>
+              <p class="tag">After</p>
+              <div class="ph">Agent recommendation for the same store</div>
+              <figcaption>Grounded in the store's own data, benchmarked, and ending in one action.</figcaption>
+            </figure>
+          </div>
+          <p style="margin-top:28px">Generic advice is noise. A benchmarked number plus one button is a decision the merchant can actually make. That became the rule for every recommendation.</p>
+        </section>
+
+        <section id="design">
+          <h2>The design: one component, one anatomy</h2>
+          <p>Every recommendation uses the same structure, so merchants learn to read it once:</p>
+          <ul>
+            <li><strong>Tag.</strong> Which part of checkout it touches.</li>
+            <li><strong>Title.</strong> The action, not the problem.</li>
+            <li><strong>Reasoning.</strong> Why, in one sentence, from the store's own data.</li>
+            <li><strong>Actions.</strong> "Let's do it" makes the change through Aria, Wix's AI assistant. "Show me how" walks the merchant through it.</li>
+          </ul>
+          <figure>
+            <div class="ph">Annotated anatomy of the recommendation card</div>
+            <figcaption><b>Recommendation card.</b> The title names the action; the reasoning carries the evidence.</figcaption>
+          </figure>
+        </section>
+
+        <section id="placement">
+          <h2>Where it lives: next to the settings it changes</h2>
+          <p>The obvious home was a separate analytics tab. I put the agent inside Checkout Settings instead, beside the settings it recommends changing. Seeing a problem and fixing it happen on the same screen.</p>
+          <ol class="flow">
+            <li><b>Open settings</b><span>Benchmarked funnel</span></li>
+            <li><b>Read</b><span>Recommendation in context</span></li>
+            <li><b>Let's do it</b><span>Aria performs it</span></li>
+            <li><b>Approve</b><span>Setting updates</span></li>
+          </ol>
+          <figure>
+            <div class="ph">Flow: Checkout Settings with the agent panel</div>
+            <figcaption><b>Placement.</b> Insight and action share one screen, so there's no gap between noticing and fixing.</figcaption>
+          </figure>
+        </section>
+
+        <section id="iterations">
+          <h2>Iterations</h2>
+
+          <div class="decision">
+            <h3>One action, not a menu</h3>
+            <dl>
+              <dt>Tension</dt><dd>Early flows offered several next steps. Merchants froze.</dd>
+              <dt>Call</dt><dd>One primary action, with a quiet "Show me how" for those who want to do it themselves.</dd>
+              <dt>Why</dt><dd>A decision beats a menu.</dd>
+            </dl>
+          </div>
+
+          <div class="decision">
+            <h3>Say "nothing to fix" out loud</h3>
+            <dl>
+              <dt>Tension</dt><dd>An agent that always finds a problem reads as upselling.</dd>
+              <dt>Call</dt><dd>A positive state: "No changes needed for branding or policies."</dd>
+              <dt>Why</dt><dd>Honest silence builds trust. An advisor, not a nag.</dd>
+            </dl>
+          </div>
+
+          <div class="decision">
+            <h3>Reasoning that is grounded and short</h3>
+            <dl>
+              <dt>Tension</dt><dd>Model-written reasons could ramble or invent things.</dd>
+              <dt>Call</dt><dd>Every reason tied to a real signal, capped at about 160 characters, no jargon. Enforced in the prompt and in the UI.</dd>
+              <dt>Why</dt><dd>Short, data-backed reasons are the ones merchants trust.</dd>
+            </dl>
+          </div>
+
+          <figure>
+            <div class="ph">The positive-state card</div>
+            <figcaption><b>Positive state.</b> When a checkout area is healthy, the agent says so.</figcaption>
+          </figure>
+        </section>
+
+        <section id="trust">
+          <h2>Making AI trustworthy before it reaches merchants</h2>
+          <p>Under the hood, site context (checkout settings, business profile, warehouse data), a system prompt and a domain knowledge base go through the Wix AI Gateway to a language model, which returns structured recommendations. My part was the merchant-facing experience, but understanding the pipeline kept the UI honest about what the data could support.</p>
+          <p>We validated in stages rather than assuming quality: manual review first, then a model judging output on a sample of sites, then repeated runs across a larger pre-release group. The rubric checked:</p>
+          <ul>
+            <li>Format and length limits (action up to 80 characters, reason up to 160)</li>
+            <li>Whether each recommendation was grounded in the store's data</li>
+            <li>Category accuracy and quality of action and reasoning</li>
+            <li>Prioritization: revenue first, then drop-off, then friction</li>
+          </ul>
+          <p>Success was defined as checkout conversion and online sales volume, plus how many recommendations merchants actually acted on.</p>
+        </section>
+
+        <section id="reflection">
+          <h2>Reflection</h2>
+          <p class="todo">TODO: 3–4 sentences in your voice. The hardest tension (surfacing AI insight without overwhelming a non-expert merchant), what you'd do differently, and what working on a real product taught you that a concept couldn't.</p>
+        </section>
+
+        <a class="next" href="/work/dream-journal">
+          <span>Next project</span>
+          <strong>Dream Journal</strong>
+        </a>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-foot wrap">© 2026 Shani Leibner</footer>
+  <script src="/assets/js/main.js" defer></script>
+</body>
+</html>

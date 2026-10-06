@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dream Journal — Shani Leibner</title>
+  <meta name="description" content="A bilingual mobile app that helps people capture a dream and understand it. Designed and built solo.">
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..600;1,8..60,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body class="p-dream">
+  <a class="skip" href="#overview">Skip to content</a>
+
+  <header class="site-head wrap">
+    <a class="name" href="/">Shani Leibner</a>
+    <nav aria-label="Main">
+      <a href="/#work" aria-current="page">Work</a>
+      <a href="/#about">About</a>
+      <a href="/#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <header class="cs-head wrap">
+      <a class="back" href="/#work">All work</a>
+      <p class="context">Mobile, wellbeing</p>
+      <!-- TODO: final app name -->
+      <h1>Dream Journal</h1>
+      <p class="sub">A bilingual mobile app that helps people capture a dream before it fades, and understand it: symbols, emotion and meaning.</p>
+      <dl class="facts">
+        <div><dt>Role</dt><dd>Solo: research, UX, UI, build</dd></div>
+        <div><dt>Platform</dt><dd>Mobile, Hebrew and English</dd></div>
+        <div><dt>Type</dt><dd>Self-initiated</dd></div>
+        <div><dt>Year</dt><dd>2025–26</dd></div>
+      </dl>
+    </header>
+
+    <figure class="cs-cover wrap">
+      <div class="ph wide">Cover: three key screens on the night-blue gradient</div>
+    </figure>
+
+    <div class="cs-layout wrap">
+      <nav class="toc" aria-label="On this page">
+        <ol>
+          <li><a href="#overview">Overview</a></li>
+          <li><a href="#problem">The problem</a></li>
+          <li><a href="#audience">Who it's for</a></li>
+          <li><a href="#research">Research</a></li>
+          <li><a href="#concept">The concept</a></li>
+          <li><a href="#design">The design</a></li>
+          <li><a href="#build">Building it</a></li>
+          <li><a href="#reflection">Reflection</a></li>
+        </ol>
+      </nav>
+
+      <article class="cs-body">
+        <section id="overview">
+          <h2>Hold the dream, then help make sense of it.</h2>
+          <p>You speak or type a dream. The app breaks it into symbols, emotions and personal associations, offers an interpretation and a generated image, and tracks patterns over time. I designed and built it end to end, alone.</p>
+        </section>
+
+        <section id="problem">
+          <h2>The problem</h2>
+          <p>The minutes after waking are fragile, and the dream goes with them. After a hard experience, it can linger as a nightmare instead.</p>
+          <p>A notes app captures the text but gives nothing back. Clinical tools feel heavy. There was no gentle, private space that both keeps the dream and helps you understand it.</p>
+        </section>
+
+        <section id="audience">
+          <h2>Who it's for</h2>
+          <p>Anyone who dreams, with particular care for people whose sleep has been shaped by trauma.</p>
+          <!-- TODO: decide how explicit to be about the post-trauma context -->
+          <p>Research showed dreams change with age. Children dream in direct images, monsters and pursuers. Teenagers tend toward realistic, recurring scenes of escape or freezing. Adults dream more symbolically: loss, collapse, confusion. The app has to read all three.</p>
+        </section>
+
+        <section id="research">
+          <h2>Meaning is general and personal at once</h2>
+          <p>I grounded the analysis in three things:</p>
+          <ul>
+            <li><strong>Dream criteria.</strong> Each dream is read by type, intensity, frequency, realism and how it feels after waking.</li>
+            <li><strong>A symbol map.</strong> Drawing on Jungian readings: water as emotion, falling as loss of control, a chase as pressure, a house as the self.</li>
+            <li><strong>The dreamer's context.</strong> A symbol means something different to each person, so every reading combines a general meaning with the user's own associations.</li>
+          </ul>
+          <p>All of it was tested against real, anonymized dream accounts.</p>
+        </section>
+
+        <section id="concept">
+          <h2>The concept: a loop, not a log</h2>
+          <ol class="flow">
+            <li><b>Capture</b><span>Voice or text</span></li>
+            <li><b>Break down</b><span>Symbols, emotion, association</span></li>
+            <li><b>Interpret</b><span>General and personal</span></li>
+            <li><b>See it</b><span>A generated image</span></li>
+            <li><b>Track</b><span>Patterns over time</span></li>
+          </ol>
+          <p>The tracking step is what separates it from a journal: recurring symbols and emotions surface on their own.</p>
+        </section>
+
+        <section id="design">
+          <h2>The design: nocturnal, soft, readable at 6 a.m.</h2>
+          <p>A night-sky system of navy and violet gradients with frosted glass surfaces. Emotions are tagged in color so patterns are visible at a glance. The app is right-to-left first, with Hebrew as the primary language, and the onboarding copy is written to feel calm rather than clinical.</p>
+          <div class="trio">
+            <figure><div class="ph tall">Capture</div><figcaption><b>Capture.</b> Voice first, because the dream fades while you type.</figcaption></figure>
+            <figure><div class="ph tall">Breakdown</div><figcaption><b>Breakdown.</b> Symbols and emotions, each with a general and a personal reading.</figcaption></figure>
+            <figure><div class="ph tall">Gallery</div><figcaption><b>Gallery.</b> Generated images make months of dreams scannable.</figcaption></figure>
+          </div>
+          <figure>
+            <div class="ph">Design system: color tokens, emotion palette, glass surfaces, RTL type</div>
+            <figcaption><b>Design tokens.</b> One source of truth for Figma and code.</figcaption>
+          </figure>
+        </section>
+
+        <section id="build">
+          <h2>Building it</h2>
+          <p>I took the app from Figma to working code myself. A full design-token system and a written prompt guide let me move designs into code with exact values, not approximations. The analysis engine is a TypeScript service that uses Claude through the Anthropic SDK, with tool use to return structured output: symbols, emotions and interpretation as data the UI can render.</p>
+          <p>Designing for AI from the inside changed how I design for it. Structure the output, and the interface can be calm.</p>
+        </section>
+
+        <section id="reflection">
+          <h2>Reflection</h2>
+          <p class="todo">TODO: 3–4 sentences in your voice. What was hardest about designing for something this personal, what building it yourself taught you, and what you'd change.</p>
+        </section>
+
+        <a class="next" href="/work/accessibility-gaps">
+          <span>Next project</span>
+          <strong>Accessibility gaps in Hotjar</strong>
+        </a>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-foot wrap">© 2026 Shani Leibner</footer>
+  <script src="/assets/js/main.js" defer></script>
+</body>
+</html>

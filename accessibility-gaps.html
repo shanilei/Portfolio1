@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Accessibility gaps in Hotjar — Shani Leibner</title>
+  <meta name="description" content="A Hotjar feature that reads accessibility gaps out of behavior data, so teams can see which user groups are struggling.">
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..600;1,8..60,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body class="p-hotjar">
+  <a class="skip" href="#overview">Skip to content</a>
+
+  <header class="site-head wrap">
+    <a class="name" href="/">Shani Leibner</a>
+    <nav aria-label="Main">
+      <a href="/#work" aria-current="page">Work</a>
+      <a href="/#about">About</a>
+      <a href="/#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <header class="cs-head wrap">
+      <a class="back" href="/#work">All work</a>
+      <p class="context">Hotjar, behavior analytics</p>
+      <h1>Revealing accessibility gaps in user behavior</h1>
+      <p class="sub">A Hotjar feature that turns behavior data into accessibility insight: where specific user groups struggle, so teams can make more inclusive decisions.</p>
+      <dl class="facts">
+        <div><dt>Role</dt><dd>UX research and UI design</dd></div>
+        <div><dt>Team</dt><dd>Team of 4</dd></div>
+        <div><dt>Type</dt><dd>Academic</dd></div>
+        <div><dt>Year</dt><dd>2025–26</dd></div>
+      </dl>
+    </header>
+
+    <figure class="cs-cover wrap">
+      <div class="ph wide">Cover: the Accessibility Issues dashboard</div>
+    </figure>
+
+    <div class="cs-layout wrap">
+      <nav class="toc" aria-label="On this page">
+        <ol>
+          <li><a href="#overview">Overview</a></li>
+          <li><a href="#problem">The problem</a></li>
+          <li><a href="#solution">The solution</a></li>
+          <li><a href="#research">Research</a></li>
+          <li><a href="#users">Who uses it</a></li>
+          <li><a href="#flow">The flow</a></li>
+          <li><a href="#iterations">Iterations</a></li>
+          <li><a href="#next">What's next</a></li>
+        </ol>
+      </nav>
+
+      <article class="cs-body">
+        <section id="overview">
+          <h2>Hotjar sees behavior. It doesn't see who is being left behind.</h2>
+          <p>Hotjar records how people use a website through heatmaps, session recordings and feedback. It doesn't show whether an interface is failing specific groups. This project adds that layer, reading accessibility gaps out of behavior Hotjar already captures.</p>
+          <p>Team: Shani Leibner, Omer Barak, Hila Lustig and Shahar Liz Ben Or.</p>
+          <!-- TODO: state your specific part once the team confirms the split -->
+        </section>
+
+        <section id="problem">
+          <h2>The problem</h2>
+          <p>When interfaces ignore differences in ability, culture or digital literacy, they create unequal access. Those gaps rarely show up as bugs, so nobody goes looking for them.</p>
+        </section>
+
+        <section id="solution">
+          <h2>The solution: an Accessibility Issues page</h2>
+          <p>A single page that lists where specific user groups struggle, ranked by how far they deviate from the average, with each issue linking straight into the heatmap or session replay that shows it.</p>
+          <figure>
+            <div class="ph">Accessibility Issues dashboard, issues ranked by deviation</div>
+            <figcaption><b>Issues table.</b> The affected group is the point of each row. Data is illustrative.</figcaption>
+          </figure>
+        </section>
+
+        <section id="research">
+          <h2>Research: cultural gaps don't show up as bugs</h2>
+          <p>We worked in three threads:</p>
+          <ul>
+            <li><strong>Reading the signals.</strong> Which behavioral patterns actually point to a gap, and how to communicate them.</li>
+            <li><strong>Existing patterns.</strong> How teams already explore data in Hotjar, which turned out to be mostly through tables.</li>
+            <li><strong>Interviews.</strong> Product managers and analysts on how they detect, interpret and prioritize issues today.</li>
+          </ul>
+          <p>That gave us three rules: build on tools Hotjar users already know, organize gaps by user population, and measure every pattern against the overall average so deviation becomes the signal.</p>
+        </section>
+
+        <section id="users">
+          <h2>Who uses it</h2>
+          <h3>Product manager</h3>
+          <p>Needs to see which segments have issues so fixes can be prioritized by impact.</p>
+          <h3>Business analyst</h3>
+          <p>Needs behavioral patterns across segments that reliably point to a gap, and a way to turn them into insight.</p>
+          <p>The shared job: find accessibility issues across the site, understand their real impact, and confirm them through heatmaps and recordings.</p>
+        </section>
+
+        <section id="flow">
+          <h2>The flow</h2>
+          <ol class="flow">
+            <li><b>Dashboard</b><span>Choose accessibility analysis</span></li>
+            <li><b>Issues</b><span>Gaps and affected groups</span></li>
+            <li><b>Investigate</b><span>Heatmap or session replay</span></li>
+          </ol>
+          <figure>
+            <div class="ph">From an issue row into its heatmap</div>
+            <figcaption><b>Investigate.</b> One click from a ranked issue to the evidence behind it.</figcaption>
+          </figure>
+        </section>
+
+        <section id="iterations">
+          <h2>Iterations</h2>
+          <!-- TODO: confirm each "What we changed" line with the team before launch -->
+
+          <div class="decision">
+            <h3>Where the feature lives</h3>
+            <dl>
+              <dt>First try</dt><dd>A standalone tab with alerts.</dd>
+              <dt>Problem</dt><dd>It clashed with Hotjar's language and navigation.</dd>
+              <dt>Change</dt><dd>Folded into Hotjar's existing patterns.</dd>
+            </dl>
+          </div>
+
+          <div class="decision">
+            <h3>Showing who is affected</h3>
+            <dl>
+              <dt>First try</dt><dd>Kept demographic data to a minimum.</dd>
+              <dt>Problem</dt><dd>Issues read as incomplete and unclear.</dd>
+              <dt>Change</dt><dd>Made the affected group the point of each row.</dd>
+            </dl>
+          </div>
+
+          <div class="decision">
+            <h3>How much the table shows</h3>
+            <dl>
+              <dt>First try</dt><dd>A stripped-down table, heatmap behind a button.</dd>
+              <dt>Problem</dt><dd>Essential details were missing.</dd>
+              <dt>Change</dt><dd>Just enough context to grasp the issue, still scannable.</dd>
+            </dl>
+          </div>
+
+          <div class="decision">
+            <h3>Framing the problem</h3>
+            <dl>
+              <dt>First try</dt><dd>One headline with a time range and user type.</dd>
+              <dt>Problem</dt><dd>It hid which segments were affected.</dd>
+              <dt>Change</dt><dd>Sub-topics that name the segments.</dd>
+            </dl>
+          </div>
+        </section>
+
+        <section id="next">
+          <h2>What's next</h2>
+          <p>Built into an analytics tool, accessibility stops being a separate audit and becomes part of everyday product decisions. Today the feature finds gaps through behavior. The next step is estimating their business cost in conversion and revenue, and later, recommending fixes.</p>
+          <p><a href="#">See the interactive prototype</a></p>
+          <!-- TODO: prototype URL -->
+          <p class="todo">Optional: a short reflection in your voice.</p>
+        </section>
+
+        <a class="next" href="/work/tiny-cart">
+          <span>Next project</span>
+          <strong>Tiny Cart, rewritten</strong>
+        </a>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-foot wrap">© 2026 Shani Leibner</footer>
+  <script src="/assets/js/main.js" defer></script>
+</body>
+</html>
