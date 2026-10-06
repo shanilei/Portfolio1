@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..600;1,8..60,400&display=swap" rel="stylesheet">
   <style>
+
 /* ------------------------------------------------------------
    Shani Leibner — portfolio
    Tokens: cool paper, ink, one accent per project.
@@ -209,119 +210,145 @@ a:hover { text-decoration-thickness: 2px; }
 .site-foot { padding-top: 24px; padding-bottom: 40px; color: var(--muted); font-size: 14px; }
 
 /* ---------- Case study ---------- */
-.cs-head { padding-top: clamp(32px, 6vw, 80px); padding-bottom: 40px; }
-.cs-head .back { font-size: 15px; color: var(--muted); text-decoration: none; }
-.cs-head .back:hover { color: var(--ink); }
-.cs-head .context { display: flex; align-items: center; gap: 10px; margin: 40px 0 16px; font-size: 16px; color: var(--muted); }
-.cs-head .context::before { content: ""; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); }
-.cs-head h1 {
-  font-size: clamp(40px, 7vw, 96px); line-height: 0.98; letter-spacing: -0.035em;
-  font-weight: 650; font-variation-settings: "wdth" 86; margin: 0; max-width: 14ch;
-}
-.cs-head .sub {
-  font-family: var(--text); font-size: clamp(19px, 1.8vw, 23px); line-height: 1.55;
-  max-width: 52ch; margin: 28px 0 0; color: var(--ink);
-}
-.facts {
-  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px 32px;
-  margin: 48px 0 0; padding: 20px 0 0; border-top: 1px solid var(--ink);
-}
-.facts dt { font-size: 14px; color: var(--muted); margin: 0 0 4px; }
-.facts dd { margin: 0; font-size: 16px; font-weight: 500; }
+body.p-checkout { --grad: linear-gradient(118deg, #5D6CF0 0%, #9D8FEA 48%, #F1B5CC 100%); }
+body.p-dream    { --grad: linear-gradient(118deg, #241E5C 0%, #5B3FC4 52%, #B58BE2 100%); }
+body.p-hotjar   { --grad: linear-gradient(118deg, #D9382D 0%, #EE7F66 52%, #F6C2AA 100%); }
+body.p-cart     { --grad: linear-gradient(118deg, #9C5806 0%, #DB870F 52%, #F0B94F 100%); }
 
-.cs-cover { margin-top: 8px; margin-bottom: clamp(48px, 8vw, 96px); }
+.cs-hero {
+  position: relative;
+  background: var(--grad);
+  color: #fff;
+  border-radius: 0 0 40px 40px;
+  padding-bottom: clamp(140px, 22vw, 300px);
+  margin-bottom: clamp(-260px, -18vw, -110px);
+}
+.cs-hero .site-head a, .cs-hero .site-head nav a { color: rgba(255,255,255,.82); }
+.cs-hero .site-head a:hover, .cs-hero .site-head nav a[aria-current="page"] { color: #fff; }
+.cs-hero :focus-visible { outline-color: #fff; }
+.cs-hero h1 {
+  font-family: var(--text);
+  font-weight: 500;
+  font-size: clamp(42px, 6.6vw, 92px);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  text-align: center;
+  margin: clamp(32px, 6vw, 72px) auto 0;
+  max-width: 20ch;
+  text-wrap: balance;
+  text-shadow: 0 1px 24px rgba(20, 16, 60, .18);
+}
+.cs-hero .context {
+  text-align: center; margin: 0; font-size: 16px; color: rgba(255,255,255,.85);
+}
+
+.cs-hero.no-cover { padding-bottom: clamp(72px, 10vw, 120px); margin-bottom: clamp(56px, 8vw, 96px); }
+.cs-cover { position: relative; margin: 0 auto clamp(56px, 8vw, 104px); }
+
+/* image panels: soft project gradient, rounded */
+.ph {
+  width: 100%; aspect-ratio: 16/10;
+  background: var(--grad);
+  border-radius: 20px;
+  position: relative; overflow: hidden;
+  display: grid; place-items: center; text-align: center;
+  padding: 24px;
+}
+.ph::before { content: ""; position: absolute; inset: 0; background: rgba(255,255,255,.55); }
+.ph > * , .ph { color: var(--ink); }
+.ph { font-size: 15px; }
+.ph span.lbl {
+  position: relative; background: rgba(255,255,255,.85); border-radius: 999px;
+  padding: 8px 16px; max-width: 90%;
+}
+.cs-cover .ph { aspect-ratio: 16/9; box-shadow: 0 30px 80px -30px rgba(20, 16, 60, .35); }
+.cs-cover .ph::before { background: rgba(255,255,255,.28); }
+.ph.tall { aspect-ratio: 9/16; max-width: 300px; }
+.ph.wide { aspect-ratio: 21/9; }
 
 .cs-layout {
-  display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 64px;
+  display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: clamp(40px, 6vw, 96px);
   padding-bottom: 96px;
 }
-.toc { position: sticky; top: 32px; align-self: start; font-size: 15px; }
-.toc ol { list-style: none; margin: 0; padding: 0; border-left: 1px solid var(--line); }
-.toc a {
-  display: block; padding: 6px 0 6px 16px; margin-left: -1px;
-  color: var(--muted); text-decoration: none; border-left: 2px solid transparent;
-}
+.cs-side { position: sticky; top: 40px; align-self: start; font-size: 16px; }
+.cs-side .back { display: inline-block; color: var(--muted); text-decoration: none; margin-bottom: 36px; }
+.cs-side .back:hover { color: var(--ink); }
+.toc ol { list-style: none; margin: 0; padding: 0; }
+.toc a { display: block; padding: 5px 0; color: #9AA0B0; text-decoration: none; transition: color .2s; }
 .toc a:hover { color: var(--ink); }
-.toc a.is-active { color: var(--ink); border-left-color: var(--accent); }
+.toc a.is-active { color: var(--ink); font-weight: 500; }
 
-.cs-body section { padding-bottom: 72px; scroll-margin-top: 24px; }
-.cs-body h2 {
-  font-size: clamp(28px, 3vw, 40px); line-height: 1.08; letter-spacing: -0.025em;
-  font-weight: 600; margin: 0 0 20px; max-width: 22ch;
+.cs-body { max-width: 760px; }
+.cs-body .intro {
+  font-family: var(--text); font-size: clamp(22px, 2.1vw, 27px); line-height: 1.4;
+  color: var(--ink); margin: 0 0 16px; max-width: 34em;
 }
-.cs-body h3 { font-size: 20px; letter-spacing: -0.01em; font-weight: 600; margin: 32px 0 8px; }
+.facts { margin: 40px 0 0; padding: 0; display: grid; gap: 12px; }
+.facts div { display: grid; grid-template-columns: 160px minmax(0, 1fr); gap: 16px; }
+.facts dt { color: #9AA0B0; font-size: 16px; }
+.facts dd { margin: 0; font-size: 16px; color: var(--ink); }
+
+.cs-body section { padding-bottom: 80px; scroll-margin-top: 32px; }
+.cs-body h2 {
+  font-family: var(--text); font-weight: 500;
+  font-size: clamp(26px, 2.4vw, 32px); line-height: 1.2; letter-spacing: -0.01em;
+  margin: 0 0 14px; max-width: 32ch; text-wrap: balance;
+}
+.cs-body h3 { font-family: var(--text); font-size: 21px; font-weight: 500; margin: 32px 0 8px; }
 .cs-body p, .cs-body li {
-  font-family: var(--text); font-size: 19px; line-height: 1.68; max-width: var(--measure);
+  font-family: var(--display); font-size: 18px; line-height: 1.65; color: var(--muted);
+  letter-spacing: 0.005em; max-width: var(--measure);
 }
 .cs-body p { margin: 0 0 1em; }
+.cs-body strong { color: var(--ink); font-weight: 600; }
 .cs-body ul { padding-left: 1.1em; margin: 0 0 1em; }
 .cs-body li { margin-bottom: 0.4em; }
-.cs-body .kicker { font-family: var(--display); font-size: 15px; color: var(--accent-ink); font-weight: 600; margin: 0 0 10px; }
+.cs-body .kicker { font-size: 14px; color: #9AA0B0; margin: 0 0 10px; }
 
 blockquote.voice {
   margin: 28px 0; padding: 4px 0 4px 22px; border-left: 3px solid var(--accent);
-  font-family: var(--text); font-style: italic; font-size: 21px; line-height: 1.5; max-width: 52ch;
+  font-family: var(--text); font-style: italic; font-size: 22px; line-height: 1.45; max-width: 34em;
 }
 
-/* pipeline / model strip */
-.flow { list-style: none; padding: 0; margin: 28px 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0; max-width: 760px; }
+/* model / flow strip: soft chips */
+.flow { list-style: none; padding: 0; margin: 28px 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
 .flow li {
-  font-family: var(--display) !important; font-size: 16px !important; line-height: 1.3 !important;
-  padding: 14px 20px; border: 1px solid var(--ink); margin: 0 -1px -1px 0 !important;
-  background: var(--paper); max-width: none !important;
+  max-width: none !important; margin: 0 !important;
+  background: #fff; border-radius: 14px; padding: 16px 18px;
+  font-size: 15px !important; line-height: 1.35 !important;
+  box-shadow: 0 1px 0 var(--line);
 }
-.flow li b { display: block; font-size: 18px; }
-.flow li span { color: var(--muted); }
+.flow li b { display: block; font-family: var(--text); font-weight: 500; font-size: 19px; color: var(--ink); margin-bottom: 4px; }
 
 /* decisions */
-.decision { border-top: 1px solid var(--ink); padding: 24px 0 8px; margin-top: 24px; }
+.decision { background: #fff; border-radius: 18px; padding: 24px 26px 18px; margin-top: 16px; }
 .decision h3 { margin-top: 0; }
-.decision dl { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 10px 24px; margin: 0; max-width: 72ch; }
-.decision dt { font-size: 15px; color: var(--accent-ink); font-weight: 600; padding-top: 3px; }
-.decision dd { margin: 0; font-family: var(--text); font-size: 18px; line-height: 1.6; }
+.decision dl { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 8px 20px; margin: 0; }
+.decision dt { font-size: 15px; color: var(--accent-ink); font-weight: 600; padding-top: 2px; }
+.decision dd { margin: 0; font-size: 17px; line-height: 1.55; color: var(--muted); }
 
-/* figures + placeholders */
-figure { margin: 32px 0; }
-figcaption { font-size: 15px; color: var(--muted); margin-top: 12px; max-width: 64ch; line-height: 1.5; }
-figcaption b { color: var(--ink); font-weight: 600; }
-.ph {
-  aspect-ratio: 16/10; width: 100%;
-  background:
-    linear-gradient(var(--paper-2), var(--paper-2)) padding-box,
-    repeating-linear-gradient(135deg, var(--accent) 0 1px, transparent 1px 10px) border-box;
-  border: 1px solid transparent;
-  display: grid; place-items: center; text-align: center;
-  color: var(--muted); font-size: 15px; padding: 24px;
-}
-.ph.tall { aspect-ratio: 9/16; max-width: 300px; }
-.ph.wide { aspect-ratio: 21/9; }
-.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+figure { margin: 36px 0; }
+figcaption { font-size: 15px; color: #9AA0B0; margin-top: 12px; max-width: 64ch; line-height: 1.5; }
+figcaption b { color: var(--ink); font-weight: 500; }
+.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 .pair figure { margin: 0; }
-.pair .tag { font-size: 15px; font-weight: 600; margin: 0 0 10px; }
-.trio { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.pair .tag { font-size: 15px; font-weight: 600; color: var(--ink) !important; margin: 0 0 10px !important; }
+.trio { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
 
 .todo {
-  background: #FFF6D6; border: 1px dashed #C9A227; padding: 16px 18px;
-  font-family: var(--display) !important; font-size: 15px !important; color: #5C4A00;
+  background: #FFF6D6; border: 1px dashed #C9A227; border-radius: 12px; padding: 16px 18px;
+  font-size: 15px !important; color: #5C4A00 !important;
 }
 
-/* next project */
-.next {
-  display: block; text-decoration: none; border-top: 1px solid var(--ink);
-  padding: 36px 0 56px;
-}
-.next span { font-size: 15px; color: var(--muted); display: block; margin-bottom: 8px; }
-.next strong {
-  font-size: clamp(32px, 5vw, 64px); letter-spacing: -0.03em; font-weight: 600; line-height: 1;
-  font-variation-settings: "wdth" 86;
-}
-.next:hover strong { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 0.12em; }
+.next { display: block; text-decoration: none; border-top: 1px solid var(--line); padding: 36px 0 56px; }
+.next span { font-size: 15px; color: #9AA0B0; display: block; margin-bottom: 8px; }
+.next strong { font-family: var(--text); font-weight: 500; font-size: clamp(30px, 4vw, 48px); line-height: 1.05; }
+.next:hover strong { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.14em; }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 900px) {
   .cs-layout { grid-template-columns: 1fr; gap: 0; }
-  .toc { display: none; }
-  .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cs-side { display: none; }
   .about { grid-template-columns: 1fr; gap: 24px; }
 }
 @media (max-width: 640px) {
@@ -331,46 +358,45 @@ figcaption b { color: var(--ink); font-weight: 600; }
   .decision dl { grid-template-columns: 1fr; gap: 4px; }
   .decision dd { margin-bottom: 12px; }
   .skills { grid-template-columns: 1fr; }
-  .cs-body p, .cs-body li { font-size: 18px; }
+  .cs-body p, .cs-body li { font-size: 17px; }
+  .facts div { grid-template-columns: 110px minmax(0,1fr); }
+  .cs-hero { border-radius: 0 0 24px 24px; }
   .index .swatch { display: none; }
   .index a { grid-template-columns: 1fr; }
 }
 
+
 </style>
 </head>
 <body class="p-hotjar">
-  <a class="skip" href="#overview">Skip to content</a>
+  <a class="skip" href="#intro">Skip to content</a>
 
-  <header class="site-head wrap">
+  <main>
+    <header class="cs-hero">
+    <div class="site-head wrap">
     <a class="name" href="index.html">Shani Leibner</a>
     <nav aria-label="Main">
       <a href="index.html#work" aria-current="page">Work</a>
       <a href="index.html#about">About</a>
       <a href="index.html#contact">Contact</a>
     </nav>
-  </header>
-
-  <main>
-    <header class="cs-head wrap">
-      <a class="back" href="index.html#work">All work</a>
+  </div>
+    <div class="wrap">
       <p class="context">Hotjar, behavior analytics</p>
       <h1>Revealing accessibility gaps in user behavior</h1>
-      <p class="sub">A Hotjar feature that turns behavior data into accessibility insight: where specific user groups struggle, so teams can make more inclusive decisions.</p>
-      <dl class="facts">
-        <div><dt>Role</dt><dd>UX research and UI design</dd></div>
-        <div><dt>Team</dt><dd>Team of 4</dd></div>
-        <div><dt>Type</dt><dd>Academic</dd></div>
-        <div><dt>Year</dt><dd>2025–26</dd></div>
-      </dl>
-    </header>
+    </div>
+  </header>
 
     <figure class="cs-cover wrap">
-      <div class="ph wide">Cover: the Accessibility Issues dashboard</div>
+      <div class="ph"><span class="lbl">Cover: the Accessibility Issues dashboard</span></div>
     </figure>
 
     <div class="cs-layout wrap">
-      <nav class="toc" aria-label="On this page">
+      <aside class="cs-side">
+        <a class="back" href="index.html#work">Back</a>
+        <nav class="toc" aria-label="On this page">
         <ol>
+          <li><a href="#intro">Introduction</a></li>
           <li><a href="#overview">Overview</a></li>
           <li><a href="#problem">The problem</a></li>
           <li><a href="#solution">The solution</a></li>
@@ -381,8 +407,19 @@ figcaption b { color: var(--ink); font-weight: 600; }
           <li><a href="#next">What's next</a></li>
         </ol>
       </nav>
+      </aside>
 
       <article class="cs-body">
+        <section id="intro" class="intro-block">
+          <p class="intro">A Hotjar feature that turns behavior data into accessibility insight: where specific user groups struggle, so teams can make more inclusive decisions.</p>
+          <dl class="facts">
+        <div><dt>Role</dt><dd>UX research and UI design</dd></div>
+        <div><dt>Team</dt><dd>Team of 4</dd></div>
+        <div><dt>Type</dt><dd>Academic</dd></div>
+        <div><dt>Year</dt><dd>2025–26</dd></div>
+      </dl>
+        </section>
+
         <section id="overview">
           <h2>Hotjar sees behavior. It doesn't see who is being left behind.</h2>
           <p>Hotjar records how people use a website through heatmaps, session recordings and feedback. It doesn't show whether an interface is failing specific groups. This project adds that layer, reading accessibility gaps out of behavior Hotjar already captures.</p>
@@ -399,7 +436,7 @@ figcaption b { color: var(--ink); font-weight: 600; }
           <h2>The solution: an Accessibility Issues page</h2>
           <p>A single page that lists where specific user groups struggle, ranked by how far they deviate from the average, with each issue linking straight into the heatmap or session replay that shows it.</p>
           <figure>
-            <div class="ph">Accessibility Issues dashboard, issues ranked by deviation</div>
+            <div class="ph"><span class="lbl">Accessibility Issues dashboard, issues ranked by deviation</span></div>
             <figcaption><b>Issues table.</b> The affected group is the point of each row. Data is illustrative.</figcaption>
           </figure>
         </section>
@@ -432,7 +469,7 @@ figcaption b { color: var(--ink); font-weight: 600; }
             <li><b>Investigate</b><span>Heatmap or session replay</span></li>
           </ol>
           <figure>
-            <div class="ph">From an issue row into its heatmap</div>
+            <div class="ph"><span class="lbl">From an issue row into its heatmap</span></div>
             <figcaption><b>Investigate.</b> One click from a ranked issue to the evidence behind it.</figcaption>
           </figure>
         </section>
