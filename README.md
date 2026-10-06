@@ -1,6 +1,6 @@
 # shanileibner.com
 
-Static site. No build step.
+Static site. No build step. CSS lives inside each page in a <style> block (same block in every file; edit all, or ask Claude to sync them).
 
 ## Deploy to Vercel
 1. Push this folder to a new GitHub repo.
@@ -10,8 +10,8 @@ Static site. No build step.
 Local preview: `python3 -m http.server` in this folder, then open http://localhost:8000
 
 ## Adding screens
-Put images in `assets/img/<project>/`. Replace each `<div class="ph">…</div>` with:
-`<img src="/assets/img/checkout/card.png" alt="What the screen shows" width="1600" height="1000">`
+Put images next to the pages, e.g. `checkout-card.png`. Replace each `<div class="ph">…</div>` with:
+`<img src="checkout-card.png" alt="What the screen shows" width="1600" height="1000">`
 Keep the `<figcaption>` — every screen says which decision it shows.
 
 ## Open items (search the code for TODO)
