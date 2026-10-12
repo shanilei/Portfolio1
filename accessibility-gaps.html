@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Accessibility gaps in Hotjar — Shani Leibner</title>
-  <meta name="description" content="A Hotjar feature that reads accessibility gaps out of behavior data, so teams can see which user groups are struggling.">
+  <title>Hotjar: accessibility gaps — Shani Leibner</title>
+  <meta name="description" content="A Hotjar feature that reveals which user groups struggle on a site, where, and how much.">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23161A2C'/><circle cx='11' cy='16' r='4' fill='%233346F0'/><circle cx='21' cy='16' r='4' fill='%23F4F5F7'/></svg>" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..600;1,8..60,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..600;1,8..60,400&display=swap" rel="stylesheet">
   <style>
 
 /* ------------------------------------------------------------
@@ -366,6 +366,123 @@ figcaption b { color: var(--ink); font-weight: 500; }
 }
 
 
+
+/* ---------- Poppins case-study pages ---------- */
+body.p-cart { --display: "Poppins", "Helvetica Neue", Arial, sans-serif; --text: "Poppins", "Helvetica Neue", Arial, sans-serif; }
+body.p-cart .cs-hero h1 { font-weight: 500; letter-spacing: -0.02em; text-shadow: none; }
+body.p-cart .cs-body h2 { font-weight: 500; font-size: clamp(26px, 2.4vw, 32px); letter-spacing: -0.01em; max-width: none; }
+body.p-cart .cs-body .intro { font-weight: 500; font-size: clamp(21px, 2vw, 26px); }
+body.p-cart .cs-body p, body.p-cart .cs-body li { font-size: 18px; line-height: 1.65; }
+.shot { margin: 8px 0 0; }
+.shot .frame {
+  position: relative; border-radius: 20px; overflow: hidden;
+  background: linear-gradient(140deg, #D3B48F 14%, #EFC993 50%, #F8DFB0 86%);
+  display: grid; place-items: center; grid-template-columns: minmax(0, 1fr); min-height: 180px; min-width: 0;
+}
+.shot img, .shot video { display: block; width: 100%; height: auto; }
+.shot .frame.missing img { display: none; }
+.shot .frame .lbl { display: none; max-width: calc(100% - 32px); text-align: center; background: rgba(255,255,255,.85); border-radius: 999px; padding: 8px 16px; font-size: 15px; color: var(--ink); }
+.shot .frame.missing .lbl { display: block; }
+.shot .frame.missing { aspect-ratio: 16/10; }
+.shot .frame.missing { min-height: 0; }
+.cs-cover .shot .frame.missing { aspect-ratio: 1144/475; }
+.cs-cover .shot { margin: 0; }
+.shot figcaption { margin-top: 12px; }
+.cs-cover .shot .frame { box-shadow: 0 30px 80px -30px rgba(60, 30, 0, .35); }
+.cs-body .problems { margin: 0; padding: 0; list-style: none; }
+.problems li { border-top: 1px solid var(--line); padding: 14px 0; max-width: none !important; margin: 0 !important; }
+.problems b, .learn b { display: block; font-weight: 500; font-size: 21px; line-height: 1.3; color: var(--ink); margin-bottom: 4px; }
+.problems span, .learn span { color: var(--muted); }
+.sol-cards { display: grid; gap: 10px; margin: 20px 0; }
+.sol-card { background: #fff; border-radius: 14px; padding: 16px 18px; }
+.sol-card b { display: block; font-weight: 500; font-size: 19px; line-height: 1.3; color: var(--ink); margin-bottom: 4px; }
+.sol-card span { font-size: 15px; line-height: 1.5; color: var(--muted); }
+.notes p { font-size: 17px !important; margin: 0 0 6px !important; }
+.notes strong { color: var(--ink); font-weight: 500; }
+.kicker-cart { font-weight: 600; font-size: 15px !important; color: #8A5300 !important; margin: -4px 0 8px !important; }
+.concept { background: #fff; border-radius: 18px; padding: 24px 26px 18px; margin-top: 16px; }
+.concept h3 { margin: 0 0 8px !important; font-family: var(--display); font-weight: 500; font-size: 21px; line-height: 1.3; }
+.concept > p { font-size: 17px !important; line-height: 1.55 !important; margin: 0 0 12px !important; }
+.concept dl { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 8px 20px; margin: 0; }
+.concept dt { font-size: 15px; font-weight: 600; color: #8A5300; padding-top: 2px; }
+.concept dd { margin: 0; font-size: 17px; line-height: 1.55; color: var(--muted); }
+.concept.chosen { box-shadow: inset 0 0 0 2px #DB870F; }
+.concept .badge { display: inline-block; margin-left: 8px; font-size: 13px; font-weight: 600; color: #fff; background: #C47A0A; border-radius: 999px; padding: 2px 10px; vertical-align: 3px; }
+.step { padding-top: 8px; margin-bottom: 36px; }
+.step h3 { margin: 0 0 8px !important; font-family: var(--display); font-weight: 500; font-size: 21px; }
+.learn { margin: 0 0 18px; }
+@media (max-width: 640px) { .concept dl { grid-template-columns: 1fr; gap: 2px; } .concept dd { margin-bottom: 10px; } }
+.concept-shot { margin: 0 0 20px; }
+.concept-shot .frame { padding: clamp(20px, 4vw, 40px); }
+.concept-shot img { width: auto; max-width: 100%; max-height: 420px; border-radius: 12px; box-shadow: 0 20px 50px -20px rgba(60, 30, 0, .35); }
+
+
+/* ---------- Hotjar page (from Figma draft 282:1355) ---------- */
+body.p-hotjar { --display: "Poppins", "Helvetica Neue", Arial, sans-serif; --text: "Poppins", "Helvetica Neue", Arial, sans-serif; }
+body.p-hotjar .cs-hero h1 { font-weight: 500; letter-spacing: -0.02em; max-width: 14em; font-size: clamp(40px, 5.6vw, 80px); line-height: 1.04; }
+body.p-hotjar .cs-body { max-width: none; }
+body.p-hotjar .cs-body h2 { font-weight: 500; font-size: clamp(26px, 2.4vw, 32px); letter-spacing: -0.01em; max-width: none; }
+body.p-hotjar .cs-body .intro { font-weight: 500; font-size: clamp(21px, 2vw, 26px); max-width: 30em; }
+body.p-hotjar .cs-body p, body.p-hotjar .cs-body li { font-size: 18px; line-height: 1.65; }
+body.p-hotjar .shot .frame { background: linear-gradient(140deg, #EEA5A0 14%, #F7C5BA 50%, #FBE3D8 86%); }
+body.p-hotjar .cs-cover .shot .frame { box-shadow: 0 30px 80px -30px rgba(20, 15, 61, .3); }
+.lead { color: var(--muted); }
+.methods { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 20px; }
+.method { background: #fff; border-radius: 18px; padding: 24px 22px; }
+.method .num { display: block; font-size: 30px; line-height: 1.2; color: var(--hotjar-ink); margin-bottom: 10px; }
+.method b { display: block; font-weight: 500; font-size: 19px; line-height: 1.3; color: var(--ink); margin-bottom: 6px; }
+.method span { display: block; font-size: 15px; line-height: 1.5; color: var(--muted); }
+.findings { list-style: none; margin: 8px 0 0 !important; padding: 0 !important; }
+.findings li { display: grid; grid-template-columns: 40px minmax(0,1fr); gap: 24px; border-top: 1px solid var(--line); padding: 20px 0; margin: 0 !important; max-width: none !important; color: var(--ink) !important; }
+.findings li .n { font-size: 13px; font-weight: 600; color: var(--hotjar-ink); padding-top: 4px; }
+.rules { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); margin-top: 20px; border-radius: 18px; padding: 26px 10px; background: linear-gradient(118deg, #FBE0D8 0%, #FCE9E1 100%); }
+.rule { padding: 0 18px; }
+.rule + .rule { border-left: 1px solid rgba(184, 41, 30, .18); }
+.rule .from { display: block; font-size: 14px; color: var(--hotjar-ink); margin-bottom: 6px; }
+.rule b { display: block; font-weight: 500; font-size: 17px; line-height: 1.35; color: var(--ink); margin-bottom: 6px; }
+.rule span { display: block; font-size: 14px; line-height: 1.5; color: var(--muted); }
+.sol-cards { max-width: 1230px; }
+.problems b { font-size: 19px; }
+/* flow: two staggered columns along a center line */
+.flow-steps { position: relative; display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); column-gap: clamp(32px, 5vw, 72px); margin-top: 28px; }
+.flow-steps::before { content: ""; position: absolute; top: 0; bottom: 0; left: 50%; width: 1px; background: var(--muted); opacity: .6; }
+.flow-col { display: grid; gap: clamp(64px, 9vw, 140px); align-content: start; }
+.flow-col.right { padding-top: clamp(120px, 18vw, 260px); }
+.fstep .pill { display: inline-block; background: #E4E4E4; border-radius: 999px; padding: 8px 28px; font-weight: 500; font-size: 19px; line-height: 1.3; color: var(--ink); margin: 0 0 14px; }
+.fstep p { margin: 0 0 16px !important; }
+.fstep .shot { margin: 0; }
+/* iterations */
+.iter-sub { font-size: 14px !important; font-weight: 600; color: var(--hotjar-ink) !important; margin: -6px 0 16px !important; }
+.iter { background: #fff; border-radius: 18px; padding: 22px 26px 18px; margin-top: 16px; }
+.iter h3 { margin: 0 0 12px !important; font-family: var(--display); font-weight: 500; font-size: 20px; line-height: 1.3; }
+.iter dl { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 8px 20px; margin: 0; }
+.iter dt { font-size: 14px; font-weight: 600; color: var(--hotjar-ink); padding-top: 2px; }
+.iter dd { margin: 0; font-size: 16px; line-height: 1.55; color: var(--muted); }
+.iter-shots { display: grid; gap: 16px; margin-top: 16px; }
+.iter-shots .shot { margin: 0; }
+.iter-shots .frame.missing { aspect-ratio: 1670/400; }
+.iter-shots .tag { font-size: 14px; font-weight: 600; color: var(--ink); margin: 0 0 8px; }
+.future { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px; margin: 14px 0 24px; }
+.future div { background: #fff; border-radius: 14px; padding: 16px 18px; }
+.future b { display: block; font-weight: 500; font-size: 19px; line-height: 1.3; color: var(--ink); margin-bottom: 4px; }
+.future span { font-size: 15px; line-height: 1.5; color: var(--muted); }
+.cs-body h3.sub { font-family: var(--display); font-weight: 500; font-size: 21px; margin: 32px 0 0; }
+.cs-body section > p, .cs-body section > .problems, .cs-body section > .sol-cards { max-width: 760px; }
+@media (max-width: 900px) {
+  .methods, .future { grid-template-columns: 1fr; }
+  .rules { grid-template-columns: 1fr; padding: 8px 4px; }
+  .rule { padding: 16px 18px; }
+  .rule + .rule { border-left: 0; border-top: 1px solid rgba(184, 41, 30, .18); }
+}
+@media (max-width: 720px) {
+  .flow-steps { display: flex; flex-direction: column; gap: 48px; }
+  .flow-steps::before { display: none; }
+  .flow-col { display: contents; }
+  .fstep { order: var(--o); }
+  .iter dl { grid-template-columns: 1fr; gap: 2px; }
+  .iter dd { margin-bottom: 10px; }
+  .findings li { grid-template-columns: 28px minmax(0,1fr); gap: 12px; }
+}
 </style>
 </head>
 <body class="p-hotjar">
@@ -373,159 +490,201 @@ figcaption b { color: var(--ink); font-weight: 500; }
 
   <main>
     <header class="cs-hero">
-    <div class="site-head wrap">
-    <a class="name" href="index.html">Shani Leibner</a>
-    <nav aria-label="Main">
-      <a href="index.html#work" aria-current="page">Work</a>
-      <a href="index.html#about">About</a>
-      <a href="index.html#contact">Contact</a>
-    </nav>
-  </div>
-    <div class="wrap">
-      <p class="context">Hotjar, behavior analytics</p>
-      <h1>Revealing accessibility gaps in user behavior</h1>
-    </div>
-  </header>
+      <div class="site-head wrap">
+        <a class="name" href="index.html">Shani Leibner</a>
+        <nav aria-label="Main">
+          <a href="index.html#work" aria-current="page">Work</a>
+          <a href="index.html#about">About</a>
+          <a href="index.html#contact">Contact</a>
+        </nav>
+      </div>
+      <div class="wrap">
+        <p class="context">Hotjar, behavior analytics</p>
+        <h1>Revealing accessibility gaps in user behavior</h1>
+      </div>
+    </header>
 
-    <figure class="cs-cover wrap">
-      <div class="ph"><span class="lbl">Cover: the Accessibility Issues dashboard</span></div>
-    </figure>
+    <div class="cs-cover wrap">
+      <figure class="shot"><div class="frame"><img src="hotjar-cover.png" alt="The Accessibility analysis page: a table of issues, each with the affected group, page, share of users and links to heatmaps and session replays" loading="eager" onerror="this.parentNode.classList.add('missing')"><span class="lbl">Accessibility analysis page</span></div></figure>
+    </div>
 
     <div class="cs-layout wrap">
       <aside class="cs-side">
         <a class="back" href="index.html#work">Back</a>
         <nav class="toc" aria-label="On this page">
-        <ol>
-          <li><a href="#intro">Introduction</a></li>
-          <li><a href="#overview">Overview</a></li>
-          <li><a href="#problem">The problem</a></li>
-          <li><a href="#solution">The solution</a></li>
-          <li><a href="#research">Research</a></li>
-          <li><a href="#users">Who uses it</a></li>
-          <li><a href="#flow">The flow</a></li>
-          <li><a href="#iterations">Iterations</a></li>
-          <li><a href="#next">What's next</a></li>
-        </ol>
-      </nav>
+          <ol>
+            <li><a href="#intro">Introduction</a></li>
+            <li><a href="#what">What is Hotjar</a></li>
+            <li><a href="#problem">The problem</a></li>
+            <li><a href="#research">Research</a></li>
+            <li><a href="#findings">Findings</a></li>
+            <li><a href="#rules">Design rules</a></li>
+            <li><a href="#solution">The solution</a></li>
+            <li><a href="#architecture">Architecture</a></li>
+            <li><a href="#flow">The flow</a></li>
+            <li><a href="#iterations">Iterations</a></li>
+            <li><a href="#testing">User testing</a></li>
+            <li><a href="#learnings">Learnings</a></li>
+          </ol>
+        </nav>
       </aside>
 
       <article class="cs-body">
         <section id="intro" class="intro-block">
-          <p class="intro">A Hotjar feature that turns behavior data into accessibility insight: where specific user groups struggle, so teams can make more inclusive decisions.</p>
+          <p class="intro">Turning accessibility challenges into actionable behavioral insights.</p>
           <dl class="facts">
-        <div><dt>Role</dt><dd>UX research and UI design</dd></div>
-        <div><dt>Team</dt><dd>Team of 4</dd></div>
-        <div><dt>Type</dt><dd>Academic</dd></div>
-        <div><dt>Year</dt><dd>2025–26</dd></div>
-      </dl>
+            <div><dt>Role</dt><dd>UX research and UI design</dd></div>
+            <div><dt>Team</dt><dd>Team of 4 students</dd></div>
+            <div><dt>Type</dt><dd>Academic</dd></div>
+            <div><dt>Year</dt><dd>2025–26</dd></div>
+          </dl>
         </section>
 
-        <section id="overview">
-          <h2>Hotjar sees behavior. It doesn't see who is being left behind.</h2>
-          <p>Hotjar records how people use a website through heatmaps, session recordings and feedback. It doesn't show whether an interface is failing specific groups. This project adds that layer, reading accessibility gaps out of behavior Hotjar already captures.</p>
-          <p>Team: Shani Leibner, Omer Barak, Hila Lustig and Shahar Liz Ben Or.</p>
-          <!-- TODO: state your specific part once the team confirms the split -->
+        <section id="what">
+          <h2>What is Hotjar</h2>
+          <p>Hotjar is a behavioral analytics platform. Product teams use it to see how people use a website, through heatmaps, session recordings and feedback.</p>
         </section>
 
         <section id="problem">
           <h2>The problem</h2>
-          <p>When interfaces ignore differences in ability, culture or digital literacy, they create unequal access. Those gaps rarely show up as bugs, so nobody goes looking for them.</p>
-        </section>
-
-        <section id="solution">
-          <h2>The solution: an Accessibility Issues page</h2>
-          <p>A single page that lists where specific user groups struggle, ranked by how far they deviate from the average, with each issue linking straight into the heatmap or session replay that shows it.</p>
-          <figure>
-            <div class="ph"><span class="lbl">Accessibility Issues dashboard, issues ranked by deviation</span></div>
-            <figcaption><b>Issues table.</b> The affected group is the point of each row. Data is illustrative.</figcaption>
-          </figure>
+          <ul class="problems">
+            <li><b>Hotjar sees behavior, not who is left behind.</b><span>It records how people use a site, but shows nothing about accessibility issues or their impact.</span></li>
+            <li><b>The gaps don't look like bugs.</b><span>When interfaces ignore differences in ability, culture or digital literacy, some groups get unequal access, and nobody goes looking for it.</span></li>
+          </ul>
         </section>
 
         <section id="research">
-          <h2>Research: cultural gaps don't show up as bugs</h2>
-          <p>We worked in three threads:</p>
-          <ul>
-            <li><strong>Reading the signals.</strong> Which behavioral patterns actually point to a gap, and how to communicate them.</li>
-            <li><strong>Existing patterns.</strong> How teams already explore data in Hotjar, which turned out to be mostly through tables.</li>
-            <li><strong>Interviews.</strong> Product managers and analysts on how they detect, interpret and prioritize issues today.</li>
-          </ul>
-          <p>That gave us three rules: build on tools Hotjar users already know, organize gaps by user population, and measure every pattern against the overall average so deviation becomes the signal.</p>
+          <h2>Research</h2>
+          <div class="methods">
+            <div class="method"><span class="num">01</span><b>WCAG + behavior data</b><span>Mapped WCAG guidelines onto the behavior data Hotjar already collects.</span></div>
+            <div class="method"><span class="num">02</span><b>Interface audit</b><span>Walked through the interface and how people actually use it.</span></div>
+            <div class="method"><span class="num">03</span><b>Industry interviews</b><span>Talked to analysts and product people about how they analyze and present data problems.</span></div>
+          </div>
         </section>
 
-        <section id="users">
-          <h2>Who uses it</h2>
-          <h3>Product manager</h3>
-          <p>Needs to see which segments have issues so fixes can be prioritized by impact.</p>
-          <h3>Business analyst</h3>
-          <p>Needs behavioral patterns across segments that reliably point to a gap, and a way to turn them into insight.</p>
-          <p>The shared job: find accessibility issues across the site, understand their real impact, and confirm them through heatmaps and recordings.</p>
+        <section id="findings">
+          <h2>Findings</h2>
+          <ol class="findings">
+            <li><span class="n">01</span><span>The problem is cultural, not only technical. Gaps appear only when the data is split by age, device and location.</span></li>
+            <li><span class="n">02</span><span>Teams explore data mostly through tables. The feature had to speak the same language.</span></li>
+            <li><span class="n">03</span><span>A number alone doesn't drive action. An issue needs a clear name, the group it affects, and a link to the evidence.</span></li>
+          </ol>
+        </section>
+
+        <section id="rules">
+          <h2>Design rules</h2>
+          <div class="rules">
+            <div class="rule"><span class="from">From finding 02</span><b>Build on what users already know</b><span>Heatmaps, recordings and tables, not a new tool to learn.</span></div>
+            <div class="rule"><span class="from">From finding 01</span><b>Organize every gap by population</b><span>The affected group is the point of each issue.</span></div>
+            <div class="rule"><span class="from">From findings 01 + 03</span><b>Measure against the average</b><span>Deviation from the overall average is the signal.</span></div>
+          </div>
+        </section>
+
+        <section id="solution">
+          <h2>The solution</h2>
+          <p>An Accessibility Analysis page that shows who struggles, where, and how much.</p>
+          <figure class="shot"><div class="frame"><img src="hotjar-solution.png" alt="The Accessibility analysis issues table" loading="lazy" onerror="this.parentNode.classList.add('missing')"><span class="lbl">Accessibility analysis issues table</span></div><figcaption><b>Issues table.</b> The affected group is the point of each row. Data is illustrative.</figcaption></figure>
+          <div class="sol-cards">
+            <div class="sol-card"><b>1. Detects</b><span>Finds behavior that deviates from the average, like early exits, repeated clicks or partial scrolling.</span></div>
+            <div class="sol-card"><b>2. Shows who it affects</b><span>Every issue comes with the affected group (age, device, location) and the share of users impacted.</span></div>
+            <div class="sol-card"><b>3. Links to the evidence</b><span>Each issue opens straight into a heatmap or session replay.</span></div>
+          </div>
+        </section>
+
+        <section id="architecture">
+          <h2>Architecture</h2>
+          <ul class="problems">
+            <li><b>Primary navigation</b><span>A new Accessibility Analysis item, next to Heatmaps and Session Replay.</span></li>
+            <li><b>Home dashboard</b><span>An Accessibility issue impact card that opens a panel with a chart, a guide to reading it, and links to issues.</span></li>
+            <li><b>The issues table</b><span>Each row is one issue, with the affected group, the page and the share of users impacted. Issues can be saved to Favorites.</span></li>
+            <li><b>Existing tools</b><span>Every row links to a heatmap or session replay, already filtered to the affected group.</span></li>
+          </ul>
         </section>
 
         <section id="flow">
           <h2>The flow</h2>
-          <ol class="flow">
-            <li><b>Dashboard</b><span>Choose accessibility analysis</span></li>
-            <li><b>Issues</b><span>Gaps and affected groups</span></li>
-            <li><b>Investigate</b><span>Heatmap or session replay</span></li>
-          </ol>
-          <figure>
-            <div class="ph"><span class="lbl">From an issue row into its heatmap</span></div>
-            <figcaption><b>Investigate.</b> One click from a ranked issue to the evidence behind it.</figcaption>
-          </figure>
+          <p>A product manager checks the site on Monday morning:</p>
+          <div class="flow-steps">
+            <div class="flow-col">
+              <div class="fstep" style="--o:1">
+                <h3 class="pill">Step 01. Notice</h3>
+                <p>On the home dashboard, the Accessibility issue impact card shows how many new issues.</p>
+                <figure class="shot"><div class="frame"><img src="hotjar-flow-1.png" alt="Home dashboard with the Accessibility issue impact card" loading="lazy" onerror="this.parentNode.classList.add('missing')"><span class="lbl">Home dashboard with the impact card</span></div></figure>
+              </div>
+              <div class="fstep" style="--o:3">
+                <h3 class="pill">Step 03. Investigate</h3>
+                <p>She opens the heatmap, already filtered to users aged 60+, and sees where they get stuck.</p>
+                <figure class="shot"><div class="frame"><img src="hotjar-flow-3.png" alt="Heatmap filtered to users aged 60+" loading="lazy" onerror="this.parentNode.classList.add('missing')"><span class="lbl">Heatmap filtered to users aged 60+</span></div></figure>
+              </div>
+            </div>
+            <div class="flow-col right">
+              <div class="fstep" style="--o:2">
+                <h3 class="pill">Step 02. Understand</h3>
+                <p>The table shows that users aged 60+ on desktop leave the homepage more than average, 7% of users.</p>
+                <figure class="shot"><div class="frame"><img src="hotjar-flow-2.png" alt="Issues table showing users aged 60+ on desktop leaving the homepage" loading="lazy" onerror="this.parentNode.classList.add('missing')"><span class="lbl">Issues table</span></div></figure>
+              </div>
+              <div class="fstep" style="--o:4">
+                <h3 class="pill">Step 04. Track</h3>
+                <p>She saves the issue to Favorites to check whether the fix works.</p>
+                <figure class="shot"><div class="frame"><img src="hotjar-flow-4.png" alt="The issue saved to Favorites" loading="lazy" onerror="this.parentNode.classList.add('missing')"><span class="lbl">Issue saved to Favorites</span></div></figure>
+              </div>
+            </div>
+          </div>
         </section>
 
         <section id="iterations">
           <h2>Iterations</h2>
-          <!-- TODO: confirm each "What we changed" line with the team before launch -->
+          <p class="iter-sub">9 options explored across 2 decisions</p>
 
-          <div class="decision">
-            <h3>Where the feature lives</h3>
+          <div class="iter">
+            <h3>01. How a table row explains an issue (5 options)</h3>
             <dl>
-              <dt>First try</dt><dd>A standalone tab with alerts.</dd>
-              <dt>Problem</dt><dd>It clashed with Hotjar's language and navigation.</dd>
-              <dt>Change</dt><dd>Folded into Hotjar's existing patterns.</dd>
+              <dt>Explored</dt><dd>A minimal table, expandable rows, everything inline, demographic tags.</dd>
+              <dt>Why not</dt><dd>The issue wasn't understood, key details were hidden, visual overload, tags looked clickable.</dd>
+              <dt>Final</dt><dd>The issue first, then the affected group, in one readable row, with heatmap and replay links.</dd>
             </dl>
           </div>
-
-          <div class="decision">
-            <h3>Showing who is affected</h3>
-            <dl>
-              <dt>First try</dt><dd>Kept demographic data to a minimum.</dd>
-              <dt>Problem</dt><dd>Issues read as incomplete and unclear.</dd>
-              <dt>Change</dt><dd>Made the affected group the point of each row.</dd>
-            </dl>
+          <div class="iter-shots">
+            <div><p class="tag">A rejected option</p><figure class="shot"><div class="frame"><img src="hotjar-iteration-1-rejected.png" alt="A rejected table row design" loading="lazy" onerror="this.parentNode.classList.add('missing')"><span class="lbl">A rejected option</span></div></figure></div>
+            <div><p class="tag">Final</p><figure class="shot"><div class="frame"><img src="hotjar-iteration-1-final.png" alt="The final table row design" loading="lazy" onerror="this.parentNode.classList.add('missing')"><span class="lbl">Final</span></div></figure></div>
           </div>
 
-          <div class="decision">
-            <h3>How much the table shows</h3>
+          <div class="iter">
+            <h3>02. Where the feature lives (4 options)</h3>
             <dl>
-              <dt>First try</dt><dd>A stripped-down table, heatmap behind a button.</dd>
-              <dt>Problem</dt><dd>Essential details were missing.</dd>
-              <dt>Change</dt><dd>Just enough context to grasp the issue, still scannable.</dd>
+              <dt>Explored</dt><dd>A standalone tab with alerts, a tab inside the main dashboard, a layer inside Heatmaps.</dd>
+              <dt>Why not</dt><dd>Off Hotjar's language, unclear it was about accessibility, added complexity.</dd>
+              <dt>Final</dt><dd>A dedicated tab in the primary navigation, easy to find and close to existing tools.</dd>
             </dl>
           </div>
-
-          <div class="decision">
-            <h3>Framing the problem</h3>
-            <dl>
-              <dt>First try</dt><dd>One headline with a time range and user type.</dd>
-              <dt>Problem</dt><dd>It hid which segments were affected.</dd>
-              <dt>Change</dt><dd>Sub-topics that name the segments.</dd>
-            </dl>
+          <div class="iter-shots">
+            <div><p class="tag">A rejected option</p><figure class="shot"><div class="frame"><img src="hotjar-iteration-2-rejected.png" alt="A rejected placement for the feature" loading="lazy" onerror="this.parentNode.classList.add('missing')"><span class="lbl">A rejected option</span></div></figure></div>
+            <div><p class="tag">Final</p><figure class="shot"><div class="frame"><img src="hotjar-iteration-2-final.png" alt="The final placement: a tab in the primary navigation" loading="lazy" onerror="this.parentNode.classList.add('missing')"><span class="lbl">Final</span></div></figure></div>
           </div>
         </section>
 
-        <section id="next">
-          <h2>What's next</h2>
-          <p>Built into an analytics tool, accessibility stops being a separate audit and becomes part of everyday product decisions. Today the feature finds gaps through behavior. The next step is estimating their business cost in conversion and revenue, and later, recommending fixes.</p>
-          <p><a href="#">See the interactive prototype</a></p>
-          <!-- TODO: prototype URL -->
-          <p class="todo">Optional: a short reflection in your voice.</p>
+        <section id="testing">
+          <h2>User testing</h2>
+          <p>We tested the prototype with a product manager from the industry (not from Hotjar), and with students and lecturers. Some participants found parts of the feature hard to understand, which showed us what to develop next.</p>
+        </section>
+
+        <section id="learnings">
+          <h2>Learnings</h2>
+          <p class="learn"><b>1. Accessibility is also cultural.</b><span>Gaps between groups don't show up as bugs. You only see them when you split the data by population.</span></p>
+          <p class="learn"><b>2. A new feature has to speak the product's language.</b><span>Most of the options we rejected failed because they didn't feel like part of Hotjar.</span></p>
+          <p class="learn"><b>3. Data needs explaining.</b><span>In testing, not everyone found the data easy to read. Making the metrics clearer is the first thing to improve.</span></p>
+          <h3 class="sub">Future direction</h3>
+          <div class="future">
+            <div><b>Today</b><span>Identifying accessibility gaps through user behavior.</span></div>
+            <div><b>Near future</b><span>Estimating business impact, such as conversion drops or revenue loss.</span></div>
+            <div><b>Long term</b><span>AI-driven recommendations for corrective actions.</span></div>
+          </div>
+          <!-- TODO: add "See the interactive prototype" link once the URL is ready -->
         </section>
 
         <a class="next" href="tiny-cart.html">
           <span>Next project</span>
-          <strong>Tiny Cart, rewritten</strong>
+          <strong>Tiny Cart</strong>
         </a>
       </article>
     </div>
