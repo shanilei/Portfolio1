@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Tiny Cart, rewritten — Shani Leibner</title>
+  <title>Tiny Cart — Shani Leibner</title>
   <meta name="description" content="Turning the Wix mini-cart from a styling afterthought into a designed surface that moves buyers to checkout.">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23161A2C'/><circle cx='11' cy='16' r='4' fill='%233346F0'/><circle cx='21' cy='16' r='4' fill='%23F4F5F7'/></svg>" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..600;1,8..60,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..600;1,8..60,400&display=swap" rel="stylesheet">
   <style>
 
 /* ------------------------------------------------------------
@@ -366,101 +366,212 @@ figcaption b { color: var(--ink); font-weight: 500; }
 }
 
 
+
+/* ---------- Tiny Cart page (from Figma draft 261:785) ---------- */
+body.p-cart { --display: "Poppins", "Helvetica Neue", Arial, sans-serif; --text: "Poppins", "Helvetica Neue", Arial, sans-serif; }
+body.p-cart .cs-hero h1 { font-weight: 500; letter-spacing: -0.02em; text-shadow: none; }
+body.p-cart .cs-body h2 { font-weight: 500; font-size: clamp(26px, 2.4vw, 32px); letter-spacing: -0.01em; max-width: none; }
+body.p-cart .cs-body .intro { font-weight: 500; font-size: clamp(21px, 2vw, 26px); }
+body.p-cart .cs-body p, body.p-cart .cs-body li { font-size: 18px; line-height: 1.65; }
+.shot { margin: 8px 0 0; }
+.shot .frame {
+  position: relative; border-radius: 20px; overflow: hidden;
+  background: linear-gradient(140deg, #D3B48F 14%, #EFC993 50%, #F8DFB0 86%);
+  display: grid; place-items: center; grid-template-columns: minmax(0, 1fr); min-height: 180px; min-width: 0;
+}
+.shot img { display: block; width: 100%; height: auto; }
+.shot .frame.missing img { display: none; }
+.shot .frame .lbl { display: none; max-width: calc(100% - 32px); text-align: center; background: rgba(255,255,255,.85); border-radius: 999px; padding: 8px 16px; font-size: 15px; color: var(--ink); }
+.shot .frame.missing .lbl { display: block; }
+.shot .frame.missing { aspect-ratio: 16/10; }
+.shot .frame.missing { min-height: 0; }
+.cs-cover .shot .frame.missing { aspect-ratio: 1144/475; }
+.cs-cover .shot { margin: 0; }
+.shot figcaption { margin-top: 12px; }
+.cs-cover .shot .frame { box-shadow: 0 30px 80px -30px rgba(60, 30, 0, .35); }
+.cs-body .problems { margin: 0; padding: 0; list-style: none; }
+.problems li { border-top: 1px solid var(--line); padding: 14px 0; max-width: none !important; margin: 0 !important; }
+.problems b, .learn b { display: block; font-weight: 500; font-size: 21px; line-height: 1.3; color: var(--ink); margin-bottom: 4px; }
+.problems span, .learn span { color: var(--muted); }
+.sol-cards { display: grid; gap: 10px; margin: 20px 0; }
+.sol-card { background: #fff; border-radius: 14px; padding: 16px 18px; }
+.sol-card b { display: block; font-weight: 500; font-size: 19px; line-height: 1.3; color: var(--ink); margin-bottom: 4px; }
+.sol-card span { font-size: 15px; line-height: 1.5; color: var(--muted); }
+.notes p { font-size: 17px !important; margin: 0 0 6px !important; }
+.notes strong { color: var(--ink); font-weight: 500; }
+.kicker-cart { font-weight: 600; font-size: 15px !important; color: #8A5300 !important; margin: -4px 0 8px !important; }
+.concept { background: #fff; border-radius: 18px; padding: 24px 26px 18px; margin-top: 16px; }
+.concept h3 { margin: 0 0 8px !important; font-family: var(--display); font-weight: 500; font-size: 21px; line-height: 1.3; }
+.concept > p { font-size: 17px !important; line-height: 1.55 !important; margin: 0 0 12px !important; }
+.concept dl { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 8px 20px; margin: 0; }
+.concept dt { font-size: 15px; font-weight: 600; color: #8A5300; padding-top: 2px; }
+.concept dd { margin: 0; font-size: 17px; line-height: 1.55; color: var(--muted); }
+.concept.chosen { box-shadow: inset 0 0 0 2px #DB870F; }
+.concept .badge { display: inline-block; margin-left: 8px; font-size: 13px; font-weight: 600; color: #fff; background: #C47A0A; border-radius: 999px; padding: 2px 10px; vertical-align: 3px; }
+.step { padding-top: 8px; margin-bottom: 36px; }
+.step h3 { margin: 0 0 8px !important; font-family: var(--display); font-weight: 500; font-size: 21px; }
+.learn { margin: 0 0 18px; }
+@media (max-width: 640px) { .concept dl { grid-template-columns: 1fr; gap: 2px; } .concept dd { margin-bottom: 10px; } }
 </style>
 </head>
 <body class="p-cart">
   <a class="skip" href="#intro">Skip to content</a>
 
   <main>
-    <header class="cs-hero no-cover">
-    <div class="site-head wrap">
-    <a class="name" href="index.html">Shani Leibner</a>
-    <nav aria-label="Main">
-      <a href="index.html#work" aria-current="page">Work</a>
-      <a href="index.html#about">About</a>
-      <a href="index.html#contact">Contact</a>
-    </nav>
-  </div>
-    <div class="wrap">
-      <p class="context">Wix eCommerce, cart and checkout</p>
-      <h1>Tiny Cart, rewritten</h1>
+    <header class="cs-hero">
+      <div class="site-head wrap">
+        <a class="name" href="index.html">Shani Leibner</a>
+        <nav aria-label="Main">
+          <a href="index.html#work" aria-current="page">Work</a>
+          <a href="index.html#about">About</a>
+          <a href="index.html#contact">Contact</a>
+        </nav>
+      </div>
+      <div class="wrap">
+        <p class="context">Wix eCommerce, cart and checkout</p>
+        <h1>Tiny Cart</h1>
+      </div>
+    </header>
+
+    <div class="cs-cover wrap">
+      <figure class="shot">
+          <div class="frame"><img src="tiny-cart-cover.png" alt="The new Tiny Cart editing experience, with the live preview" loading="eager" onerror="this.parentNode.classList.add('missing')"><span class="lbl">The new Tiny Cart editing experience, with the live preview</span></div>
+        </figure>
     </div>
-  </header>
 
     <div class="cs-layout wrap">
       <aside class="cs-side">
         <a class="back" href="index.html#work">Back</a>
         <nav class="toc" aria-label="On this page">
-        <ol>
-          <li><a href="#intro">Introduction</a></li>
-          <li><a href="#overview">Starting point</a></li>
-          <li><a href="#benchmark">Benchmark</a></li>
-          <li><a href="#added">What changed</a></li>
-          <li><a href="#editor">In the Editor</a></li>
-          <li><a href="#reflection">Reflection</a></li>
-        </ol>
-      </nav>
+          <ol>
+            <li><a href="#intro">Introduction</a></li>
+            <li><a href="#brief">The brief</a></li>
+            <li><a href="#starting-point">Starting point</a></li>
+            <li><a href="#problem">The problem</a></li>
+            <li><a href="#solution">The solution</a></li>
+            <li><a href="#decision">Key decision</a></li>
+            <li><a href="#flow">Editing flow</a></li>
+            <li><a href="#constraints">Constraints</a></li>
+            <li><a href="#learnings">Learnings</a></li>
+          </ol>
+        </nav>
       </aside>
 
       <article class="cs-body">
         <section id="intro" class="intro-block">
-          <p class="intro">The pop-up a shopper sees right after "Add to cart" is the highest-intent moment in a store. It was barely designable and led nowhere. I rebuilt it as a surface that moves buyers to checkout.</p>
+          <p class="intro">The pop-up shoppers see right after “Add to cart.” I redesigned how store owners set it up and design it.</p>
           <dl class="facts">
-        <div><dt>Role</dt><dd>UX/UI Designer</dd></div>
-        <div><dt>Platform</dt><dd>Wix eCommerce</dd></div>
-        <div><dt>Type</dt><dd>Feature redesign</dd></div>
-        <div><dt>Status</dt><dd>Shipped</dd></div>
-      </dl>
+            <div><dt>Role</dt><dd>UX/UI Designer</dd></div>
+            <div><dt>Team</dt><dd>PM, developer, architect</dd></div>
+            <div><dt>Platform</dt><dd>Wix eCommerce</dd></div>
+            <div><dt>Year</dt><dd>2026</dd></div>
+            <div><dt>Status</dt><dd>Shipped</dd></div>
+          </dl>
         </section>
 
-        <section id="overview">
-          <h2>The starting point: three ways in, one buried panel</h2>
-          <p>Shoppers reached the Tiny Cart from the cart icon, a product page or a category page. But merchants could only customize it from deep inside the cart-icon settings, and only lightly: text, fonts, colors and the button style.</p>
-          <p>Worse, it had no path to checkout, and it showed too little (no discounts, no item details) to give a buyer confidence.</p>
-          <div class="pair">
-            <figure>
-              <p class="tag">Before</p>
-              <div class="ph"><span class="lbl">Cart-icon settings panel</span></div>
-              <figcaption>Customization hidden one level too deep.</figcaption>
-            </figure>
-            <figure>
-              <p class="tag">After</p>
-              <div class="ph"><span class="lbl">The new Tiny Cart</span></div>
-              <figcaption>A direct path to checkout, with the details a buyer needs.</figcaption>
-            </figure>
-          </div>
+        <section id="brief">
+          <h2>The brief</h2>
+          <p>Part of improving the purchase experience, for shoppers and for the store owners who use Wix. The goal: refresh the Tiny Cart, make it stand out, and add new capabilities, like sales boosters, that help store owners increase their sales.</p>
         </section>
 
-        <section id="benchmark">
-          <h2>Benchmark: reassure, then move forward</h2>
-          <p>I studied how leading retailers like Nike and American Eagle handle the add-to-cart moment. They share three things: a direct checkout button, a free-shipping nudge, and clear item details such as price, discount and variant. At this moment, the cart's job isn't to confirm the add. It's to move the buyer forward.</p>
-          <figure>
-            <div class="ph wide"><span class="lbl">Side carts from Nike and American Eagle, annotated</span></div>
-            <figcaption><b>Benchmark.</b> What leading carts show at the moment of highest intent.</figcaption>
-          </figure>
+        <section id="starting-point">
+          <h2>Starting point</h2>
+          <p>Shoppers reach the Tiny Cart from three places: the cart icon, and the “Add to Cart” button on product and category pages.</p>
+          <p>Store owners could only design it through the cart icon settings, and had to set its behavior in three different places. Design options were limited: button text, fonts, colors, backgrounds, and styling for the success pop-up. And they designed it without seeing it: there was no preview of the pop-up.</p>
+          <figure class="shot">
+          <div class="frame"><img src="tiny-cart-before.png" alt="Before: the cart icon settings panel" loading="lazy" onerror="this.parentNode.classList.add('missing')"><span class="lbl">Before: the cart icon settings panel</span></div>
+          <figcaption>The only way into Tiny Cart design, with no preview.</figcaption>
+        </figure>
         </section>
 
-        <section id="added">
-          <h2>What changed for shoppers</h2>
-          <ul>
-            <li><strong>A checkout button,</strong> not just "View cart."</li>
-            <li><strong>Discounts and item details,</strong> so buyers see savings and confirm what they picked.</li>
-            <li><strong>Two new slots</strong> merchants can use to extend the cart.</li>
+        <section id="problem">
+          <h2>The problem</h2>
+          <ul class="problems">
+            <li><b>Store owners designed it blind.</b><span>There was no preview of the pop-up, so they couldn't see what they were designing.</span></li>
+            <li><b>The settings were scattered.</b><span>Design lived only in the cart icon settings, and behavior was set in three different places.</span></li>
+            <li><b>The code was legacy.</b><span>The Tiny Cart had to be rewritten, which made it the right moment to rethink the whole experience.</span></li>
           </ul>
         </section>
 
-        <section id="editor">
-          <h2>What changed for merchants</h2>
-          <p>The Tiny Cart got its own page in the Wix Editor, with separate panels for design and customization instead of living inside the cart-icon settings. Merchants can also choose, per entry point, whether shoppers see the Side Cart or the Tiny Cart, and where the button leads: checkout, the cart page or express checkout.</p>
-          <figure>
-            <div class="ph"><span class="lbl">Settings panel with per-entry-point routing</span></div>
-            <figcaption><b>Routing.</b> Each entry point gets its own behavior.</figcaption>
-          </figure>
+        <section id="solution">
+          <h2>The solution</h2>
+          <p>We redesigned the Tiny Cart with its own section in the Editor and improved customization, so store owners edit everything in one place.</p>
+          <div class="sol-cards">
+            <div class="sol-card"><b>1. Its own section in the Editor</b><span>One entry point to editing, with separate panels for design and customization.</span></div>
+            <div class="sol-card"><b>2. Live preview</b><span>Store owners see the pop-up as they design it.</span></div>
+            <div class="sol-card"><b>3. Routing per entry point</b><span>Store owners choose Side Cart or Tiny Cart for each entry point.</span></div>
+          </div>
+          <div class="notes">
+            <p><strong>Also new:</strong> A checkout button, and clearer item and discount display.</p>
+            <p><strong>Phase 2:</strong> Two sales-booster slots.</p>
+          </div>
         </section>
 
-        <section id="reflection">
-          <h2>Reflection</h2>
-          <p class="todo">TODO: 2–3 sentences in your voice. What a small surface taught you about high-intent moments.</p>
+        <section id="decision">
+          <h2>Key decision: Where store owners design the Tiny Cart</h2>
+          <p class="kicker-cart">3 concepts explored</p>
+          <figure class="shot">
+          <div class="frame"><img src="tiny-cart-concepts.png" alt="The three concepts" loading="lazy" onerror="this.parentNode.classList.add('missing')"><span class="lbl">The three concepts</span></div>
+        </figure>
+
+          <div class="concept">
+            <h3>Concept 1. Inside the cart icon panel</h3>
+            <p>Store owners choose what happens when shoppers click the cart icon: Side Cart, full cart page, or pop-up.</p>
+            <dl><dt>Why not</dt><dd>Editing stays hidden in the cart icon, with no preview of the pop-up.</dd></dl>
+          </div>
+
+          <div class="concept chosen">
+            <h3>Concept 2. Its own page in the Editor<span class="badge">Chosen</span></h3>
+            <p>The pop-up cart appears under Store Pages, right next to the Side Cart.</p>
+            <dl><dt>Why</dt><dd>It follows a pattern store owners already know from the Side Cart, gives the Tiny Cart a clear entry point, and opens editing with a live preview. Access from the cart icon stayed, so existing users didn't face a dramatic change.</dd></dl>
+          </div>
+
+          <div class="concept">
+            <h3>Concept 3. One unified cart panel</h3>
+            <p>A single side panel with tabs for the cart icon, pop-up, settings and management.</p>
+            <dl><dt>Why not</dt><dd>Everything in one panel made it crowded, and the pop-up was still reached through the cart.</dd></dl>
+          </div>
+        </section>
+
+        <section id="flow">
+          <h2>Editing flow</h2>
+          <div class="step">
+            <h3>Step 01. Its own section in the Editor</h3>
+            <p>When Wix Stores is installed, the Tiny Cart gets a dedicated section in the Editor. Editing opens from there.</p>
+          </div>
+          <div class="step">
+            <h3>Step 02. Design panel</h3>
+            <p>Fonts, colors, backgrounds and button styles, with a live preview of the pop-up.</p>
+            <figure class="shot">
+          <div class="frame"><img src="tiny-cart-design-panel.png" alt="Design panel with live preview" loading="lazy" onerror="this.parentNode.classList.add('missing')"><span class="lbl">Design panel with live preview</span></div>
+        </figure>
+          </div>
+          <div class="step">
+            <h3>Step 03. Customization panel</h3>
+            <p>What the cart shows: the checkout button, discounts and item details.</p>
+            <figure class="shot">
+          <div class="frame"><img src="tiny-cart-customization-panel.png" alt="Customization panel" loading="lazy" onerror="this.parentNode.classList.add('missing')"><span class="lbl">Customization panel</span></div>
+        </figure>
+          </div>
+          <div class="step">
+            <h3>Step 04. Routing per entry point</h3>
+            <p>For each of the three entry points, store owners choose whether shoppers land in the Side Cart or the Tiny Cart.</p>
+            <figure class="shot">
+          <div class="frame"><img src="tiny-cart-routing.png" alt="Routing settings per entry point" loading="lazy" onerror="this.parentNode.classList.add('missing')"><span class="lbl">Routing settings per entry point</span></div>
+        </figure>
+          </div>
+        </section>
+
+        <section id="constraints">
+          <h2>Constraints</h2>
+          <p>We planned more design options for the panel, but some were cut due to development constraints. We prioritized by two things: what mattered most to the purchase experience, and what could be rewritten most simply.</p>
+        </section>
+
+        <section id="learnings">
+          <h2>Learnings</h2>
+          <p class="learn"><b>1. Check what's possible early.</b><span>Working with the developer and architect showed it's worth understanding the constraints at the start, not after the design is done.</span></p>
+          <p class="learn"><b>2. Prioritize by impact and effort.</b><span>When not everything fits, choose what matters most to users and what's simplest to build.</span></p>
+          <p class="learn"><b>3. Respect existing habits.</b><span>Keeping the old access point meant the change didn't come at the cost of users who were used to it.</span></p>
         </section>
 
         <a class="next" href="checkout-agent.html">
