@@ -379,7 +379,7 @@ body.p-cart .cs-body p, body.p-cart .cs-body li { font-size: 18px; line-height: 
   background: linear-gradient(140deg, #D3B48F 14%, #EFC993 50%, #F8DFB0 86%);
   display: grid; place-items: center; grid-template-columns: minmax(0, 1fr); min-height: 180px; min-width: 0;
 }
-.shot img { display: block; width: 100%; height: auto; }
+.shot img, .shot video { display: block; width: 100%; height: auto; }
 .shot .frame.missing img { display: none; }
 .shot .frame .lbl { display: none; max-width: calc(100% - 32px); text-align: center; background: rgba(255,255,255,.85); border-radius: 999px; padding: 8px 16px; font-size: 15px; color: var(--ink); }
 .shot .frame.missing .lbl { display: block; }
@@ -412,6 +412,17 @@ body.p-cart .cs-body p, body.p-cart .cs-body li { font-size: 18px; line-height: 
 .step h3 { margin: 0 0 8px !important; font-family: var(--display); font-weight: 500; font-size: 21px; }
 .learn { margin: 0 0 18px; }
 @media (max-width: 640px) { .concept dl { grid-template-columns: 1fr; gap: 2px; } .concept dd { margin-bottom: 10px; } }
+.concept-shot { margin: 0 0 20px; }
+.concept-shot .frame { padding: clamp(20px, 4vw, 40px); }
+.concept-shot img { width: auto; max-width: 100%; max-height: 420px; border-radius: 12px; box-shadow: 0 20px 50px -20px rgba(60, 30, 0, .35); }
+
+/* scroll reveal: only hides content once JS confirms it can show it again */
+@media (prefers-reduced-motion: no-preference) {
+  .js-reveal .reveal .frame { clip-path: inset(0 0 100% 0 round 20px); transition: clip-path 0.9s cubic-bezier(.2,.7,.2,1); }
+  .js-reveal .reveal img { opacity: 0; transform: translateY(24px) scale(.96); transition: opacity 0.8s 0.25s ease, transform 0.9s 0.25s cubic-bezier(.2,.7,.2,1); }
+  .js-reveal .reveal.is-visible .frame { clip-path: inset(0 0 0 0 round 20px); }
+  .js-reveal .reveal.is-visible img { opacity: 1; transform: none; }
+}
 </style>
 </head>
 <body class="p-cart">
@@ -510,23 +521,29 @@ body.p-cart .cs-body p, body.p-cart .cs-body li { font-size: 18px; line-height: 
         <section id="decision">
           <h2>Key decision: Where store owners design the Tiny Cart</h2>
           <p class="kicker-cart">3 concepts explored</p>
-          <figure class="shot">
-          <div class="frame"><img src="tiny-cart-concepts.png" alt="The three concepts" loading="lazy" onerror="this.parentNode.classList.add('missing')"><span class="lbl">The three concepts</span></div>
-        </figure>
 
           <div class="concept">
+            <figure class="shot concept-shot reveal">
+              <div class="frame"><img src="cart%20icon%20concept1.png" alt="Cart Icon panel with a Settings tab where store owners choose between showing the side cart or opening the full cart page" loading="lazy" onerror="this.parentNode.classList.add('missing')"><span class="lbl">Concept 1</span></div>
+            </figure>
             <h3>Concept 1. Inside the cart icon panel</h3>
             <p>Store owners choose what happens when shoppers click the cart icon: Side Cart, full cart page, or pop-up.</p>
             <dl><dt>Why not</dt><dd>Editing stays hidden in the cart icon, with no preview of the pop-up.</dd></dl>
           </div>
 
           <div class="concept chosen">
+            <figure class="shot concept-shot reveal">
+              <div class="frame"><img src="tiny%20cart%20-%20concept%202.png" alt="Editor pages menu listing Side Cart and the pop-up cart under Cart and Thank You in Store Pages" loading="lazy" onerror="this.parentNode.classList.add('missing')"><span class="lbl">Concept 2</span></div>
+            </figure>
             <h3>Concept 2. Its own page in the Editor<span class="badge">Chosen</span></h3>
             <p>The pop-up cart appears under Store Pages, right next to the Side Cart.</p>
             <dl><dt>Why</dt><dd>It follows a pattern store owners already know from the Side Cart, gives the Tiny Cart a clear entry point, and opens editing with a live preview. Access from the cart icon stayed, so existing users didn't face a dramatic change.</dd></dl>
           </div>
 
           <div class="concept">
+            <figure class="shot concept-shot reveal">
+              <div class="frame"><img src="cart%20icon%20concept3.png" alt="Unified Cart item panel with tabs for cart icon, pop up, setting and manage, showing pop-up customization options" loading="lazy" onerror="this.parentNode.classList.add('missing')"><span class="lbl">Concept 3</span></div>
+            </figure>
             <h3>Concept 3. One unified cart panel</h3>
             <p>A single side panel with tabs for the cart icon, pop-up, settings and management.</p>
             <dl><dt>Why not</dt><dd>Everything in one panel made it crowded, and the pop-up was still reached through the cart.</dd></dl>
@@ -543,21 +560,14 @@ body.p-cart .cs-body p, body.p-cart .cs-body li { font-size: 18px; line-height: 
             <h3>Step 02. Design panel</h3>
             <p>Fonts, colors, backgrounds and button styles, with a live preview of the pop-up.</p>
             <figure class="shot">
-          <div class="frame"><img src="tiny-cart-design-panel.png" alt="Design panel with live preview" loading="lazy" onerror="this.parentNode.classList.add('missing')"><span class="lbl">Design panel with live preview</span></div>
+          <div class="frame"><video src="tiny-cart-design-panel.mov" aria-label="Design panel with live preview" autoplay muted loop playsinline preload="metadata"></video></div>
         </figure>
           </div>
           <div class="step">
             <h3>Step 03. Customization panel</h3>
             <p>What the cart shows: the checkout button, discounts and item details.</p>
             <figure class="shot">
-          <div class="frame"><img src="tiny-cart-customization-panel.png" alt="Customization panel" loading="lazy" onerror="this.parentNode.classList.add('missing')"><span class="lbl">Customization panel</span></div>
-        </figure>
-          </div>
-          <div class="step">
-            <h3>Step 04. Routing per entry point</h3>
-            <p>For each of the three entry points, store owners choose whether shoppers land in the Side Cart or the Tiny Cart.</p>
-            <figure class="shot">
-          <div class="frame"><img src="tiny-cart-routing.png" alt="Routing settings per entry point" loading="lazy" onerror="this.parentNode.classList.add('missing')"><span class="lbl">Routing settings per entry point</span></div>
+          <div class="frame"><video src="tiny-cart-customization-panel.mov" aria-label="Customization panel" autoplay muted loop playsinline preload="metadata"></video></div>
         </figure>
           </div>
         </section>
@@ -605,6 +615,23 @@ body.p-cart .cs-body p, body.p-cart .cs-body li { font-size: 18px; line-height: 
     var el = document.getElementById(id);
     if (el) observer.observe(el);
   });
+})();
+
+// Reveals each concept image as it scrolls into view.
+(function () {
+  var items = document.querySelectorAll('.reveal');
+  if (!items.length || !('IntersectionObserver' in window)) return;
+  document.documentElement.classList.add('js-reveal');
+
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('is-visible');
+      observer.unobserve(entry.target);
+    });
+  }, { rootMargin: '0px 0px -15% 0px', threshold: 0.15 });
+
+  items.forEach(function (el) { observer.observe(el); });
 })();
 
 </script>
