@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
+  <script>document.documentElement.classList.add("js")</script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Tiny Cart — Shani Leibner</title>
@@ -423,6 +424,26 @@ body.p-cart .cs-body p, body.p-cart .cs-body li { font-size: 18px; line-height: 
   .js-reveal .reveal.is-visible .frame { clip-path: inset(0 0 0 0 round 20px); }
   .js-reveal .reveal.is-visible img { opacity: 1; transform: none; }
 }
+/* Key decision: scroll-driven concepts */
+.ds { --frame-h: min(44vh, 460px); --stage-h: calc(var(--frame-h) + 40px); position: relative; margin-top: 8px; }
+.ds-stage { position: sticky; top: 16px; z-index: 5; background: var(--paper); padding: 8px 0 16px; }
+.ds-frame { position: relative; height: var(--frame-h); border-radius: 20px; overflow: hidden; background: #E7EDFA; }
+.ds-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; opacity: 0; transform: scale(.97); transition: opacity .45s ease, transform .45s cubic-bezier(.2,.7,.2,1); }
+.ds-img.is-active { opacity: 1; transform: none; }
+.ds-img.missing { display: none; }
+.ds-count { position: absolute; right: 14px; bottom: 30px; background: rgba(255,255,255,.9); border-radius: 999px; padding: 4px 12px; font-size: 14px; color: var(--ink); }
+/* each card sticks under the screen until the next one slides over it */
+.ds-step { position: sticky; top: calc(16px + var(--stage-h)); margin-top: 0; margin-bottom: 38vh; }
+.ds-step:last-child { margin-bottom: 0; }
+.ds-step + .ds-step { box-shadow: 0 -12px 30px -18px rgba(60,30,0,.25); }
+.js .ds-step { opacity: 0; transform: translateY(40px); transition: opacity .5s ease, transform .5s cubic-bezier(.2,.7,.2,1); }
+.js .ds-step.is-in { opacity: 1; transform: none; }
+.ds-step.chosen { box-shadow: inset 0 0 0 2px #DB870F, 0 -12px 30px -18px rgba(60,30,0,.25); }
+@media (prefers-reduced-motion: reduce) {
+  .js .ds-step { opacity: 1; transform: none; transition: none; }
+  .ds-img { transition: none; transform: none; }
+}
+@media (max-width: 640px) { .ds { --frame-h: 32vh; } .ds-step { margin-bottom: 30vh; } }
 </style>
 </head>
 <body class="p-cart">
@@ -520,32 +541,32 @@ body.p-cart .cs-body p, body.p-cart .cs-body li { font-size: 18px; line-height: 
         <section id="decision">
           <h2>Key decision: Where store owners design the Tiny Cart</h2>
           <p class="kicker-cart">3 concepts explored</p>
-
-          <div class="concept">
-            <figure class="shot concept-shot reveal">
-              <div class="frame"><img src="cart%20icon%20concept1.png" alt="Cart Icon panel with a Settings tab where store owners choose between showing the side cart or opening the full cart page" loading="lazy" onerror="this.parentNode.classList.add('missing')"><span class="lbl">Concept 1</span></div>
-            </figure>
-            <h3>Concept 1. Inside the cart icon panel</h3>
-            <p>Store owners choose what happens when shoppers click the cart icon: Side Cart, full cart page, or pop-up.</p>
-            <dl><dt>Why not</dt><dd>Editing stays hidden in the cart icon, with no preview of the pop-up.</dd></dl>
-          </div>
-
-          <div class="concept chosen">
-            <figure class="shot concept-shot reveal">
-              <div class="frame"><img src="tiny%20cart%20-%20concept%202.png" alt="Editor pages menu listing Side Cart and the pop-up cart under Cart and Thank You in Store Pages" loading="lazy" onerror="this.parentNode.classList.add('missing')"><span class="lbl">Concept 2</span></div>
-            </figure>
-            <h3>Concept 2. Its own page in the Editor<span class="badge">Chosen</span></h3>
-            <p>The pop-up cart appears under Store Pages, right next to the Side Cart.</p>
-            <dl><dt>Why</dt><dd>It follows a pattern store owners already know from the Side Cart, gives the Tiny Cart a clear entry point, and opens editing with a live preview. Access from the cart icon stayed, so existing users didn't face a dramatic change.</dd></dl>
-          </div>
-
-          <div class="concept">
-            <figure class="shot concept-shot reveal">
-              <div class="frame"><img src="cart%20icon%20concept3.png" alt="Unified Cart item panel with tabs for cart icon, pop up, setting and manage, showing pop-up customization options" loading="lazy" onerror="this.parentNode.classList.add('missing')"><span class="lbl">Concept 3</span></div>
-            </figure>
-            <h3>Concept 3. One unified cart panel</h3>
-            <p>A single side panel with tabs for the cart icon, pop-up, settings and management.</p>
-            <dl><dt>Why not</dt><dd>Everything in one panel made it crowded, and the pop-up was still reached through the cart.</dd></dl>
+          <div class="ds">
+            <div class="ds-stage" aria-hidden="true">
+              <div class="ds-frame">
+              <img class="ds-img is-active" data-step="1" src="cart%20icon%20concept1.png" alt="Concept 1. Inside the cart icon panel" loading="lazy" onerror="this.classList.add('missing')">
+              <img class="ds-img" data-step="2" src="tiny%20cart%20-%20concept%202.png" alt="Concept 2. Its own page in the Editor" loading="lazy" onerror="this.classList.add('missing')">
+              <img class="ds-img" data-step="3" src="cart%20icon%20concept3.png" alt="Concept 3. One unified cart panel" loading="lazy" onerror="this.classList.add('missing')">
+              </div>
+              <div class="ds-count"><span class="ds-now">1</span> / 3</div>
+            </div>
+            <div class="ds-steps">
+            <div class="concept ds-step" data-step="1">
+              <h3>Concept 1. Inside the cart icon panel</h3>
+              <p>Store owners choose what happens when shoppers click the cart icon: Side Cart, full cart page, or pop-up.</p>
+              <dl><dt>Why not</dt><dd>Editing stays hidden in the cart icon, with no preview of the pop-up.</dd></dl>
+            </div>
+            <div class="concept ds-step chosen" data-step="2">
+              <h3>Concept 2. Its own page in the Editor<span class="badge">Chosen</span></h3>
+              <p>The pop-up cart appears under Store Pages, right next to the Side Cart.</p>
+              <dl><dt>Why</dt><dd>It follows a pattern store owners already know from the Side Cart, gives the Tiny Cart a clear entry point, and opens editing with a live preview. Access from the cart icon stayed, so existing users didn't face a dramatic change.</dd></dl>
+            </div>
+            <div class="concept ds-step" data-step="3">
+              <h3>Concept 3. One unified cart panel</h3>
+              <p>A single side panel with tabs for the cart icon, pop-up, settings and management.</p>
+              <dl><dt>Why not</dt><dd>Everything in one panel made it crowded, and the pop-up was still reached through the cart.</dd></dl>
+            </div>
+            </div>
           </div>
         </section>
 
@@ -633,6 +654,32 @@ body.p-cart .cs-body p, body.p-cart .cs-body li { font-size: 18px; line-height: 
   items.forEach(function (el) { observer.observe(el); });
 })();
 
+
+// Key decision: reveal each concept on scroll, and show the screen of the concept in focus.
+(function () {
+  var steps = [].slice.call(document.querySelectorAll('.ds-step'));
+  if (!steps.length) return;
+  var imgs = [].slice.call(document.querySelectorAll('.ds-img')), now = document.querySelector('.ds-now'), current = null;
+  function activate(n) {
+    if (n === current) return; current = n;
+    imgs.forEach(function (i) { i.classList.toggle('is-active', i.dataset.step === n); });
+    if (now) now.textContent = n;
+  }
+  function update() {
+    var vh = window.innerHeight, stickTop = parseFloat(getComputedStyle(steps[0]).top) || 0, active = steps[0].dataset.step;
+    steps.forEach(function (st) {
+      var top = st.getBoundingClientRect().top;
+      if (top < vh * 0.9) st.classList.add('is-in');
+      if (top <= stickTop + vh * 0.12) active = st.dataset.step;
+    });
+    activate(active);
+  }
+  var ticking = false;
+  function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(function () { ticking = false; update(); }); } }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  update();
+})();
 </script>
 </body>
 </html>
