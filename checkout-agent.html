@@ -8,7 +8,7 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23161A2C'/><circle cx='11' cy='16' r='4' fill='%233346F0'/><circle cx='21' cy='16' r='4' fill='%23F4F5F7'/></svg>" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..600;1,8..60,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..600;1,8..60,400&display=swap" rel="stylesheet">
   <style>
 
 /* ------------------------------------------------------------
@@ -366,6 +366,41 @@ figcaption b { color: var(--ink); font-weight: 500; }
 }
 
 
+/* ---------- Same type as the other case studies (Poppins) ---------- */
+body.p-checkout { --display: "Poppins", "Helvetica Neue", Arial, sans-serif; --text: "Poppins", "Helvetica Neue", Arial, sans-serif; }
+body.p-checkout .cs-hero h1 { font-weight: 500; letter-spacing: -0.02em; max-width: 14em; font-size: clamp(40px, 5.6vw, 80px); line-height: 1.04; }
+body.p-checkout .cs-body h2 { font-weight: 500; font-size: clamp(26px, 2.4vw, 32px); letter-spacing: -0.01em; max-width: none; }
+body.p-checkout .cs-body h3 { font-weight: 500; }
+body.p-checkout .cs-body .intro { font-weight: 500; font-size: clamp(21px, 2vw, 26px); max-width: 30em; }
+body.p-checkout .cs-body p, body.p-checkout .cs-body li { font-size: 18px; line-height: 1.65; }
+body.p-checkout .next strong { font-weight: 500; }
+
+/* problem lists and the one-line solution */
+body.p-checkout .cs-body ul.diamonds { list-style: none; padding: 0; margin: 0 0 16px; }
+body.p-checkout .cs-body ul.diamonds li { position: relative; padding-left: 26px; margin-bottom: 8px; }
+body.p-checkout .cs-body ul.diamonds li::before { content: "◆"; position: absolute; left: 0; top: .1em; font-size: 12px; color: var(--checkout); }
+.result { margin-top: 24px; }
+body.p-checkout .cs-body .result-label { margin: 0 0 10px; font-weight: 500; color: var(--ink); }
+body.p-checkout .cs-body .solution-line { font-size: clamp(19px, 1.7vw, 22px); line-height: 1.55; color: var(--ink); max-width: 36em; }
+body.p-checkout .cs-body .solution-line strong { font-weight: 500; color: var(--checkout-ink); }
+
+/* user voices: quotes one after another */
+body.p-checkout .cs-body ul.voices { list-style: none; padding: 0; margin: 20px 0 0; }
+body.p-checkout .cs-body ul.voices li { margin: 0; padding: 22px 0 22px 24px; border-left: 3px solid #C7BFF3; max-width: none; }
+body.p-checkout .cs-body ul.voices li + li { margin-top: 14px; }
+body.p-checkout .cs-body ul.voices blockquote { margin: 0 0 8px; font-size: clamp(18px, 1.6vw, 21px); line-height: 1.5; color: var(--ink); max-width: 36em; }
+body.p-checkout .cs-body ul.voices mark { background: #E7E2FB; color: inherit; padding: 0 3px; border-radius: 3px; }
+body.p-checkout .cs-body ul.voices .who { display: block; font-size: 14px; color: #9AA0B0; }
+
+/* screenshot inside a section, same purple frame as the cover */
+.shot-fig .ph.has-img { aspect-ratio: auto; padding: clamp(14px, 2.6vw, 32px); display: block; background: linear-gradient(140deg, #A9B0F6 14%, #C7BFF3 50%, #F3D3E2 86%); }
+.shot-fig .ph.has-img::before { display: none; }
+.shot-fig .ph.has-img img { position: relative; display: block; width: 100%; height: auto; border-radius: 10px; box-shadow: 0 20px 50px -20px rgba(20, 16, 60, .4); }
+
+/* cover: the screenshot fills the panel */
+.cs-cover .ph.has-img { aspect-ratio: auto; padding: clamp(16px, 3.4vw, 44px); display: block; background: linear-gradient(140deg, #A9B0F6 14%, #C7BFF3 50%, #F3D3E2 86%); }
+.cs-cover .ph.has-img::before { display: none; }
+.cs-cover .ph.has-img img { position: relative; display: block; width: 100%; height: auto; border-radius: 10px; box-shadow: 0 20px 50px -20px rgba(20, 16, 60, .4); }
 </style>
 </head>
 <body class="p-checkout">
@@ -388,7 +423,7 @@ figcaption b { color: var(--ink); font-weight: 500; }
   </header>
 
     <figure class="cs-cover wrap">
-      <div class="ph"><span class="lbl">Cover: the recommendation card in context, inside Checkout Settings</span></div>
+      <div class="ph has-img"><img src="checkout-agent-cover.png" width="1728" height="990" alt="Checkout settings in Wix Studio with the Checkout recommendations card on the right" loading="eager"></div>
     </figure>
 
     <div class="cs-layout wrap">
@@ -397,9 +432,10 @@ figcaption b { color: var(--ink); font-weight: 500; }
         <nav class="toc" aria-label="On this page">
         <ol>
           <li><a href="#intro">Introduction</a></li>
-          <li><a href="#overview">Overview</a></li>
           <li><a href="#problem">The problem</a></li>
+          <li><a href="#solution">The solution</a></li>
           <li><a href="#role">My role</a></li>
+          <li><a href="#voices">User voices</a></li>
           <li><a href="#research">Research</a></li>
           <li><a href="#concept">The concept</a></li>
           <li><a href="#decision">A key decision</a></li>
@@ -414,7 +450,7 @@ figcaption b { color: var(--ink); font-weight: 500; }
 
       <article class="cs-body">
         <section id="intro" class="intro-block">
-          <p class="intro">An AI agent inside Checkout Settings that tells merchants where they lose buyers, why, and what to change, then makes the change in one click.</p>
+          <p class="intro">An AI based recommendations built into Checkout Settings that transforms checkout data into guided, data-driven optimization.</p>
           <dl class="facts">
         <div><dt>Role</dt><dd>UX/UI Designer</dd></div>
         <div><dt>Team</dt><dd>PM, BE, FE, BA, QA</dd></div>
@@ -423,15 +459,27 @@ figcaption b { color: var(--ink); font-weight: 500; }
       </dl>
         </section>
 
-        <section id="overview">
-          <h2>Merchants could see they were losing buyers. Not where, why, or what to do.</h2>
-          <p>Checkout analytics told Wix merchants that buyers were dropping off. They never said where in the flow, why it happened, or which setting to change. I designed an AI agent that lives inside Checkout Settings, reads the store's own data, benchmarks it against similar stores, and turns each insight into a single action.</p>
-        </section>
-
         <section id="problem">
           <h2>The problem</h2>
-          <p>Checkout is where revenue is won or lost, and where merchants are most blind. They couldn't pinpoint where buyers left, had no guidance on which settings improve conversion, and the reports they had were static and hard to act on.</p>
-          <p>Nothing connected the data to the fix. That gap was the product.</p>
+          <p>Merchants know checkout is critical, but:</p>
+          <ul class="diamonds">
+            <li>They don’t know where in the flow they’re losing buyers</li>
+            <li>They don’t know what to change in checkout settings</li>
+            <li>Existing reports are static and hard to translate into action</li>
+          </ul>
+          <div class="result">
+            <p class="result-label">➔ Result:</p>
+            <ul class="diamonds">
+              <li>Missed revenue from avoidable drop-offs</li>
+              <li>Under-used capabilities (express checkout, branded checkout, coupons, etc.)</li>
+              <li>Support and AMs answering the same “why is my checkout not converting?” question</li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="solution">
+          <h2>The solution</h2>
+          <p class="solution-line">An AI Checkout Conversion Agent that sits inside Checkout Settings.<br><strong>From analytics and guesswork → to guided, data driven optimization.</strong></p>
         </section>
 
         <section id="role">
@@ -440,11 +488,43 @@ figcaption b { color: var(--ink); font-weight: 500; }
           <!-- TODO: adjust after the PM confirms role wording (led vs. contributed) -->
         </section>
 
+        <section id="voices">
+          <h2>User voices</h2>
+          <p>What merchants asked, in their own words, in Wix User Voice and in the Wix AI assistant.</p>
+          <ul class="voices">
+            <li>
+              <blockquote>“I’m very excited you have a customizable side cart though! … But I have one last question - in the last week, 71 people have added to cart but only 7 checked out. Can anyone help with why it’s so low and how I can increase <mark>conversions</mark>?”</blockquote>
+              <span class="who">Wix merchant · Premium, DIY · Wix User Voice</span>
+            </li>
+            <li>
+              <blockquote>“I’d like to ask another question: can the checkout process be optimized?”</blockquote>
+              <span class="who">Wix merchant · Premium, DIY · Wix User Voice</span>
+            </li>
+            <li>
+              <blockquote>“I would like to know if there is any option to customize my store checkout, so it is more convenient and has better conversion rate. That includes: brand background color, form label (border, corners), butto…”</blockquote>
+              <span class="who">Wix merchant · Premium, Target Partner · Wix User Voice</span>
+            </li>
+            <li>
+              <blockquote>“<mark>applier the best checkout</mark> in my website”</blockquote>
+              <span class="who">Message to the Wix AI assistant</span>
+            </li>
+            <li>
+              <blockquote>“I want it to be a <mark>one click checkout</mark> and <mark>high converting</mark>”</blockquote>
+              <span class="who">Message to the Wix AI assistant</span>
+            </li>
+          </ul>
+        </section>
+
         <section id="research">
           <h2>Merchants didn't want another chart. They wanted the tool to do the thinking.</h2>
-          <p>I looked at how competitors like Shopify frame cart abandonment, then went to the merchants themselves: logs from the Wix AI assistant and store reviews.</p>
+          <p>I started by looking at how Wix presents analytics today, to understand what a regular user actually sees.</p>
+          <figure class="shot-fig">
+            <div class="ph has-img"><img src="checkout-agent-analytics.png" width="724" height="252" alt="Analytics card on the Wix Home dashboard: site sessions, total sales, total orders and bookings for the last 30 days" loading="lazy"></div>
+            <figcaption>The Analytics card on the Wix Home dashboard: numbers, without what to do next.</figcaption>
+          </figure>
+          <p>Then we looked at competitors like Shopify, to see whether they offer similar tools and how they present them.</p>
           <blockquote class="voice">"71 added to cart, 7 checked out. How do I increase conversions?"</blockquote>
-          <p>The logs also exposed the failure mode of the generic assistant: it answered, but it didn't know the store. Advice that applied to everyone helped no one. So the job of the product became a decision, not more data.</p>
+          <p>The logs also exposed the failure mode of the generic assistant: it answered, but its answers weren't personalized to the store. Advice that applied to everyone helped no one. So the job of the product became a decision, not more data.</p>
         </section>
 
         <section id="concept">

@@ -110,7 +110,7 @@ a { color: inherit; text-decoration: none; }
 }
 .works[data-view="row"] .gallery::-webkit-scrollbar { display: none; }
 .works[data-view="row"] .gallery.dragging { cursor: grabbing; scroll-snap-type: none; }
-.works[data-view="row"] .gallery li { flex: 0 0 clamp(260px, 43.4vw, 520px); scroll-snap-align: start; }
+.works[data-view="row"] .gallery li { flex: 0 0 max(260px, 43.4vw); scroll-snap-align: start; }
 /* grid view: two columns */
 .works[data-view="grid"] .gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 24px; }
 
@@ -119,9 +119,9 @@ a { color: inherit; text-decoration: none; }
   position: relative; aspect-ratio: 520 / 484; border-radius: 6px; overflow: hidden;
   display: grid; place-items: center;
 }
-.cover img.shot { width: calc(100% - 56px); height: calc(100% - 56px); object-fit: contain; transition: transform .5s cubic-bezier(.2,.7,.2,1); }
+.cover img.shot { width: 108%; max-width: none; height: auto; object-fit: contain; transition: transform .5s cubic-bezier(.2,.7,.2,1); }
 .card:hover .cover img.shot, .card:hover .cover .phones { transform: scale(1.03); }
-.cover img.rounded { width: calc(100% - 56px); height: auto; max-height: calc(100% - 56px); border-radius: 8px; box-shadow: 0 20px 50px -20px rgba(20, 16, 60, .45); }
+.cover img.shot.rounded { width: calc(100% - 32px); max-width: none; height: auto; max-height: calc(100% - 32px); border-radius: 8px; box-shadow: 0 20px 50px -20px rgba(20, 16, 60, .45); }
 .card .disciplines { position: absolute; left: 14px; top: 14px; z-index: 2; display: flex; gap: 6px; }
 .card .name { font-size: 14px; line-height: 1.16; letter-spacing: -0.01em; }
 .gallery.dragging .card { pointer-events: none; }
@@ -138,9 +138,9 @@ a { color: inherit; text-decoration: none; }
 .phone img { position: absolute; max-width: none; }
 .phone .screen { left: 5.26%; top: 2.05%; width: 89.48%; height: 95.89%; object-fit: cover; border-radius: 7.4% / 3.4%; }
 .phone .frame { inset: 0; width: 100%; height: 100%; }
-.phones .p-left   { left: 11%; top: 24%; width: 27%; }
-.phones .p-center { left: 35.5%; top: 18%; width: 29%; z-index: 1; }
-.phones .p-right  { left: 62%; top: 24%; width: 27%; }
+.phones .p-left   { left: 6%; top: 17%; width: 32%; }
+.phones .p-center { left: 32.5%; top: 10%; width: 35%; z-index: 1; }
+.phones .p-right  { left: 62%; top: 17%; width: 32%; }
 
 .divider { height: 1px; background: var(--line); }
 
