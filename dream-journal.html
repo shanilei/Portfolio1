@@ -509,6 +509,17 @@ body.p-dream {
   .dj-screens { grid-template-columns: minmax(0, 242px); justify-content: center; gap: 32px; }
   .p-dream .cs-body h2.h3 { font-size: 24px; }
 }
+
+/* learnings + future direction */
+.learn { margin: 0 0 18px !important; }
+.learn b { display: block; font-weight: 500; font-size: 21px; line-height: 1.3; color: var(--ink); margin-bottom: 4px; }
+.learn span { color: var(--muted); }
+.cs-body h3.sub { font-weight: 500; font-size: 21px; margin: 32px 0 0; }
+.future { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px; margin: 14px 0 0; }
+.future div { background: #fff; border-radius: 14px; padding: 16px 18px; }
+.future b { display: block; font-weight: 500; font-size: 19px; line-height: 1.3; color: var(--ink); margin-bottom: 4px; }
+.future span { font-size: 15px; line-height: 1.5; color: var(--muted); }
+@media (max-width: 640px) { .future { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body class="p-dream">
@@ -554,7 +565,7 @@ body.p-dream {
           <li><a href="#concept">The concept</a></li>
           <li><a href="#design">The design</a></li>
           <li><a href="#build">Building it</a></li>
-          <li><a href="#learnings">Key learnings</a></li>
+          <li><a href="#learnings">Learnings</a></li>
           <li><a href="#reflection">Reflection</a></li>
         </ol>
       </nav>
@@ -633,8 +644,15 @@ body.p-dream {
         </section>
 
         <section id="learnings">
-          <h2>Key Learnings &amp; Future Direction</h2>
-          <p>to rewrite</p>
+          <h2>Key Learnings</h2>
+          <p class="learn"><b>1. Start with the build.</b><span>I designed first and learned the tools along the way. Today I'd start by learning how to build it and setting up the image and video generation, then move to design.</span></p>
+          <p class="learn"><b>2. A design system before code.</b><span>Every design change during implementation slowed me down. A system set up front would have saved that.</span></p>
+          <p class="learn"><b>3. Test every day, not once.</b><span>About 7 people used the app daily, and I improved it every day based on how they used it.</span></p>
+          <h3 class="sub">Future Direction</h3>
+          <div class="future">
+            <div><b>Video instead of an image</b><span>Users asked to see their dream as a video.</span></div>
+            <div><b>Interpretation length</b><span>Some wanted it shorter, others wanted more room for it. Next step: test both.</span></div>
+          </div>
         </section>
 
         <section id="reflection">
