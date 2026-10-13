@@ -380,6 +380,34 @@ body.p-cart .cs-body p, body.p-cart .cs-body li { font-size: 18px; line-height: 
   display: grid; place-items: center; grid-template-columns: minmax(0, 1fr); min-height: 180px; min-width: 0;
 }
 .shot img, .shot video { display: block; width: 100%; height: auto; }
+.shot video { cursor: pointer; }
+/* video controls: pause/play and restart, added by the script */
+.vid-ctrl { position: absolute; right: 14px; bottom: 14px; z-index: 2; display: flex; gap: 8px; }
+.vid-ctrl button {
+  display: grid; place-items: center; width: 38px; height: 38px; padding: 0; border: 0; border-radius: 50%;
+  background: rgba(22, 26, 44, .72); color: #fff; cursor: pointer; opacity: .85;
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  transition: background .2s ease, transform .2s ease, opacity .2s ease;
+}
+.shot .frame:hover .vid-ctrl button, .vid-ctrl button:focus-visible { opacity: 1; }
+.vid-ctrl button:hover { background: rgba(22, 26, 44, .92); transform: scale(1.06); }
+.vid-ctrl svg { width: 16px; height: 16px; }
+.vid-ctrl .i-play { display: none; }
+.vid-ctrl .is-paused .i-play { display: block; }
+.vid-ctrl .is-paused .i-pause { display: none; }
+/* big play button over the poster until the video is started */
+.vid-start {
+  position: absolute; left: 50%; top: 50%; z-index: 3; transform: translate(-50%, -50%);
+  display: inline-flex; align-items: center; gap: 10px; padding: 14px 22px 14px 18px; border: 0; border-radius: 999px;
+  font: inherit; font-size: 16px; font-weight: 500; color: #fff; cursor: pointer;
+  background: rgba(22, 26, 44, .82); box-shadow: 0 12px 30px -10px rgba(22, 26, 44, .5);
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  transition: background .2s ease, transform .2s ease;
+}
+.vid-start:hover { background: rgba(22, 26, 44, .95); transform: translate(-50%, -50%) scale(1.04); }
+.vid-start svg { width: 20px; height: 20px; }
+.frame:not(.has-started) .vid-ctrl { display: none; }
+.frame.has-started .vid-start { display: none; }
 .shot .frame.missing img { display: none; }
 .shot .frame .lbl { display: none; max-width: calc(100% - 32px); text-align: center; background: rgba(255,255,255,.85); border-radius: 999px; padding: 8px 16px; font-size: 15px; color: var(--ink); }
 .shot .frame.missing .lbl { display: block; }
@@ -559,14 +587,14 @@ body.p-cart .cs-body p, body.p-cart .cs-body li { font-size: 18px; line-height: 
             <h3>Step 02. Design panel</h3>
             <p>Fonts, colors, backgrounds and button styles, with a live preview of the pop-up.</p>
             <figure class="shot">
-          <div class="frame"><video src="tiny-cart-design-panel.mp4" poster="tiny-cart-design-panel-poster.jpg" aria-label="Design panel with live preview" autoplay muted loop playsinline preload="metadata"></video></div>
+          <div class="frame"><video src="tiny-cart-design-panel.mp4" poster="tiny-cart-design-panel-poster.jpg" aria-label="Design panel with live preview" muted loop playsinline preload="metadata"></video></div>
         </figure>
           </div>
           <div class="step">
             <h3>Step 03. Customization panel</h3>
             <p>What the cart shows: the checkout button, discounts and item details.</p>
             <figure class="shot">
-          <div class="frame"><video src="tiny-cart-customization-panel.mp4" poster="tiny-cart-customization-panel-poster.jpg" aria-label="Customization panel" autoplay muted loop playsinline preload="metadata"></video></div>
+          <div class="frame"><video src="tiny-cart-customization-panel.mp4" poster="tiny-cart-customization-panel-poster.jpg" aria-label="Customization panel" muted loop playsinline preload="metadata"></video></div>
         </figure>
           </div>
         </section>
@@ -593,6 +621,47 @@ body.p-cart .cs-body p, body.p-cart .cs-body li { font-size: 18px; line-height: 
 
   <footer class="site-foot wrap">© 2026 Shani Leibner</footer>
   <script>
+// Videos wait on their poster with a Play button; once started they get pause/play and restart
+// buttons, and clicking the video also toggles it.
+(function () {
+  var PAUSE = '<svg class="i-pause" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="3.5" y="2.5" width="3" height="11" rx="1"/><rect x="9.5" y="2.5" width="3" height="11" rx="1"/></svg>';
+  var PLAY = '<svg class="i-play" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M5 2.8v10.4a.8.8 0 0 0 1.2.7l8.2-5.2a.8.8 0 0 0 0-1.4L6.2 2.1A.8.8 0 0 0 5 2.8z"/></svg>';
+  var RESTART = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 8a5.5 5.5 0 1 0 1.7-4"/><path d="M2.5 2.5v3h3"/></svg>';
+
+  document.querySelectorAll('.shot .frame video').forEach(function (video) {
+    var bar = document.createElement('div');
+    bar.className = 'vid-ctrl';
+    bar.innerHTML = '<button type="button" class="vc-toggle" aria-label="Pause video">' + PAUSE + PLAY + '</button>' +
+                    '<button type="button" class="vc-restart" aria-label="Restart video">' + RESTART + '</button>';
+    video.parentNode.appendChild(bar);
+    var toggle = bar.querySelector('.vc-toggle');
+
+    var start = document.createElement('button');
+    start.type = 'button';
+    start.className = 'vid-start';
+    start.innerHTML = PLAY.replace('class="i-play" ', '') + 'Play video';
+    video.parentNode.appendChild(start);
+    start.addEventListener('click', function () { video.play(); });
+    video.addEventListener('play', function () { video.parentNode.classList.add('has-started'); });
+
+    function sync() {
+      toggle.classList.toggle('is-paused', video.paused);
+      toggle.setAttribute('aria-label', video.paused ? 'Play video' : 'Pause video');
+    }
+    function flip() { if (video.paused) video.play(); else video.pause(); }
+
+    toggle.addEventListener('click', flip);
+    video.addEventListener('click', flip);
+    bar.querySelector('.vc-restart').addEventListener('click', function () {
+      video.currentTime = 0;
+      video.play();
+    });
+    video.addEventListener('play', sync);
+    video.addEventListener('pause', sync);
+    sync();
+  });
+})();
+
 // Highlights the current section in the case-study table of contents.
 (function () {
   var links = document.querySelectorAll('.toc a');
