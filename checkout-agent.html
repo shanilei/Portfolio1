@@ -397,11 +397,52 @@ body.p-checkout .cs-body ul.voices .who { display: block; font-size: 14px; color
 .shot-fig .ph.has-img::before { display: none; }
 .shot-fig .ph.has-img img { position: relative; display: block; width: 100%; height: auto; border-radius: 10px; box-shadow: 0 20px 50px -20px rgba(20, 16, 60, .4); }
 
+/* concept drill-down cards: closed by default, open on click (script below) */
+.drills { display: grid; gap: 12px; margin: 20px 0 40px; }
+.drill { background: #fff; border-radius: 16px; box-shadow: 0 1px 2px rgba(22, 26, 44, .04), 0 8px 24px -16px rgba(60, 40, 140, .25); overflow: hidden; }
+body.p-checkout .cs-body .drill-head { margin: 0; font-size: inherit; }
+.drill-head button {
+  display: flex; align-items: center; gap: 16px; width: 100%; padding: 20px 22px; border: 0; background: none; cursor: pointer;
+  font: inherit; font-size: clamp(18px, 1.6vw, 21px); font-weight: 500; color: var(--ink); text-align: left;
+}
+.drill-head .n { display: grid; place-items: center; flex: none; width: 34px; height: 34px; border-radius: 50%; font-size: 13px; background: #E7E2FB; color: var(--checkout-ink); transition: background .3s ease, color .3s ease; }
+.drill-head .t { flex: 1; }
+.drill-head .chev { flex: none; width: 10px; height: 10px; margin-right: 4px; border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted); transform: rotate(45deg) translateY(-3px); transition: transform .35s cubic-bezier(.2,.7,.2,1); }
+.drill.open .drill-head .chev { transform: rotate(-135deg) translateY(-3px); }
+.drill.open .drill-head .n { background: var(--checkout); color: #fff; }
+.drill-head button:hover .t { color: var(--checkout-ink); }
+.drill-body { display: grid; grid-template-rows: 1fr; }
+.js-drill .drill-body { grid-template-rows: 0fr; transition: grid-template-rows .4s cubic-bezier(.2,.7,.2,1); }
+.js-drill .drill.open .drill-body { grid-template-rows: 1fr; }
+.drill-inner { overflow: hidden; min-height: 0; padding: 0 22px 0 72px; }
+.drill-inner > :last-child { margin-bottom: 22px !important; }
+body.p-checkout .cs-body .drill-label { margin: 0 0 10px; font-size: 13px; font-weight: 500; letter-spacing: .04em; text-transform: uppercase; color: #9AA0B0; }
+body.p-checkout .cs-body ul.drill-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+body.p-checkout .cs-body ul.drill-list li { margin: 0; padding: 12px 16px; border-radius: 12px; background: #F4F2FD; color: var(--ink); font-size: 17px; line-height: 1.5; max-width: none; }
+body.p-checkout .cs-body ul.drill-list .act { display: inline-flex; align-items: center; gap: 8px; font-weight: 500; color: var(--checkout-ink); }
+body.p-checkout .cs-body ul.drill-list .act::after { content: "→"; }
+body.p-checkout .cs-body h3.sub { font-size: 21px; font-weight: 500; margin: 0 0 8px; }
+@media (max-width: 640px) { .drill-inner { padding-left: 22px; } }
+
+/* concept cards reveal one piece after another, once, then stay visible */
+@media (prefers-reduced-motion: no-preference) {
+  .js-drill .drills:not(.is-visible) .drill,
+  .js-drill .drills:not(.is-visible) .drill-label,
+  .js-drill .drills:not(.is-visible) .drill-list li { opacity: 0; transform: translateY(12px); }
+  .js-drill .drills .drill, .js-drill .drills .drill-label, .js-drill .drills .drill-list li {
+    transition: opacity .5s ease, transform .55s cubic-bezier(.2,.7,.2,1);
+    transition-delay: var(--d, 0ms);
+  }
+}
+
 /* cover: the screenshot fills the panel */
 .cs-cover .ph.has-img { aspect-ratio: auto; padding: clamp(16px, 3.4vw, 44px); display: block; background: linear-gradient(140deg, #A9B0F6 14%, #C7BFF3 50%, #F3D3E2 86%); }
 .cs-cover .ph.has-img::before { display: none; }
 .cs-cover .ph.has-img img { position: relative; display: block; width: 100%; height: auto; border-radius: 10px; box-shadow: 0 20px 50px -20px rgba(20, 16, 60, .4); }
 </style>
+  <link rel="stylesheet" href="reveal.css">
+  <script>document.documentElement.classList.add('rv-on');setTimeout(function(){if(!window.__rv)document.documentElement.classList.remove('rv-on');},2500);</script>
+  <script src="reveal.js" defer></script>
 </head>
 <body class="p-checkout">
   <a class="skip" href="#intro">Skip to content</a>
@@ -528,7 +569,49 @@ body.p-checkout .cs-body ul.voices .who { display: block; font-size: 14px; color
         </section>
 
         <section id="concept">
-          <h2>The concept: data, insight, recommendation, action</h2>
+          <h2>What Is the Checkout Conversion Agent?</h2>
+          <p>A smart layer inside Checkout Settings that:</p>
+          <div class="drills">
+            <div class="drill open">
+              <h3 class="drill-head"><button type="button" aria-expanded="true" aria-controls="drill-1" id="drill-btn-1"><span class="n">01</span><span class="t">Turns data into insights</span><span class="chev" aria-hidden="true"></span></button></h3>
+              <div class="drill-body" id="drill-1" role="region" aria-labelledby="drill-btn-1">
+                <div class="drill-inner">
+                  <p class="drill-label">Insights</p>
+                  <ul class="drill-list">
+                  <li>“Your largest drop-off is at Customer Details.”</li>
+                  <li>“Drop-off here is higher than similar businesses.”</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="drill open">
+              <h3 class="drill-head"><button type="button" aria-expanded="true" aria-controls="drill-2" id="drill-btn-2"><span class="n">02</span><span class="t">Turns insights into recommendations</span><span class="chev" aria-hidden="true"></span></button></h3>
+              <div class="drill-body" id="drill-2" role="region" aria-labelledby="drill-btn-2">
+                <div class="drill-inner">
+                  <p class="drill-label">Recommendations</p>
+                  <ul class="drill-list">
+                  <li>“Reduce required fields from 12 to 6.”</li>
+                  <li>“Enable express checkout for mobile buyers.”</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="drill open">
+              <h3 class="drill-head"><button type="button" aria-expanded="true" aria-controls="drill-3" id="drill-btn-3"><span class="n">03</span><span class="t">Turns recommendations into actions</span><span class="chev" aria-hidden="true"></span></button></h3>
+              <div class="drill-body" id="drill-3" role="region" aria-labelledby="drill-btn-3">
+                <div class="drill-inner">
+                  <p class="drill-label">Actions</p>
+                  <ul class="drill-list">
+                  <li><span class="act">Go to Checkout Form</span></li>
+                  <li><span class="act">Enable Express Checkout</span></li>
+                  <li><span class="act">Review Payment Methods</span></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <h3 class="sub">The concept: data, insight, recommendation, action</h3>
           <p>A smart layer that runs in three steps:</p>
           <ol class="flow">
             <li><b>Collect</b><span>Buyer, item, locale, industry, season, settings</span></li>
@@ -675,6 +758,40 @@ body.p-checkout .cs-body ul.voices .who { display: block; font-size: 14px; color
   Object.keys(map).forEach(function (id) {
     var el = document.getElementById(id);
     if (el) observer.observe(el);
+  });
+})();
+
+// Concept cards: each opens and closes on click to show its examples.
+(function () {
+  var drills = document.querySelectorAll('.drill');
+  if (!drills.length) return;
+  document.documentElement.classList.add('js-drill');
+  // reveal order: card 1, its label, its examples, card 2, ... (one step every 180ms)
+  var wrap = document.querySelector('.drills'), step = 0;
+  drills.forEach(function (d) {
+    [d, d.querySelector('.drill-label')].concat(Array.prototype.slice.call(d.querySelectorAll('.drill-list li')))
+      .forEach(function (el) { el.style.setProperty('--d', (step++ * 180) + 'ms'); });
+  });
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      if (!entries[0].isIntersecting) return;
+      wrap.classList.add('is-visible');
+      io.disconnect();
+      // once everything is in, drop the delays so opening/closing feels instant
+      setTimeout(function () { wrap.querySelectorAll('[style*="--d"]').forEach(function (el) { el.style.removeProperty('--d'); }); }, step * 180 + 600);
+    }, { rootMargin: '0px 0px -15% 0px', threshold: 0.15 });
+    io.observe(wrap);
+  } else {
+    wrap.classList.add('is-visible');
+  }
+
+  drills.forEach(function (d) {
+    var btn = d.querySelector('.drill-head button');
+    btn.addEventListener('click', function () {
+      var open = !d.classList.contains('open');
+      d.classList.toggle('open', open);
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
   });
 })();
 
