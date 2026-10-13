@@ -280,7 +280,7 @@ body.p-cart     { --grad: linear-gradient(118deg, #9C5806 0%, #DB870F 52%, #F0B9
 .toc a:hover { color: var(--ink); }
 .toc a.is-active { color: var(--ink); font-weight: 500; }
 
-.cs-body { max-width: 760px; }
+.cs-body { max-width: 768px; }
 .cs-body .intro {
   font-family: var(--text); font-size: clamp(22px, 2.1vw, 27px); line-height: 1.4;
   color: var(--ink); margin: 0 0 16px; max-width: 34em;
@@ -372,7 +372,7 @@ body.p-dream {
   --sans: "Poppins", "Helvetica Neue", Arial, sans-serif;
   --soft: #9AA0B0;
   --line: #DADDE5;
-  --max: 1240px;
+  --max: 1248px;
   --grad: linear-gradient(150deg, #241E5C 14.3%, #5B3FC4 50%, #B58BE2 85.7%);
   --lavender: linear-gradient(151deg, #9C9AC0 14.3%, #B5A9E4 50%, #DDCBF2 85.7%);
   --phone-shadow: drop-shadow(71px 35px 89px rgba(9, 20, 50, .15));
@@ -389,7 +389,7 @@ body.p-dream {
 }
 .p-dream .cs-hero .tagline {
   font-weight: 500; font-size: clamp(19px, 1.95vw, 28px); line-height: 1.16; letter-spacing: -0.01em;
-  text-align: center; margin: 0 auto; max-width: 1040px; text-wrap: balance;
+  text-align: center; margin: 0 auto; max-width: 1048px; text-wrap: balance;
   text-shadow: 0 1px 24px rgba(20, 16, 60, .18);
 }
 
@@ -411,7 +411,7 @@ body.p-dream {
 .dj-cover .p-center { left: 38.43%; top: 5.05%; width: 22.86%; z-index: 1; }
 
 .dj-statement {
-  max-width: calc(1040px + 2 * var(--gutter)); margin: 0 auto 60px;
+  max-width: calc(1048px + 2 * var(--gutter)); margin: 0 auto 60px;
   font-weight: 500; font-size: clamp(21px, 1.95vw, 28px); line-height: 1.35; letter-spacing: -0.01em; color: var(--ink);
 }
 
@@ -424,16 +424,16 @@ body.p-dream {
 .p-dream .facts dt { color: var(--soft); }
 .p-dream .cs-body h2 {
   font-family: var(--sans); font-weight: 500; font-size: clamp(26px, 2.2vw, 32px);
-  line-height: 1.2; letter-spacing: -0.01em; margin: 0 0 16px; max-width: 640px;
+  line-height: 1.2; letter-spacing: -0.01em; margin: 0 0 16px; max-width: 648px;
 }
 .p-dream .cs-body h2 .serif { font-family: var(--text); }
 .p-dream .cs-body h2.h3 { font-size: 28px; line-height: 1.16; color: #000; }
-.p-dream .cs-body p, .p-dream .cs-body li { font-family: var(--sans); letter-spacing: 0; max-width: 680px; }
+.p-dream .cs-body p, .p-dream .cs-body li { font-family: var(--sans); letter-spacing: 0; max-width: 688px; }
 .p-dream .cs-body p { margin: 0 0 16px; }
 .p-dream .cs-body section > :last-child { margin-bottom: 0; }
 .p-dream .cs-body .lead { font-family: var(--display); font-weight: 600; color: inherit; }
 .p-dream .cs-body .black, .p-dream .cs-body .black li { color: #000; }
-.p-dream .cs-body ul { padding-left: 27px; margin: 0 0 16px; max-width: 680px; }
+.p-dream .cs-body ul { padding-left: 27px; margin: 0 0 16px; max-width: 688px; }
 .p-dream .cs-body li { margin-bottom: 8px; max-width: none; }
 .dj-decisions p { margin-bottom: 8px !important; color: #000 !important; }
 .dj-decisions h2 + p { margin-bottom: 16px !important; }
@@ -482,44 +482,112 @@ body.p-dream {
   .js-reveal .p-dream .cs-body .loop.is-visible li:hover { transform: translateY(-3px); transition-delay: 0s; }
 }
 
-.p-dream .cs-body #design h2 { max-width: 760px; }
+.p-dream .cs-body #design h2 { max-width: 768px; }
 .dj-screens { display: grid; grid-template-columns: repeat(3, 242px); gap: 16px; margin: 0 0 16px; }
 .dj-screens figure, .dj-system { margin: 0; }
 .dj-screens .phone { filter: drop-shadow(0 16px 24px rgba(9, 20, 50, .16)); }
 .dj-screens figcaption, .dj-system figcaption { color: var(--soft); margin-top: 12px; }
-.dj-system { margin-bottom: 0; }
-.dj-system img { width: 100%; height: auto; border-radius: 20px; }
+.dj-system { margin-top: 48px; margin-bottom: 0; }
+.dj-system img { width: 100%; height: auto; }
 
-.p-dream .todo { font-family: var(--sans) !important; max-width: 736px !important; }
+.p-dream .todo { font-family: var(--sans) !important; max-width: 744px !important; }
 .p-dream .next { border-top-color: var(--line); }
 .p-dream .next span { color: var(--soft); }
 .p-dream .next strong { line-height: 1.2; letter-spacing: -0.01em; }
+
+/* build timeline: vertical, fills in as the reader scrolls (see script) */
+.tl-wrap { margin: 16px 0 40px; }
+.timeline { --p: 1; list-style: none; margin: 0; padding: 0 0 0 48px; position: relative; }
+.timeline::before, .timeline::after {
+  content: ""; position: absolute; left: 11px; top: var(--tl-top, 40px); bottom: var(--tl-bottom, 23px); width: 2px; border-radius: 2px;
+}
+.timeline::before { background: var(--line); }
+.timeline::after {
+  background: linear-gradient(180deg, #B5A9E4 0%, #5B3FC4 55%, #241E5C 100%);
+  transform-origin: center top; transform: scaleY(var(--p)); transition: transform .12s linear;
+}
+.p-dream .cs-body .timeline li { position: relative; margin: 0; max-width: none; padding: 11px 0; font-size: 17px; line-height: 1.4; }
+.timeline .phase { display: block; margin: 0 0 10px; font-size: 13px; font-weight: 500; letter-spacing: .04em; text-transform: uppercase; color: var(--soft); }
+.p-dream .cs-body .timeline li:first-child { padding-top: 0; }
+.p-dream .cs-body .timeline li.phase-start:not(:first-child) { padding-top: 32px; }
+.timeline .dot {
+  position: absolute; left: -43px; top: calc((1.4em - 14px) / 2); z-index: 1;
+  width: 14px; height: 14px; border-radius: 50%;
+  background: var(--paper); border: 2px solid #C9BEEE;
+  transition: background .35s ease, border-color .35s ease, transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s ease;
+}
+.timeline .row { position: relative; display: block; }
+.timeline .num { display: inline-block; width: 34px; font-size: 13px; font-weight: 500; color: var(--soft); font-variant-numeric: tabular-nums; transition: color .35s ease; }
+.timeline .label { color: var(--ink); transition: color .35s ease; }
+.timeline .final .label { font-weight: 500; }
+/* states only apply once the script runs, so without JS everything shows as done */
+.tl-live .timeline li:not(.is-on) .label { color: var(--soft); }
+.timeline li:not(.final) .dot { background: #fff; border-color: #7A5FD6; }
+.tl-live .timeline li:not(.is-on):not(.final) .dot { background: var(--paper); border-color: #C9BEEE; }
+.tl-live .timeline li.is-on .num { color: #7A5FD6; }
+.timeline .final .dot { width: 18px; height: 18px; left: -45px; top: calc((1.4em - 18px) / 2); border: 0; background: linear-gradient(135deg, #B58BE2, #5B3FC4); box-shadow: 0 0 0 6px rgba(91, 63, 196, .15); }
+.tl-live .timeline .final:not(.is-on) .dot { background: var(--paper); border: 2px solid #C9BEEE; box-shadow: none; }
+.tl-live .timeline li.is-on .dot { transform: scale(1.1); }
+.timeline .desc { display: block; margin: 2px 0 0 34px; max-width: 568px; font-size: 15px; line-height: 1.5; color: var(--muted); transition: color .35s ease; }
+.tl-live .timeline li:not(.is-on) .desc { color: var(--soft); }
+
+.dj-learned {
+  margin: 32px 0 0; padding: 26px 28px 24px; border-radius: 18px;
+  background: linear-gradient(150deg, #FFFFFF 0%, #F3EFFD 100%);
+  box-shadow: inset 0 0 0 1px #E4DCFA;
+}
+.p-dream .cs-body .dj-learned h3 { font-family: var(--sans); font-weight: 500; font-size: 21px; line-height: 1.3; margin: 0 0 14px; color: var(--ink); }
+.p-dream .cs-body .dj-learned ul { list-style: none; padding: 0; margin: 0 0 18px; max-width: none; display: grid; grid-template-columns: 1fr 1fr; gap: 14px 28px; }
+.p-dream .cs-body .dj-learned li { margin: 0; font-size: 16px; line-height: 1.5; color: var(--muted); }
+.p-dream .cs-body .dj-learned li strong { display: block; color: var(--ink); font-weight: 500; margin-bottom: 2px; }
+.p-dream .cs-body .dj-learned p { margin: 0; padding-top: 16px; border-top: 1px solid #E4DCFA; font-size: 16px; color: var(--ink); max-width: none; }
+
+/* key learnings / future direction: tabs once the script runs, both lists stacked without it */
+.dj-tabs { display: inline-flex; gap: 4px; padding: 4px; margin: 4px 0 20px; background: #fff; border-radius: 999px; box-shadow: inset 0 0 0 1px var(--line); }
+.dj-tabs[hidden] { display: none; }
+.dj-tabs button {
+  display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border: 0; border-radius: 999px;
+  font: inherit; font-size: 15px; font-weight: 500; color: var(--muted); background: transparent; cursor: pointer;
+  transition: background .25s ease, color .25s ease;
+}
+.dj-tabs button:hover { color: var(--ink); }
+.dj-tabs button[aria-selected="true"] { background: var(--ink); color: #fff; }
+.dj-tabs .count { display: inline-grid; place-items: center; min-width: 20px; height: 20px; padding: 0 6px; border-radius: 999px; font-size: 12px; background: #EEE9FB; color: #5B3FC4; transition: background .25s ease, color .25s ease; }
+.dj-tabs button[aria-selected="true"] .count { background: rgba(255, 255, 255, .18); color: #fff; }
+.p-dream .cs-body .dj-panel .panel-title { font-family: var(--sans); font-weight: 500; font-size: 20px; margin: 24px 0 12px; }
+.p-dream .cs-body #panel-learn .panel-title { margin-top: 4px; }
+.tabs-live .panel-title { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.p-dream .cs-body .dj-cards { list-style: none; padding: 0; margin: 0; max-width: none; display: grid; gap: 12px; }
+.p-dream .cs-body .dj-cards li {
+  display: grid; grid-template-columns: 32px minmax(0, 1fr); gap: 14px; margin: 0; max-width: none;
+  background: #fff; border-radius: 16px; padding: 20px 22px;
+  box-shadow: 0 1px 2px rgba(22, 26, 44, .04), 0 8px 24px -16px rgba(60, 40, 140, .25);
+}
+.dj-cards .n { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; font-size: 13px; font-weight: 500; background: #EEE9FB; color: #5B3FC4; }
+.dj-cards strong { display: block; font-size: 18px; font-weight: 500; line-height: 1.4; color: var(--ink); margin: 3px 0 4px; }
+.p-dream .cs-body .dj-cards p { margin: 0; max-width: none; font-size: 16px; line-height: 1.55; color: var(--muted); }
+@media (prefers-reduced-motion: no-preference) {
+  .tabs-live .dj-panel:not([hidden]) .dj-cards li { animation: dj-card-in .45s cubic-bezier(.2,.7,.2,1) both; animation-delay: calc(var(--i) * 80ms); }
+}
+@keyframes dj-card-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 
 @media (max-width: 900px) {
   .dj-screens { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 @media (max-width: 640px) {
   body.p-dream { --phone-shadow: drop-shadow(24px 12px 30px rgba(9, 20, 50, .15)); }
+  .p-dream .cs-body .timeline li { font-size: 16px; }
+  .p-dream .cs-body .dj-learned ul { grid-template-columns: 1fr; }
+  .dj-learned { padding: 22px 20px 20px; }
+}
   .dj-cover .panel { margin: 0; border-radius: 14px; }
   .loop { grid-template-columns: 1fr; gap: 22px; padding-bottom: 0; }
   .loop::before, .loop::after { display: none; }
   .loop li:not(:last-child)::after { top: auto; bottom: -17px; right: auto; left: 24px; margin: 0; transform: rotate(90deg); transform-origin: center; }
   .js-reveal .loop li:not(:last-child)::after { transform: rotate(90deg) scaleX(0); }
   .js-reveal .loop.is-visible li:not(:last-child)::after { transform: rotate(90deg); }
-  .dj-screens { grid-template-columns: minmax(0, 242px); justify-content: center; gap: 32px; }
   .p-dream .cs-body h2.h3 { font-size: 24px; }
 }
-
-/* learnings + future direction */
-.learn { margin: 0 0 18px !important; }
-.learn b { display: block; font-weight: 500; font-size: 21px; line-height: 1.3; color: var(--ink); margin-bottom: 4px; }
-.learn span { color: var(--muted); }
-.cs-body h3.sub { font-weight: 500; font-size: 21px; margin: 32px 0 0; }
-.future { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px; margin: 14px 0 0; }
-.future div { background: #fff; border-radius: 14px; padding: 16px 18px; }
-.future b { display: block; font-weight: 500; font-size: 19px; line-height: 1.3; color: var(--ink); margin-bottom: 4px; }
-.future span { font-size: 15px; line-height: 1.5; color: var(--muted); }
-@media (max-width: 640px) { .future { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body class="p-dream">
@@ -565,7 +633,7 @@ body.p-dream {
           <li><a href="#concept">The concept</a></li>
           <li><a href="#design">The design</a></li>
           <li><a href="#build">Building it</a></li>
-          <li><a href="#learnings">Learnings</a></li>
+          <li><a href="#learnings">Key learnings</a></li>
           <li><a href="#reflection">Reflection</a></li>
         </ol>
       </nav>
@@ -632,26 +700,61 @@ body.p-dream {
             <figure><div class="phone"><img class="screen" src="dream-screen-dream.jpg" alt="A single dream, Sweet Cotton Fields, with its generated image and the What does it say? reading" loading="lazy"><img class="frame" src="dream-phone-frame.png" alt=""></div><figcaption>Gallery. Generated images make months of dreams scannable.</figcaption></figure>
           </div>
           <figure class="dj-system">
-            <img src="dream-design-system.webp" width="760" height="669" alt="Dream app design system: Urbanist type scale, color tokens from Midnight to Nebula cyan, navigation and action icons, and button states" loading="lazy">
+            <img src="dream-design-system.webp" width="760" height="848" alt="Dream app design system: Urbanist type scale, color tokens from Midnight to Nebula cyan, navigation, action and filter states, glass buttons and the icon grid" loading="lazy">
             <figcaption>Design tokens. One source of truth for Figma and code.</figcaption>
           </figure>
         </section>
 
         <section id="build">
-          <h2>Building it</h2>
-          <p>I took the app from Figma to working code myself. A full design-token system and a written prompt guide let me move designs into code with exact values, not approximations. The analysis engine is a TypeScript service that uses Claude through the Anthropic SDK, with tool use to return structured output: symbols, emotions and interpretation as data the UI can render.</p>
-          <p>Designing for AI from the inside changed how I design for it. Structure the output, and the interface can be calm.</p>
+          <h2>Building it myself</h2>
+          <p>This was the first app I built on my own, and the first time I connected it to APIs. I designed it, then took it all the way to working code.</p>
+          <div class="tl-wrap">
+            <ol class="timeline" aria-label="Project timeline">
+              <li class="phase-start"><span class="phase">Research &amp; design</span><span class="row"><span class="dot"></span><span class="num">01</span><span class="label">Research question</span></span></li>
+              <li><span class="row"><span class="dot"></span><span class="num">02</span><span class="label">Concept</span></span></li>
+              <li><span class="row"><span class="dot"></span><span class="num">03</span><span class="label">Design</span></span></li>
+              <li><span class="row"><span class="dot"></span><span class="num">04</span><span class="label">Design system</span></span></li>
+              <li><span class="row"><span class="dot"></span><span class="num">05</span><span class="label">Wireframes</span></span></li>
+              <li class="phase-start"><span class="phase">Build</span><span class="row"><span class="dot"></span><span class="num">06</span><span class="label">Screens in code</span></span><span class="desc">Turning the Figma screens into real layouts is where CSS finally clicked for me.</span></li>
+              <li><span class="row"><span class="dot"></span><span class="num">07</span><span class="label">Image generation API</span></span><span class="desc">My first API connection. I chose which image service to connect, then taught it how to turn a dream into an image, so every dream gets its own.</span></li>
+              <li><span class="row"><span class="dot"></span><span class="num">08</span><span class="label">Interpretation bot</span></span><span class="desc">Claude reads the dream and returns symbols, emotions and meaning as structured data.</span></li>
+              <li><span class="row"><span class="dot"></span><span class="num">09</span><span class="label">Voice recording</span></span><span class="desc">Speaking the dream instead of typing it, wired into the same flow.</span></li>
+              <li class="final"><span class="row"><span class="dot"></span><span class="num">10</span><span class="label">Final result</span></span><span class="desc">A working app, with every piece connected.</span></li>
+            </ol>
+          </div>
+          <p>A full design-token system and a written prompt guide let me move designs into code with exact values, not approximations. The analysis engine is a TypeScript service that uses Claude through the Anthropic SDK, with tool use to return structured output: symbols, emotions and interpretation as data the UI can render.</p>
+          <aside class="dj-learned">
+            <h3>What building it taught me</h3>
+            <ul>
+              <li><strong>New tools, fast.</strong> I picked up tools I had never used and learned them by building.</li>
+              <li><strong>Teaching myself.</strong> When something didn't work, I found the way through on my own.</li>
+              <li><strong>Everything has to connect.</strong> Screens, APIs, data and voice only become an app once every piece is wired together.</li>
+              <li><strong>CSS from the inside.</strong> Building the layouts myself showed me how the design actually becomes a page.</li>
+            </ul>
+            <p>Designing for AI from the inside changed how I design for it. Structure the output, and the interface can be calm.</p>
+          </aside>
         </section>
 
         <section id="learnings">
-          <h2>Key Learnings</h2>
-          <p class="learn"><b>1. Start with the build.</b><span>I designed first and learned the tools along the way. Today I'd start by learning how to build it and setting up the image and video generation, then move to design.</span></p>
-          <p class="learn"><b>2. A design system before code.</b><span>Every design change during implementation slowed me down. A system set up front would have saved that.</span></p>
-          <p class="learn"><b>3. Test every day, not once.</b><span>About 7 people used the app daily, and I improved it every day based on how they used it.</span></p>
-          <h3 class="sub">Future Direction</h3>
-          <div class="future">
-            <div><b>Video instead of an image</b><span>Users asked to see their dream as a video.</span></div>
-            <div><b>Interpretation length</b><span>Some wanted it shorter, others wanted more room for it. Next step: test both.</span></div>
+          <h2>Key Learnings &amp; Future Direction</h2>
+          <div class="dj-tabs" role="tablist" aria-label="Key learnings and future direction" hidden>
+            <button type="button" role="tab" id="tab-learn" aria-controls="panel-learn" aria-selected="true">Key learnings <span class="count">3</span></button>
+            <button type="button" role="tab" id="tab-future" aria-controls="panel-future" aria-selected="false" tabindex="-1">Future direction <span class="count">2</span></button>
+          </div>
+          <div class="dj-panel" id="panel-learn" role="tabpanel" aria-labelledby="tab-learn">
+            <h3 class="panel-title">Key Learnings</h3>
+            <ol class="dj-cards">
+              <li style="--i:0"><span class="n">01</span><div><strong>Start with the build.</strong><p>I designed first and learned the tools along the way. Today I'd start by learning how to build it and setting up the image and video generation, then move to design.</p></div></li>
+              <li style="--i:1"><span class="n">02</span><div><strong>A design system before code.</strong><p>Every design change during implementation slowed me down. A system set up front would have saved that.</p></div></li>
+              <li style="--i:2"><span class="n">03</span><div><strong>Test every day, not once.</strong><p>About 7 people used the app daily, and I improved it every day based on how they used it.</p></div></li>
+            </ol>
+          </div>
+          <div class="dj-panel" id="panel-future" role="tabpanel" aria-labelledby="tab-future">
+            <h3 class="panel-title">Future Direction</h3>
+            <ol class="dj-cards">
+              <li style="--i:0"><span class="n">01</span><div><strong>Video instead of an image.</strong><p>Users asked to see their dream as a video.</p></div></li>
+              <li style="--i:1"><span class="n">02</span><div><strong>Interpretation length.</strong><p>Some wanted it shorter, others wanted more room for it. Next step: test both.</p></div></li>
+            </ol>
           </div>
         </section>
 
@@ -695,8 +798,8 @@ body.p-dream {
 
 // Plays the concept loop once, step by step, when it scrolls into view.
 (function () {
-  var loop = document.querySelector('.loop');
-  if (!loop || !('IntersectionObserver' in window)) return;
+  var items = document.querySelectorAll('.loop');
+  if (!items.length || !('IntersectionObserver' in window)) return;
   document.documentElement.classList.add('js-reveal');
 
   var observer = new IntersectionObserver(function (entries) {
@@ -707,7 +810,72 @@ body.p-dream {
     });
   }, { rootMargin: '0px 0px -20% 0px', threshold: 0.3 });
 
-  observer.observe(loop);
+  items.forEach(function (el) { observer.observe(el); });
+})();
+
+// Fills the build timeline as the reader scrolls: the line grows to a point 60% down the
+// viewport, and each step lights up once the line reaches its dot.
+(function () {
+  var wrap = document.querySelector('.tl-wrap');
+  if (!wrap || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var line = wrap.querySelector('.timeline');
+  var steps = Array.prototype.slice.call(line.querySelectorAll('li'));
+  wrap.classList.add('tl-live');
+
+  var ticking = false;
+  function update() {
+    ticking = false;
+    var mark = window.innerHeight * 0.6;
+    var box = line.getBoundingClientRect();
+    var first = centerOf(steps[0]), last = centerOf(steps[steps.length - 1]);
+    // keep the drawn line exactly between the first and last dots
+    line.style.setProperty('--tl-top', (first - box.top) + 'px');
+    line.style.setProperty('--tl-bottom', (box.bottom - last) + 'px');
+    var p = Math.min(1, Math.max(0, (mark - first) / (last - first)));
+    line.style.setProperty('--p', p.toFixed(4));
+    steps.forEach(function (li) {
+      li.classList.toggle('is-on', centerOf(li) <= mark);
+    });
+  }
+  function centerOf(li) {
+    var dot = li.querySelector('.dot').getBoundingClientRect();
+    return dot.top + dot.height / 2;
+  }
+  function onScroll() {
+    if (!ticking) { ticking = true; requestAnimationFrame(update); }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  window.addEventListener('load', onScroll);
+  update();
+})();
+
+// Key learnings / future direction tabs (click or arrow keys).
+(function () {
+  var list = document.querySelector('.dj-tabs');
+  if (!list) return;
+  var tabs = Array.prototype.slice.call(list.querySelectorAll('[role="tab"]'));
+  list.hidden = false;
+  list.closest('section').classList.add('tabs-live');
+
+  function select(tab, focus) {
+    tabs.forEach(function (t) {
+      var on = t === tab;
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      t.tabIndex = on ? 0 : -1;
+      document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+    });
+    if (focus) tab.focus();
+  }
+  tabs.forEach(function (t, i) {
+    t.addEventListener('click', function () { select(t); });
+    t.addEventListener('keydown', function (e) {
+      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+      e.preventDefault();
+      select(tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length], true);
+    });
+  });
+  select(tabs[0]);
 })();
 
 </script>
