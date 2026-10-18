@@ -370,6 +370,8 @@ figcaption b { color: var(--ink); font-weight: 500; }
 /* ---------- Dream Journal (Figma: protfolio / 03 — Dream Journal) ---------- */
 body.p-dream {
   --sans: "Poppins", "Helvetica Neue", Arial, sans-serif;
+  --display: var(--sans);
+  --text: var(--sans);
   --soft: #9AA0B0;
   --line: #DADDE5;
   --max: 1248px;
@@ -436,6 +438,16 @@ body.p-dream {
 .p-dream .cs-body ul { padding-left: 27px; margin: 0 0 16px; max-width: 688px; }
 .p-dream .cs-body li { margin-bottom: 8px; max-width: none; }
 .dj-decisions p { margin-bottom: 8px !important; color: #000 !important; }
+.ux-cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 8px; }
+.ux-col { background: #fff; border-radius: 16px; padding: 22px 20px 20px; box-shadow: 0 1px 2px rgba(22, 26, 44, .04), 0 8px 24px -16px rgba(60, 40, 140, .25); transition: transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s ease; }
+.ux-col:hover { transform: scale(1.04); box-shadow: 0 1px 2px rgba(22, 26, 44, .04), 0 24px 48px -20px rgba(60, 40, 140, .4); position: relative; z-index: 1; }
+.ux-col .ux-n { display: block; font-size: 30px; font-weight: 500; line-height: 1; color: #C9BEEE; margin-bottom: 12px; }
+.p-dream .cs-body .ux-col h3 { margin: 0 0 16px; font-family: var(--sans); font-size: 18px; font-weight: 500; line-height: 1.35; color: var(--ink); }
+.ux-col dl { margin: 0; }
+.ux-col dt { font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: #7A5FD6; margin: 0 0 3px; }
+.ux-col dd { margin: 0 0 14px; font-size: 15px; line-height: 1.5; color: var(--muted); }
+.ux-col dd:last-child { margin-bottom: 0; }
+@media (max-width: 900px) { .ux-cols { grid-template-columns: 1fr; } }
 .dj-decisions h2 + p { margin-bottom: 16px !important; }
 
 /* concept loop: five steps in a row, arrows between, a return line from Track back to Capture */
@@ -579,19 +591,28 @@ body.p-dream {
   .p-dream .cs-body .timeline li { font-size: 16px; }
   .p-dream .cs-body .dj-learned ul { grid-template-columns: 1fr; }
   .dj-learned { padding: 22px 20px 20px; }
-}
   .dj-cover .panel { margin: 0; border-radius: 14px; }
-  .loop { grid-template-columns: 1fr; gap: 22px; padding-bottom: 0; }
-  .loop::before, .loop::after { display: none; }
-  .loop li:not(:last-child)::after { top: auto; bottom: -17px; right: auto; left: 24px; margin: 0; transform: rotate(90deg); transform-origin: center; }
-  .js-reveal .loop li:not(:last-child)::after { transform: rotate(90deg) scaleX(0); }
-  .js-reveal .loop.is-visible li:not(:last-child)::after { transform: rotate(90deg); }
   .p-dream .cs-body h2.h3 { font-size: 24px; }
+
+  /* concept loop on narrow screens: a compact list on a thin line, ending in a return arrow */
+  .loop { display: block; padding: 0 0 30px 30px; margin-bottom: 20px; }
+  .loop::before { left: 7px; right: auto; top: 10px; bottom: 60px; width: 0; height: auto; border: 0; border-left: 1.6px solid var(--loop-line); border-radius: 0; }
+  .loop::after { content: "↺  back to Capture"; left: 0; bottom: 0; width: auto; height: auto; background: none; font-size: 13px; color: #7A5FD6; }
+  .p-dream .cs-body .loop li { background: none; box-shadow: none; border-radius: 0; padding: 0 0 18px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; }
+  .p-dream .cs-body .loop li:hover { transform: none; box-shadow: none; }
+  .p-dream .cs-body .loop li::before { content: ""; position: absolute; left: -29px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: #fff; border: 2px solid #7A5FD6; }
+  .loop li:not(:last-child)::after { display: none; }
+  .loop .num { margin: 0; }
+  .loop b { margin: 0; }
+  .loop .detail { flex-basis: 100%; }
+  .js-reveal .loop::before { clip-path: none; }
 }
 </style>
   <link rel="stylesheet" href="reveal.css">
   <script>document.documentElement.classList.add('rv-on');setTimeout(function(){if(!window.__rv)document.documentElement.classList.remove('rv-on');},2500);</script>
   <script src="reveal.js" defer></script>
+  <link rel="stylesheet" href="site.css">
+  <script src="site.js" defer></script>
 </head>
 <body class="p-dream">
   <a class="skip" href="#intro">Skip to content</a>
@@ -664,7 +685,7 @@ body.p-dream {
         </section>
 
         <section id="research">
-          <h2>Research : <span class="serif">how to read a dream</span></h2>
+          <h2>Research : how to read a dream</h2>
           <p class="black">I grounded the analysis in three things, and each one shaped the app</p>
           <ul class="black">
             <li>Dream criteria. Each dream is read by type, intensity, frequency, realism and how it feels after waking. So every dream is broken down the same way, which is what makes patterns visible over time.</li>
@@ -677,9 +698,35 @@ body.p-dream {
         <section id="decisions" class="dj-decisions">
           <h2 class="h3">UX decisions</h2>
           <p>Three calls shaped how the app feels to use.</p>
-          <p>01 — A calendar that's also a gallery<br>Tension A dream journal needs a timeline, but a list of entries is easy to forget.<br>Call Each night on the calendar shows its dream's generated image.<br>Why The calendar holds the timeline. The images make it worth revisiting.</p>
-          <p>02 — From single dreams to recurring patterns<br>Tension One dream explains a moment, not why the same themes keep returning.<br>Call Analyze dreams across months to surface recurring symbols and themes.<br>Why Only the long view can answer "Why do I keep dreaming this?"</p>
-          <p>03 — Voice first, writing one tap away<br>Tension Research showed speaking captures a dream faster, but some mornings writing feels right.<br>Call "Tap to record" as the main action, with "Write instead" always one tap away.<br>Why Less effort to catch a fading memory, without taking away the choice.</p>
+          <div class="ux-cols">
+            <article class="ux-col">
+              <span class="ux-n">01</span>
+              <h3>A calendar that's also a gallery</h3>
+              <dl>
+                <dt>Tension</dt><dd>A dream journal needs a timeline, but a list of entries is easy to forget.</dd>
+                <dt>Call</dt><dd>Each night on the calendar shows its dream's generated image.</dd>
+                <dt>Why</dt><dd>The calendar holds the timeline. The images make it worth revisiting.</dd>
+              </dl>
+            </article>
+            <article class="ux-col">
+              <span class="ux-n">02</span>
+              <h3>From single dreams to recurring patterns</h3>
+              <dl>
+                <dt>Tension</dt><dd>One dream explains a moment, not why the same themes keep returning.</dd>
+                <dt>Call</dt><dd>Analyze dreams across months to surface recurring symbols and themes.</dd>
+                <dt>Why</dt><dd>Only the long view can answer "Why do I keep dreaming this?"</dd>
+              </dl>
+            </article>
+            <article class="ux-col">
+              <span class="ux-n">03</span>
+              <h3>Voice first, writing one tap away</h3>
+              <dl>
+                <dt>Tension</dt><dd>Research showed speaking captures a dream faster, but some mornings writing feels right.</dd>
+                <dt>Call</dt><dd>"Tap to record" as the main action, with "Write instead" always one tap away.</dd>
+                <dt>Why</dt><dd>Less effort to catch a fading memory, without taking away the choice.</dd>
+              </dl>
+            </article>
+          </div>
         </section>
 
         <section id="concept">
@@ -766,10 +813,26 @@ body.p-dream {
           <p class="todo">TODO: 3–4 sentences in your voice. What was hardest about designing for something this personal, what building it yourself taught you, and what you'd change.</p>
         </section>
 
-        <a class="next" href="accessibility-gaps.html">
-          <span>Next project</span>
-          <strong>Accessibility gaps in Hotjar</strong>
-        </a>
+        <nav class="more" aria-label="More projects">
+          <div class="more-head">
+            <h2>More projects</h2>
+            <a class="home-link" href="index.html">Back to home<span class="badge"><svg viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M12.75 12.75V5.25H5.25M12.75 5.25l-7.5 7.5" stroke="#fff" stroke-width="1.4" stroke-linecap="round"/></svg></span></a>
+          </div>
+          <div class="more-list">
+            <a class="more-card mc-hotjar" href="accessibility-gaps.html">
+              <span class="meta">Academic, team of 4, 2025–26</span>
+              <strong>Accessibility gaps in Hotjar</strong>
+              <span class="desc">Reading accessibility gaps out of behavior data, so teams can see who is being left behind.</span>
+              <span class="go">View project →</span>
+            </a>
+            <a class="more-card mc-cart" href="tiny-cart.html">
+              <span class="meta">Wix eCommerce</span>
+              <strong>Tiny Cart, rewritten</strong>
+              <span class="desc">Turning the add-to-cart pop-up into a surface that moves buyers to checkout.</span>
+              <span class="go">View project →</span>
+            </a>
+          </div>
+        </nav>
       </article>
     </div>
   </main>

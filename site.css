@@ -1,0 +1,53 @@
+/* ------------------------------------------------------------
+   Shared bits for the case-study pages:
+   the "More projects" footer and the back-to-top button.
+   ------------------------------------------------------------ */
+
+/* ---------- More projects ---------- */
+.more { border-top: 1px solid var(--line); padding: 36px 0 56px; }
+.more-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 20px; }
+.more-head h2 { margin: 0 !important; font-size: 15px !important; font-weight: 500 !important; color: #9AA0B0 !important; letter-spacing: 0 !important; }
+.home-link {
+  display: inline-flex; align-items: center; gap: 10px; height: 40px; padding: 4px 4px 4px 16px; border-radius: 100px;
+  background: #111210; color: #fff; font-size: 13px; text-decoration: none; white-space: nowrap;
+  transition: background .2s ease;
+}
+.home-link .badge { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: #30312F; transition: transform .25s cubic-bezier(.2,.7,.2,1); }
+.home-link svg { width: 16px; height: 16px; }
+.home-link:hover { background: #000; }
+.home-link:hover .badge { transform: rotate(45deg); }
+
+.more-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.more-card {
+  position: relative; display: flex; flex-direction: column; gap: 6px; padding: 22px 22px 24px; border-radius: 16px; overflow: hidden;
+  background: #fff; color: var(--ink); text-decoration: none;
+  box-shadow: 0 1px 2px rgba(22, 26, 44, .04), 0 8px 24px -16px rgba(60, 40, 140, .25);
+  transition: transform .3s cubic-bezier(.2,.7,.2,1), box-shadow .3s ease;
+}
+.more-card::before { content: ""; position: absolute; left: 0; top: 0; right: 0; height: 6px; background: var(--c); }
+.more-card:hover { transform: translateY(-4px); box-shadow: 0 1px 2px rgba(22, 26, 44, .04), 0 18px 36px -18px rgba(60, 40, 140, .35); }
+.more-card .meta { font-size: 13px; color: #9AA0B0; }
+.more-card strong { font-size: clamp(20px, 1.9vw, 24px); font-weight: 500; line-height: 1.25; letter-spacing: -0.01em; }
+.more-card .desc { font-size: 15px; line-height: 1.5; color: var(--muted); }
+.more-card .go { margin-top: 8px; font-size: 14px; font-weight: 500; color: var(--c-ink, var(--ink)); }
+.more-card:hover .go { text-decoration: underline; text-underline-offset: 3px; }
+.mc-checkout { --c: linear-gradient(90deg, #5D6CF0, #9D8FEA, #F1B5CC); --c-ink: #2633C7; }
+.mc-dream    { --c: linear-gradient(90deg, #241E5C, #5B3FC4, #B58BE2); --c-ink: #4A31A8; }
+.mc-hotjar   { --c: linear-gradient(90deg, #D9382D, #EE7F66, #F6C2AA); --c-ink: #B8291E; }
+.mc-cart     { --c: linear-gradient(90deg, #9C5806, #DB870F, #F0B94F); --c-ink: #8A5300; }
+@media (max-width: 640px) {
+  .more-list { grid-template-columns: 1fr; }
+}
+
+/* ---------- Back to top ---------- */
+.to-top {
+  position: fixed; right: clamp(16px, 2.5vw, 32px); bottom: clamp(16px, 2.5vw, 32px); z-index: 50;
+  display: grid; place-items: center; width: 46px; height: 46px; padding: 0; border: 0; border-radius: 50%; cursor: pointer;
+  background: #111210; color: #fff; box-shadow: 0 12px 30px -10px rgba(17, 18, 16, .45);
+  opacity: 0; visibility: hidden; transform: translateY(12px);
+  transition: opacity .3s ease, transform .3s cubic-bezier(.2,.7,.2,1), visibility 0s linear .3s, background .2s ease;
+}
+.to-top.show { opacity: 1; visibility: visible; transform: none; transition: opacity .3s ease, transform .3s cubic-bezier(.2,.7,.2,1), background .2s ease; }
+.to-top:hover { background: #000; transform: translateY(-3px); }
+.to-top svg { width: 18px; height: 18px; }
+@media (prefers-reduced-motion: reduce) { .to-top, .to-top.show { transition: none; } }

@@ -11,7 +11,7 @@
 
   var SELECTOR = [
     '.cs-hero .wrap > *', '.cs-cover', '.dj-cover', '.dj-statement',
-    '.cs-body section > *', '.cs-body > .next',
+    '.cs-body section > *', '.cs-body > .more',
     '.statement > *', '.works-head', '.gallery > li', '.about .block', '.about .foot'
   ].join(',');
   var SKIP = '.loop, .tl-wrap, .drills, [role="tabpanel"]';

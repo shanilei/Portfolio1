@@ -141,6 +141,15 @@ a { color: inherit; text-decoration: none; }
 .phones .p-left   { left: 6%; top: 17%; width: 32%; }
 .phones .p-center { left: 32.5%; top: 10%; width: 35%; z-index: 1; }
 .phones .p-right  { left: 62%; top: 17%; width: 32%; }
+/* Dream card motion: the three screens start stacked in the middle and spread into place */
+@media (prefers-reduced-motion: no-preference) {
+  .phones.anim .phone { transition: transform 2.8s cubic-bezier(.25,.8,.25,1), opacity 1.4s ease; }
+  .phones.anim .p-center { transition-delay: 0ms; }
+  .phones.anim .p-left, .phones.anim .p-right { transition-delay: 500ms; }
+  .phones.anim:not(.play) .p-left   { transform: translateX(84%) rotate(-7deg) scale(.92); }
+  .phones.anim:not(.play) .p-right  { transform: translateX(-84%) rotate(7deg) scale(.92); }
+  .phones.anim:not(.play) .p-center { transform: translateY(14%) scale(.94); opacity: 0; }
+}
 
 .divider { height: 1px; background: var(--line); }
 
@@ -228,6 +237,8 @@ a { color: inherit; text-decoration: none; }
   <link rel="stylesheet" href="reveal.css">
   <script>document.documentElement.classList.add('rv-on');setTimeout(function(){if(!window.__rv)document.documentElement.classList.remove('rv-on');},2500);</script>
   <script src="reveal.js" defer></script>
+  <link rel="stylesheet" href="site.css">
+  <script src="site.js" defer></script>
 </head>
 <body>
   <div class="loader" aria-hidden="true"><span class="pct">0%</span></div>
@@ -444,6 +455,15 @@ a { color: inherit; text-decoration: none; }
     setView('grid');
     works.scrollIntoView({ block: 'start' });
   });
+})();
+
+// Dream card: as the site loads, the stacked screens slowly spread out side by side.
+(function () {
+  var phones = document.querySelector('.phones');
+  if (!phones || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  phones.classList.add('anim');
+  function play() { setTimeout(function () { phones.classList.add('play'); }, 700); }
+  if (document.readyState === 'complete') play(); else window.addEventListener('load', play);
 })();
 
 // Row view: drag sideways with the mouse to scroll the projects.

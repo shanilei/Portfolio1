@@ -426,6 +426,8 @@ body.p-hotjar .cs-body .intro { font-weight: 500; font-size: clamp(21px, 2vw, 26
 body.p-hotjar .cs-body p, body.p-hotjar .cs-body li { font-size: 18px; line-height: 1.65; }
 body.p-hotjar .shot .frame { background: linear-gradient(140deg, #EEA5A0 14%, #F7C5BA 50%, #FBE3D8 86%); }
 body.p-hotjar .cs-cover .shot .frame { box-shadow: 0 30px 80px -30px rgba(20, 15, 61, .3); }
+body.p-hotjar .cs-cover .shot .frame { padding: clamp(16px, 3.4vw, 44px); }
+body.p-hotjar .cs-cover .shot .frame img { border-radius: 10px; box-shadow: 0 20px 50px -20px rgba(80, 20, 20, .35); }
 .lead { color: var(--muted); }
 .methods { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 20px; }
 .method { background: #fff; border-radius: 18px; padding: 24px 22px; }
@@ -444,7 +446,12 @@ body.p-hotjar .cs-cover .shot .frame { box-shadow: 0 30px 80px -30px rgba(20, 15
 .sol-cards { max-width: 1230px; }
 .problems b { font-size: 19px; }
 /* flow: two staggered columns along a center line */
-.flow-steps { position: relative; display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); column-gap: clamp(32px, 5vw, 72px); margin-top: 28px; }
+.flow-steps { position: relative; display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); column-gap: clamp(24px, 2.6vw, 40px); margin-top: 28px; }
+/* images reach a little past their column toward the outer edges, so they read larger */
+@media (min-width: 901px) {
+  .flow-col:not(.right) .fstep .shot { margin-left: -36px; }
+  .flow-col.right .fstep .shot { margin-right: -36px; }
+}
 .flow-steps::before { content: ""; position: absolute; top: 0; bottom: 0; left: 50%; width: 1px; background: var(--muted); opacity: .6; }
 .flow-col { display: grid; gap: clamp(64px, 9vw, 140px); align-content: start; }
 .flow-col.right { padding-top: clamp(120px, 18vw, 260px); }
@@ -483,10 +490,30 @@ body.p-hotjar .cs-cover .shot .frame { box-shadow: 0 30px 80px -30px rgba(20, 15
   .iter dd { margin-bottom: 10px; }
   .findings li { grid-template-columns: 28px minmax(0,1fr); gap: 12px; }
 }
+/* click a flow screenshot to see it large */
+.fstep .frame:not(.missing) img, .fstep .frame video { cursor: zoom-in; }
+.lightbox {
+  position: fixed; inset: 0; z-index: 200; display: grid; place-items: center; padding: clamp(16px, 4vw, 56px);
+  background: rgba(22, 26, 44, .78); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  cursor: zoom-out; opacity: 0; transition: opacity .3s ease;
+}
+.lightbox.show { opacity: 1; }
+.lightbox img, .lightbox video {
+  max-width: min(1400px, 100%); max-height: 100%; width: auto; height: auto; border-radius: 14px;
+  box-shadow: 0 40px 100px -30px rgba(0, 0, 0, .6);
+  transform: scale(.94); transition: transform .35s cubic-bezier(.2,.7,.2,1);
+}
+.lightbox.show img, .lightbox.show video { transform: none; }
+.lightbox .close {
+  position: absolute; top: 16px; right: 16px; width: 44px; height: 44px; border: 0; border-radius: 50%;
+  background: rgba(255, 255, 255, .92); color: var(--ink); font-size: 22px; line-height: 1; cursor: pointer;
+}
 </style>
   <link rel="stylesheet" href="reveal.css">
   <script>document.documentElement.classList.add('rv-on');setTimeout(function(){if(!window.__rv)document.documentElement.classList.remove('rv-on');},2500);</script>
   <script src="reveal.js" defer></script>
+  <link rel="stylesheet" href="site.css">
+  <script src="site.js" defer></script>
 </head>
 <body class="p-hotjar">
   <a class="skip" href="#intro">Skip to content</a>
@@ -508,7 +535,7 @@ body.p-hotjar .cs-cover .shot .frame { box-shadow: 0 30px 80px -30px rgba(20, 15
     </header>
 
     <div class="cs-cover wrap">
-      <figure class="shot"><div class="frame"><img src="hotjar-cover.png" alt="The Accessibility analysis page: a table of issues, each with the affected group, page, share of users and links to heatmaps and session replays" loading="eager" onerror="this.parentNode.classList.add('missing')"><span class="lbl">Accessibility analysis page</span></div></figure>
+      <figure class="shot"><div class="frame"><img src="hotjar-cover-screen.png" width="1015" height="442" alt="The Accessibility analysis page: a table of issues, each with the affected group, page, share of users and links to heatmaps and session replays" loading="eager" onerror="this.parentNode.classList.add('missing')"><span class="lbl">Accessibility analysis page</span></div></figure>
     </div>
 
     <div class="cs-layout wrap">
@@ -685,10 +712,26 @@ body.p-hotjar .cs-cover .shot .frame { box-shadow: 0 30px 80px -30px rgba(20, 15
           <!-- TODO: add "See the interactive prototype" link once the URL is ready -->
         </section>
 
-        <a class="next" href="tiny-cart.html">
-          <span>Next project</span>
-          <strong>Tiny Cart</strong>
-        </a>
+        <nav class="more" aria-label="More projects">
+          <div class="more-head">
+            <h2>More projects</h2>
+            <a class="home-link" href="index.html">Back to home<span class="badge"><svg viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M12.75 12.75V5.25H5.25M12.75 5.25l-7.5 7.5" stroke="#fff" stroke-width="1.4" stroke-linecap="round"/></svg></span></a>
+          </div>
+          <div class="more-list">
+            <a class="more-card mc-cart" href="tiny-cart.html">
+              <span class="meta">Wix eCommerce</span>
+              <strong>Tiny Cart, rewritten</strong>
+              <span class="desc">Turning the add-to-cart pop-up into a surface that moves buyers to checkout.</span>
+              <span class="go">View project →</span>
+            </a>
+            <a class="more-card mc-checkout" href="checkout-agent.html">
+              <span class="meta">Wix eCommerce, 2025</span>
+              <strong>Checkout Recommendation Agent</strong>
+              <span class="desc">AI-based recommendations built into Checkout Settings, from checkout data to action.</span>
+              <span class="go">View project →</span>
+            </a>
+          </div>
+        </nav>
       </article>
     </div>
   </main>
@@ -718,6 +761,52 @@ body.p-hotjar .cs-cover .shot .frame { box-shadow: 0 30px 80px -30px rgba(20, 15
   });
 })();
 
+// Flow screenshots open large on click; click anywhere, the X or Escape to close.
+(function () {
+  var box = null, last = null;
+  function close() {
+    if (!box) return;
+    var b = box; box = null;
+    b.classList.remove('show');
+    setTimeout(function () { b.remove(); }, 300);
+    document.removeEventListener('keydown', onKey);
+    if (last) last.focus();
+  }
+  function onKey(e) { if (e.key === 'Escape') close(); }
+  function open(media) {
+    last = document.activeElement;
+    box = document.createElement('div');
+    box.className = 'lightbox';
+    box.setAttribute('role', 'dialog');
+    box.setAttribute('aria-modal', 'true');
+    box.setAttribute('aria-label', media.getAttribute('alt') || media.getAttribute('aria-label') || 'Enlarged image');
+    var big;
+    if (media.tagName === 'VIDEO') {
+      big = document.createElement('video');
+      big.src = media.currentSrc || media.src;
+      big.muted = true; big.loop = true; big.autoplay = true; big.playsInline = true; big.controls = true;
+    } else {
+      big = document.createElement('img');
+      big.src = media.currentSrc || media.src;
+      big.alt = media.alt;
+    }
+    var x = document.createElement('button');
+    x.type = 'button'; x.className = 'close'; x.setAttribute('aria-label', 'Close'); x.textContent = '×';
+    box.appendChild(big); box.appendChild(x);
+    box.addEventListener('click', function (e) { if (e.target !== big || media.tagName !== 'VIDEO') close(); });
+    document.body.appendChild(box);
+    requestAnimationFrame(function () { box.classList.add('show'); });
+    document.addEventListener('keydown', onKey);
+    x.focus();
+  }
+  document.querySelectorAll('.fstep .frame img, .fstep .frame video').forEach(function (m) {
+    if (m.parentNode.classList.contains('missing')) return;
+    m.setAttribute('tabindex', '0');
+    m.setAttribute('role', 'button');
+    m.addEventListener('click', function () { if (!m.parentNode.classList.contains('missing')) open(m); });
+    m.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(m); } });
+  });
+})();
 </script>
 </body>
 </html>

@@ -443,6 +443,8 @@ body.p-checkout .cs-body h3.sub { font-size: 21px; font-weight: 500; margin: 0 0
   <link rel="stylesheet" href="reveal.css">
   <script>document.documentElement.classList.add('rv-on');setTimeout(function(){if(!window.__rv)document.documentElement.classList.remove('rv-on');},2500);</script>
   <script src="reveal.js" defer></script>
+  <link rel="stylesheet" href="site.css">
+  <script src="site.js" defer></script>
 </head>
 <body class="p-checkout">
   <a class="skip" href="#intro">Skip to content</a>
@@ -728,10 +730,26 @@ body.p-checkout .cs-body h3.sub { font-size: 21px; font-weight: 500; margin: 0 0
           <p class="todo">TODO: 3–4 sentences in your voice. The hardest tension (surfacing AI insight without overwhelming a non-expert merchant), what you'd do differently, and what working on a real product taught you that a concept couldn't.</p>
         </section>
 
-        <a class="next" href="dream-journal.html">
-          <span>Next project</span>
-          <strong>Dream Journal</strong>
-        </a>
+        <nav class="more" aria-label="More projects">
+          <div class="more-head">
+            <h2>More projects</h2>
+            <a class="home-link" href="index.html">Back to home<span class="badge"><svg viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M12.75 12.75V5.25H5.25M12.75 5.25l-7.5 7.5" stroke="#fff" stroke-width="1.4" stroke-linecap="round"/></svg></span></a>
+          </div>
+          <div class="more-list">
+            <a class="more-card mc-dream" href="dream-journal.html">
+              <span class="meta">Self-initiated, 2025–26</span>
+              <strong>Dream Journal</strong>
+              <span class="desc">A bilingual app that turns a fragment of a dream into symbols, emotion and meaning. Designed and built solo.</span>
+              <span class="go">View project →</span>
+            </a>
+            <a class="more-card mc-hotjar" href="accessibility-gaps.html">
+              <span class="meta">Academic, team of 4, 2025–26</span>
+              <strong>Accessibility gaps in Hotjar</strong>
+              <span class="desc">Reading accessibility gaps out of behavior data, so teams can see who is being left behind.</span>
+              <span class="go">View project →</span>
+            </a>
+          </div>
+        </nav>
       </article>
     </div>
   </main>

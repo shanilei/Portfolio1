@@ -10,7 +10,7 @@
     .cs-hero .wrap > *,
     .cs-cover, .dj-cover, .dj-statement,
     .cs-body section > *,
-    .cs-body > .next,
+    .cs-body > .more,
     .statement > *,
     .works-head, .gallery > li, .about .block, .about .foot
   ):not(.loop):not(.tl-wrap):not(.drills):not([role="tabpanel"]):not(.rv-in) {
