@@ -627,6 +627,28 @@ body.p-dream {
   .p-dream .cs-body .rj-2, .p-dream .cs-body .rj-4 { transform: none; }
 }
 
+/* onboarding: text on the left, the recording video in a phone on the right */
+.ob { display: grid; grid-template-columns: minmax(0, 1fr) 260px; gap: clamp(28px, 5vw, 64px); align-items: center; }
+.p-dream .cs-body .ob-text p { margin: 0; }
+.ob-media { margin: 0; }
+.ob-flip { grid-template-columns: 260px minmax(0, 1fr); }
+.ob.gs { grid-template-columns: 170px minmax(0, 1fr); align-items: start; gap: clamp(24px, 4vw, 48px); margin-right: clamp(-200px, -12vw, 0px); }
+.p-dream .cs-body .gs .ob-text h2 { font-size: 26px; line-height: 1.2; margin: 6px 0 0; }
+.gs-screens { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(16px, 2.4vw, 32px); align-items: start; }
+.gs-screens figure:nth-child(2) { margin-top: 48px; }
+.gs-screens figure { margin: 0; }
+.gs-screens figcaption { margin-top: 20px; text-align: left; padding-right: 8px; }
+.gs-screens .gs-n { display: block; font-size: 12px; font-weight: 600; letter-spacing: .08em; color: #7A5FD6; margin-bottom: 6px; }
+.gs-screens figcaption b { display: block; font-size: 17px; font-weight: 500; line-height: 1.3; color: var(--ink); margin-bottom: 4px; }
+.gs-screens figcaption span { display: block; font-size: 14px; line-height: 1.5; color: var(--muted); }
+.p-dream .cs-body dl.beats { margin: 18px 0 0; }
+.p-dream .cs-body dl.beats dt:first-child { margin-top: 0; }
+.p-dream .cs-body dl.beats dt { margin: 20px 0 0; font-size: 19px; font-weight: 500; line-height: 1.3; color: var(--ink); }
+.p-dream .cs-body dl.beats dd { margin: 2px 0 0; max-width: none; font-size: 16px; line-height: 1.55; color: var(--muted); }
+.ob-media video { position: absolute; display: block; max-width: none; background: #0b0b24; }
+@media (max-width: 900px) { .ob.gs { margin-right: 0; grid-template-columns: 1fr; } .gs-screens figure:nth-child(2) { margin-top: 0; } }
+@media (max-width: 640px) { .ob, .ob-flip, .ob.gs { grid-template-columns: 1fr; } .gs-screens { grid-template-columns: 1fr; max-width: 260px; margin: 0 auto; } .ob-flip .ob-text, .gs .ob-text { order: -1; } .ob-media { width: 240px; margin: 0 auto; } }
+
 @media (max-width: 900px) {
   .dj-screens { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
@@ -700,6 +722,9 @@ body.p-dream {
           <li><a href="#decisions">UX decisions</a></li>
           <li><a href="#concept">The concept</a></li>
           <li><a href="#design">The design</a></li>
+          <li><a href="#onboarding">Onboarding</a></li>
+          <li><a href="#record">Record and loader</a></li>
+          <li><a href="#gallery-screens">Gallery and photos</a></li>
           <li><a href="#build">Building it</a></li>
           <li><a href="#learnings">Key learnings</a></li>
           <li><a href="#reflection">Reflection</a></li>
@@ -828,6 +853,50 @@ body.p-dream {
             <img src="dream-design-system.webp" width="760" height="848" alt="Dream app design system: Urbanist type scale, color tokens from Midnight to Nebula cyan, navigation, action and filter states, glass buttons and the icon grid" loading="lazy">
             <figcaption>Design tokens. One source of truth for Figma and code.</figcaption>
           </figure>
+        </section>
+
+        <section id="onboarding">
+          <div class="ob">
+            <div class="ob-text">
+              <h2>Onboarding</h2>
+              <dl class="beats">
+                <dt>Before it fades</dt><dd>Capture your dream while the details are still fresh.</dd>
+                <dt>Look closer</dt><dd>Turn fleeting memories into symbols, emotions, and visual stories.</dd>
+                <dt>See what returns</dt><dd>Discover the patterns hiding across your dreams.</dd>
+              </dl>
+            </div>
+            <figure class="ob-media">
+              <div class="phone"><video class="screen" src="dream-onboarding.mp4" poster="dream-onboarding-poster.jpg" muted playsinline preload="metadata" aria-label="Onboarding: intro screens, sign in, then the record screen"></video><img class="frame" src="dream-phone-frame.png" alt=""></div>
+            </figure>
+          </div>
+        </section>
+
+        <section id="record">
+          <div class="ob ob-flip">
+            <figure class="ob-media">
+              <div class="phone"><video class="screen" src="dream-record.mp4" poster="dream-record-poster.jpg" muted playsinline preload="metadata" aria-label="Recording a dream: tap to record, the app listens, tap again to analyze, then the loader"></video><img class="frame" src="dream-phone-frame.png" alt=""></div>
+            </figure>
+            <div class="ob-text">
+              <h2>Record and loader</h2>
+              <dl class="beats">
+                <dt>Tell me what you remember</dt><dd>Speak freely while Lucid captures the details of your dream.</dd>
+                <dt>Something is taking shape</dt><dd>Your dream is being translated into symbols, emotions, and imagery.</dd>
+              </dl>
+            </div>
+          </div>
+        </section>
+
+        <section id="gallery-screens">
+          <div class="ob gs">
+            <div class="ob-text">
+              <h2>Gallery and photo screens</h2>
+            </div>
+            <div class="gs-screens">
+              <figure><div class="phone"><img class="screen" src="dream-screen-gallery-date.jpg" width="540" height="1168" alt="Dream Journal calendar where each night shows its dream image" loading="lazy"><img class="frame" src="dream-phone-frame.png" alt=""></div><figcaption><span class="gs-n">01</span><b>A night worth remembering</b><span>Explore the dreams you captured on a single night.</span></figcaption></figure>
+              <figure><div class="phone"><img class="screen" src="dream-screen-photo.jpg" width="540" height="1168" alt="A single dream, Sweet Cotton Fields, with its generated image and the What does it say? reading" loading="lazy"><img class="frame" src="dream-phone-frame.png" alt=""></div><figcaption><span class="gs-n">02</span><b>What stayed with you</b><span>A visual interpretation of the dream, shaped by its symbols, emotions, and details.</span></figcaption></figure>
+              <figure><div class="phone"><img class="screen" src="dream-screen-gallery-2.jpg" width="540" height="1168" alt="Dream Journal gallery grouped by type: Fear, Confused, Sweet, Sad, Angry" loading="lazy"><img class="frame" src="dream-phone-frame.png" alt=""></div><figcaption><span class="gs-n">03</span><b>The patterns begin to emerge</b><span>See recurring symbols and themes across your dreams.</span></figcaption></figure>
+            </div>
+          </div>
         </section>
 
         <section id="build">
@@ -1039,6 +1108,16 @@ body.p-dream {
   window.addEventListener('resize', update);
   update();
 })();
+// Section videos: each plays once when it comes into view; hovering it plays it again from the start.
+document.querySelectorAll('.ob-media video').forEach(function (v) {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  function play() { if (!v.paused && !v.ended) return; v.currentTime = 0; v.play(); }
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (e) { if (e[0].isIntersecting) { io.disconnect(); play(); } }, { threshold: 0.5 });
+    io.observe(v);
+  }
+  v.closest('.ob-media').addEventListener('mouseenter', play);
+});
 </script>
 </body>
 </html>
