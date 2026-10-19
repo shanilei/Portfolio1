@@ -508,6 +508,49 @@ body.p-hotjar .cs-cover .shot .frame img { border-radius: 10px; box-shadow: 0 20
   position: absolute; top: 16px; right: 16px; width: 44px; height: 44px; border: 0; border-radius: 50%;
   background: rgba(255, 255, 255, .92); color: var(--ink); font-size: 22px; line-height: 1; cursor: pointer;
 }
+/* solution: the same click-through as the home card. Plays once in view, replays on hover. */
+.sol-anim { padding: clamp(14px, 2.6vw, 32px); }
+.hj-stage { position: relative; width: 100%; border-radius: 10px; overflow: hidden; box-shadow: 0 20px 50px -20px rgba(80, 20, 20, .35); }
+.hj-stage img { display: block; width: 100%; height: auto; }
+.hj-stage .hj-analysis, .hj-stage .hj-home { position: absolute; inset: 0; height: 100%; opacity: 0; transition: opacity .7s cubic-bezier(.4,0,.2,1); }
+.hj-stage[data-s="home"] .hj-home, .hj-stage[data-s="home"] .hj-analysis, .hj-stage[data-s="ana"] .hj-analysis { opacity: 1; }
+.hj-pill { position: absolute; left: .697%; top: 29.167%; width: 10.938%; height: 3.241%; border-radius: 6px; background: rgba(94, 92, 230, .14); mix-blend-mode: multiply; pointer-events: none; z-index: 1; transition: top .45s cubic-bezier(.45,0,.2,1); }
+.hj-stage[data-s="home"] .hj-pill { top: 11.574%; }
+.hj-stage[data-s="ana"] .hj-pill { top: 49.722%; }
+.hj-cursor { position: absolute; left: 58%; top: 62%; width: 26px; height: 26px; opacity: 0; filter: drop-shadow(0 2px 4px rgba(0,0,0,.25)); transition: left 1.1s cubic-bezier(.45,0,.2,1), top 1.1s cubic-bezier(.45,0,.2,1), opacity .3s ease, transform .15s ease; pointer-events: none; z-index: 3; }
+.hj-stage.cursor .hj-cursor { opacity: 1; }
+.hj-stage[data-c="1"] .hj-cursor { left: 6.3%; top: 50.6%; }
+.hj-stage[data-c="2"] .hj-cursor { left: 73.4%; top: 39.9%; }
+.hj-stage.press .hj-cursor { transform: scale(.85); }
+.hj-ring { position: absolute; left: 6.6%; top: 51.3%; width: 34px; height: 34px; margin: -17px 0 0 -17px; border-radius: 50%; border: 2px solid rgba(51, 70, 240, .7); opacity: 0; transform: scale(.3); pointer-events: none; z-index: 2; }
+.hj-stage[data-c="2"] .hj-ring { left: 74.1%; top: 40.6%; }
+.hj-stage.press .hj-ring { animation: hj-ring .6s ease-out; }
+@keyframes hj-ring { 0% { opacity: 1; transform: scale(.3); } 100% { opacity: 0; transform: scale(1.6); } }
+/* rollout plan: a line with three phases; the selected phase opens in a framed box */
+.rollout { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 28px 0 8px; }
+.rollout::before { content: ""; position: absolute; left: 0; right: 0; top: 22px; height: 1px; background: var(--line); }
+.ro-step { position: relative; border: 2px solid transparent; border-radius: 14px; padding: 0 14px 16px; transition: border-color .3s ease, background .3s ease; }
+.ro-head { display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; padding: 13px 0 0; border: 0; background: none; cursor: pointer; font: inherit; }
+.ro-dot { width: 18px; height: 18px; border-radius: 50%; background: var(--paper); border: 2px solid #C9CEE0; transition: background .3s ease, border-color .3s ease, transform .3s ease; }
+.ro-label { font-size: 15px; font-weight: 500; color: var(--muted); transition: color .3s ease; }
+.ro-head:hover .ro-label { color: var(--ink); }
+body.p-hotjar .cs-body .ro-body p { margin: 14px 0 0; font-size: 15px; line-height: 1.5; color: var(--muted); text-align: center; max-width: none; }
+body.p-hotjar .cs-body .ro-body li { position: relative; margin: 0 0 6px; padding-left: 22px; font-size: 15px; line-height: 1.5; color: var(--muted); max-width: none; }
+body.p-hotjar .cs-body .ro-body li::before { content: "→"; position: absolute; left: 0; color: var(--hotjar); }
+.ro-step.open .ro-dot { background: var(--hotjar); border-color: var(--hotjar); transform: scale(1.15); }
+.ro-step.open .ro-label { color: var(--hotjar-ink); }
+.js-ro .ro-step:not(.open) .ro-body { display: none; }
+@media (prefers-reduced-motion: no-preference) {
+  .js-ro .ro-step.open .ro-body { animation: ro-in .35s ease both; }
+}
+@keyframes ro-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@media (max-width: 760px) {
+  .rollout { grid-template-columns: 1fr; }
+  .rollout::before { display: none; }
+  .ro-head { flex-direction: row; }
+  .js-ro .ro-step:not(.open) .ro-body { display: block; }
+}
+
 </style>
   <link rel="stylesheet" href="reveal.css">
   <script>document.documentElement.classList.add('rv-on');setTimeout(function(){if(!window.__rv)document.documentElement.classList.remove('rv-on');},2500);</script>
@@ -535,7 +578,7 @@ body.p-hotjar .cs-cover .shot .frame img { border-radius: 10px; box-shadow: 0 20
     </header>
 
     <div class="cs-cover wrap">
-      <figure class="shot"><div class="frame"><img src="hotjar-cover-screen.png" width="1015" height="442" alt="The Accessibility analysis page: a table of issues, each with the affected group, page, share of users and links to heatmaps and session replays" loading="eager" onerror="this.parentNode.classList.add('missing')"><span class="lbl">Accessibility analysis page</span></div></figure>
+      <figure class="shot"><div class="frame"><img src="hotjar-cover-screen.webp" width="1865" height="800" alt="The Accessibility analysis page: a table of issues, each with the affected group, page, share of users and links to heatmaps and session replays" loading="eager" onerror="this.parentNode.classList.add('missing')"><span class="lbl">Accessibility analysis page</span></div></figure>
     </div>
 
     <div class="cs-layout wrap">
@@ -586,9 +629,9 @@ body.p-hotjar .cs-cover .shot .frame img { border-radius: 10px; box-shadow: 0 20
         <section id="research">
           <h2>Research</h2>
           <div class="methods">
-            <div class="method"><span class="num">01</span><b>WCAG + behavior data</b><span>Mapped WCAG guidelines onto the behavior data Hotjar already collects.</span></div>
-            <div class="method"><span class="num">02</span><b>Interface audit</b><span>Walked through the interface and how people actually use it.</span></div>
-            <div class="method"><span class="num">03</span><b>Industry interviews</b><span>Talked to analysts and product people about how they analyze and present data problems.</span></div>
+            <div class="method"><span class="num">01</span><b>Understanding cultural signals beyond the data</b><span>Cultural gaps don't always surface as bugs. The challenge lies in how they are surfaced and communicated. This process helps identify which indicators are truly relevant and how to present them clearly.</span></div>
+            <div class="method"><span class="num">02</span><b>Identifying existing patterns</b><span>We reviewed recurring usage patterns in Hotjar, with a strong emphasis on table based data exploration.</span></div>
+            <div class="method"><span class="num">03</span><b>Validating insights across teams</b><span>To validate and sharpen these insights, we spoke with Product Managers and Business Analysts to understand how issues are currently detected, interpreted, and prioritized across teams.</span></div>
           </div>
         </section>
 
@@ -613,7 +656,7 @@ body.p-hotjar .cs-cover .shot .frame img { border-radius: 10px; box-shadow: 0 20
         <section id="solution">
           <h2>The solution</h2>
           <p>An Accessibility Analysis page that shows who struggles, where, and how much.</p>
-          <figure class="shot"><div class="frame"><img src="hotjar-solution.png" alt="The Accessibility analysis issues table" loading="lazy" onerror="this.parentNode.classList.add('missing')"><span class="lbl">Accessibility analysis issues table</span></div><figcaption><b>Issues table.</b> The affected group is the point of each row. Data is illustrative.</figcaption></figure>
+          <figure class="shot"><div class="frame sol-anim"><div class="hj-stage" role="img" aria-label="From the Hotjar home dashboard, a click on Accessibility analysis opens the issues table"><img class="hj-heat" src="hotjar-card-heatmap.webp" width="1865" height="1080" alt=""><img class="hj-analysis" src="hotjar-card-analysis.webp" width="1865" height="1080" alt=""><img class="hj-home" src="hotjar-card-home.webp" width="1865" height="1080" alt=""><span class="hj-pill"></span><span class="hj-ring"></span><svg class="hj-cursor" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3l14 8.2-6.3 1.5L9.6 19z" fill="#20211F" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/></svg></div></div><figcaption><b>Issues table.</b> The affected group is the point of each row. Data is illustrative.</figcaption></figure>
           <div class="sol-cards">
             <div class="sol-card"><b>1. Detects</b><span>Finds behavior that deviates from the average, like early exits, repeated clicks or partial scrolling.</span></div>
             <div class="sol-card"><b>2. Shows who it affects</b><span>Every issue comes with the affected group (age, device, location) and the share of users impacted.</span></div>
@@ -704,10 +747,19 @@ body.p-hotjar .cs-cover .shot .frame img { border-radius: 10px; box-shadow: 0 20
           <p class="learn"><b>2. A new feature has to speak the product's language.</b><span>Most of the options we rejected failed because they didn't feel like part of Hotjar.</span></p>
           <p class="learn"><b>3. Data needs explaining.</b><span>In testing, not everyone found the data easy to read. Making the metrics clearer is the first thing to improve.</span></p>
           <h3 class="sub">Future direction</h3>
-          <div class="future">
-            <div><b>Today</b><span>Identifying accessibility gaps through user behavior.</span></div>
-            <div><b>Near future</b><span>Estimating business impact, such as conversion drops or revenue loss.</span></div>
-            <div><b>Long term</b><span>AI driven recommendations for corrective actions.</span></div>
+          <div class="rollout">
+            <div class="ro-step">
+              <button type="button" class="ro-head" id="ro-b0" aria-controls="ro-p0" aria-expanded="true"><span class="ro-dot"></span><span class="ro-label">Today</span></button>
+              <div class="ro-body" id="ro-p0" role="region" aria-labelledby="ro-b0"><p>Identifying accessibility gaps through user behavior.</p></div>
+            </div>
+            <div class="ro-step">
+              <button type="button" class="ro-head" id="ro-b1" aria-controls="ro-p1" aria-expanded="false"><span class="ro-dot"></span><span class="ro-label">Near future</span></button>
+              <div class="ro-body" id="ro-p1" role="region" aria-labelledby="ro-b1"><p>Estimating business impact, such as conversion drops or revenue loss.</p></div>
+            </div>
+            <div class="ro-step">
+              <button type="button" class="ro-head" id="ro-b2" aria-controls="ro-p2" aria-expanded="false"><span class="ro-dot"></span><span class="ro-label">Long term</span></button>
+              <div class="ro-body" id="ro-p2" role="region" aria-labelledby="ro-b2"><p>AI driven recommendations for corrective actions.</p></div>
+            </div>
           </div>
           <!-- TODO: add "See the interactive prototype" link once the URL is ready -->
         </section>
@@ -720,7 +772,7 @@ body.p-hotjar .cs-cover .shot .frame img { border-radius: 10px; box-shadow: 0 20
           <div class="more-list">
             <a class="more-card mc-cart" href="tiny-cart.html">
               <span class="meta">Wix eCommerce</span>
-              <strong>Tiny Cart, rewritten</strong>
+              <strong>Tiny Cart</strong>
               <span class="desc">Turning the add to cart pop up into a surface that moves buyers to checkout.</span>
               <span class="go">View project →</span>
             </a>
@@ -806,6 +858,55 @@ body.p-hotjar .cs-cover .shot .frame img { border-radius: 10px; box-shadow: 0 20
     m.addEventListener('click', function () { if (!m.parentNode.classList.contains('missing')) open(m); });
     m.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(m); } });
   });
+})();
+// Solution: the home dashboard, a click on Accessibility analysis, then the issues table.
+// Plays once when it comes into view; hovering it plays it again.
+(function () {
+  var stage = document.querySelector('.sol-anim .hj-stage');
+  if (!stage || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var running = false;
+  function play() {
+    if (running) return;
+    running = true;
+    var t = 0, at = function (ms, fn) { t += ms; setTimeout(fn, t); };
+    stage.classList.remove('press', 'cursor');
+    stage.removeAttribute('data-c');
+    stage.setAttribute('data-s', 'home');
+    at(700, function () { stage.classList.add('cursor'); });
+    at(400, function () { stage.setAttribute('data-c', '1'); });
+    at(1200, function () { stage.classList.add('press'); });
+    at(250, function () { stage.setAttribute('data-s', 'ana'); });
+    at(400, function () { stage.classList.remove('press'); });
+    at(500, function () { stage.setAttribute('data-c', '2'); });
+    at(1300, function () { stage.classList.add('press'); });
+    at(250, function () { stage.setAttribute('data-s', 'heat'); });
+    at(500, function () { stage.classList.remove('cursor', 'press'); });
+    at(400, function () { stage.removeAttribute('data-c'); running = false; });
+  }
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      if (!entries[0].isIntersecting) return;
+      io.disconnect();
+      play();
+    }, { threshold: 0.5 });
+    io.observe(stage);
+  } else play();
+  stage.addEventListener('mouseenter', play);
+})();
+// Rollout plan: clicking a phase opens it (one at a time).
+(function () {
+  var steps = Array.prototype.slice.call(document.querySelectorAll('.ro-step'));
+  if (!steps.length) return;
+  document.documentElement.classList.add('js-ro');
+  function open(step) {
+    steps.forEach(function (s) {
+      var on = s === step;
+      s.classList.toggle('open', on);
+      s.querySelector('.ro-head').setAttribute('aria-expanded', on ? 'true' : 'false');
+    });
+  }
+  steps.forEach(function (s) { s.querySelector('.ro-head').addEventListener('click', function () { open(s); }); });
+  open(steps[0]);
 })();
 </script>
 </body>
