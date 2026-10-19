@@ -618,7 +618,7 @@ body.p-checkout .cs-body .ro-body li::before { content: "→"; position: absolut
 /* cover: the screenshot fills the panel */
 .cs-cover .ph.has-img { aspect-ratio: auto; padding: clamp(16px, 3.4vw, 44px); display: block; background: linear-gradient(140deg, #A9B0F6 14%, #C7BFF3 50%, #F3D3E2 86%); }
 .cs-cover .ph.has-img::before { display: none; }
-.cs-cover .ph.has-img img { position: relative; display: block; width: 100%; height: auto; border-radius: 10px; box-shadow: 0 20px 50px -20px rgba(20, 16, 60, .4); }
+.cs-cover .ph.has-img > img { position: relative; display: block; width: 100%; height: auto; border-radius: 10px; box-shadow: 0 20px 50px -20px rgba(20, 16, 60, .4); }
 </style>
   <link rel="stylesheet" href="reveal.css">
   <script>document.documentElement.classList.add('rv-on');setTimeout(function(){if(!window.__rv)document.documentElement.classList.remove('rv-on');},2500);</script>
@@ -964,7 +964,7 @@ body.p-checkout .cs-body .ro-body li::before { content: "→"; position: absolut
             </div>
             <div class="ro-step">
               <button type="button" class="ro-head" id="ro-b2" aria-controls="ro-p2" aria-expanded="false"><span class="ro-dot"></span><span class="ro-label">Phase 3</span></button>
-              <div class="ro-body" id="ro-p2" role="region" aria-labelledby="ro-b2"><ul><li>Gradual Expansion: Roll out to additional verticals gradually</li></ul></div>
+              <div class="ro-body" id="ro-p2" role="region" aria-labelledby="ro-b2"><ul><li>Gradual Expansion: Roll out to additional verticals gradually</li><li>Automatic completion: The system detects when a recommended action was done, sends a signal back, and marks it as done on its own.</li></ul></div>
             </div>
           </div>
         </section>

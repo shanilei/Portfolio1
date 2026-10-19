@@ -145,11 +145,26 @@ a { color: inherit; text-decoration: none; }
 @media (prefers-reduced-motion: no-preference) {
   .phones.anim .phone { transition: transform 2.8s cubic-bezier(.25,.8,.25,1), opacity 1.4s ease; }
   .phones.anim .p-center { transition-delay: 0ms; }
+  .phones.anim.reset .phone { transition: none; }
   .phones.anim .p-left, .phones.anim .p-right { transition-delay: 500ms; }
   .phones.anim:not(.play) .p-left   { transform: translateX(84%) rotate(-7deg) scale(.92); }
   .phones.anim:not(.play) .p-right  { transform: translateX(-84%) rotate(7deg) scale(.92); }
   .phones.anim:not(.play) .p-center { transform: translateY(14%) scale(.94); opacity: 0; }
 }
+
+/* Checkout card: empty panel, then recommendations, then each card pops in turn.
+   Plays once when the card first shows, then stays still; hovering the card plays it again. */
+.cv-stage { position: relative; width: calc(100% - 40px); border-radius: 8px; box-shadow: 0 20px 50px -20px rgba(20, 16, 60, .45); transition: transform .5s cubic-bezier(.2,.7,.2,1); }
+.card:hover .cv-stage { transform: scale(1.03); }
+.cv-stage img { display: block; width: 100%; height: auto; border-radius: 8px; }
+.cv-stage .cv-empty { position: absolute; inset: 0; height: 100%; opacity: 0; transition: opacity 1s cubic-bezier(.4,0,.2,1); }
+.cv-stage.empty .cv-empty { opacity: 1; }
+.cv-stage .cv-card {
+  position: absolute; border-radius: 4px; will-change: transform;
+  transition: transform .55s cubic-bezier(.22,1,.36,1), box-shadow .55s cubic-bezier(.22,1,.36,1), opacity .4s ease;
+}
+.cv-stage.empty .cv-card { opacity: 0; }
+.cv-stage .cv-card.pop { transform: scale(1.12); box-shadow: 0 14px 30px -10px rgba(38, 51, 199, .45), 0 0 0 2px rgba(51, 70, 240, .35); z-index: 2; }
 
 .divider { height: 1px; background: var(--line); }
 
@@ -289,7 +304,7 @@ a { color: inherit; text-decoration: none; }
       <ul class="gallery">
         <li>
           <a class="card" href="checkout-agent.html">
-            <div class="cover c-checkout"><img class="shot rounded" src="checkout-agent-cover.png" alt="" loading="lazy"></div>
+            <div class="cover c-checkout"><div class="cv-stage"><img class="cv-full" src="checkout-agent-cover-full.webp" width="2000" height="1708" alt=""><img class="cv-empty" src="checkout-agent-cover-empty.webp" width="2000" height="1708" alt=""><img class="cv-card" src="checkout-agent-cover-card-1.webp" alt="" style="left:71.742%;top:30.12%;width:20.645%;height:16.867%"><img class="cv-card" src="checkout-agent-cover-card-2.webp" alt="" style="left:71.742%;top:47.791%;width:20.645%;height:15.904%"><img class="cv-card" src="checkout-agent-cover-card-3.webp" alt="" style="left:71.742%;top:64.498%;width:20.645%;height:15.904%"></div></div>
             <span class="name">Checkout Recommendation Agent</span>
             <span class="disciplines"><span class="tag sm t-pink">Product design</span><span class="tag sm t-blue">AI</span></span>
           </a>
@@ -483,6 +498,49 @@ a { color: inherit; text-decoration: none; }
   // on the first visit wait for the bubble loader to clear, so the spread is seen
   if (document.documentElement.classList.contains('first-load')) window.addEventListener('loader:done', play);
   else if (document.readyState === 'complete') play(); else window.addEventListener('load', play);
+  // hovering the card plays it again: jump back to the stack without animating, then spread
+  var busy = false;
+  phones.closest('.card').addEventListener('mouseenter', function () {
+    if (busy || !phones.classList.contains('play')) return;
+    busy = true;
+    phones.classList.add('reset');
+    phones.classList.remove('play');
+    void phones.offsetWidth;
+    phones.classList.remove('reset');
+    requestAnimationFrame(function () { phones.classList.add('play'); });
+    setTimeout(function () { busy = false; }, 3400);
+  });
+})();
+
+// Checkout card: plays the sequence once when the card comes into view, then rests on the full
+// panel. Hovering the card plays it again (never while a run is in progress).
+(function () {
+  var stage = document.querySelector('.cv-stage');
+  if (!stage || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var cards = stage.querySelectorAll('.cv-card'), running = false;
+  function play() {
+    if (running) return;
+    running = true;
+    var t = 0, at = function (ms, fn) { t += ms; setTimeout(fn, t); };
+    stage.classList.add('empty');
+    at(1600, function () { stage.classList.remove('empty'); });
+    at(1100, function () {});
+    Array.prototype.forEach.call(cards, function (c) {
+      at(0, function () { c.classList.add('pop'); });
+      at(750, function () { c.classList.remove('pop'); });
+      at(300, function () {});
+    });
+    at(0, function () { running = false; });
+  }
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      if (!entries[0].isIntersecting) return;
+      io.disconnect();
+      play();
+    }, { threshold: 0.5 });
+    io.observe(stage);
+  } else play();
+  stage.closest('.card').addEventListener('mouseenter', play);
 })();
 
 // Row view: drag sideways with the mouse to scroll the projects.
