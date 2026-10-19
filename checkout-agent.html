@@ -564,6 +564,7 @@ body.p-checkout .cs-body ol.ai-cards { list-style: none; padding: 0; margin: 0; 
 body.p-checkout .cs-body ol.ai-cards li { display: grid; grid-template-columns: 32px minmax(0, 1fr); gap: 14px; margin: 0; max-width: none; background: #fff; border-radius: 16px; padding: 18px 20px; box-shadow: 0 1px 2px rgba(22, 26, 44, .04), 0 8px 24px -16px rgba(60, 40, 140, .25); }
 .ai-cards .n { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; font-size: 13px; font-weight: 500; background: #E7E2FB; color: var(--checkout-ink); }
 .ai-cards strong { display: block; font-size: 17px; font-weight: 500; line-height: 1.4; color: var(--ink); margin: 3px 0 2px; }
+body.p-checkout .cs-body .ai-panel p.ai-intro { margin: 0 0 14px; }
 body.p-checkout .cs-body .ai-cards p { margin: 0; font-size: 15px; line-height: 1.55; color: var(--muted); max-width: none; }
 @media (prefers-reduced-motion: no-preference) {
   .ai-live .ai-panel:not([hidden]) .ai-cards li { animation: ai-card-in .45s cubic-bezier(.2,.7,.2,1) both; animation-delay: calc(var(--i) * 70ms); }
@@ -614,6 +615,9 @@ body.p-checkout .cs-body .ro-body li::before { content: "→"; position: absolut
   .ro-head { flex-direction: row; }
   .js-ro .ro-step:not(.open) .ro-body { display: block; }
 }
+
+body.p-checkout .cs-body ul.anat-sub { margin: 6px 0 2px; padding-left: 22px; list-style: disc; }
+body.p-checkout .cs-body ul.anat-sub li { margin: 0 0 4px; padding: 0; font-size: 17px; }
 
 /* cover: the screenshot fills the panel */
 .cs-cover .ph.has-img { aspect-ratio: auto; padding: clamp(16px, 3.4vw, 44px); display: block; background: linear-gradient(140deg, #A9B0F6 14%, #C7BFF3 50%, #F3D3E2 86%); }
@@ -747,7 +751,7 @@ body.p-checkout .cs-body .ro-body li::before { content: "→"; position: absolut
             <figcaption>The Analytics card on the Wix Home dashboard: numbers, without what to do next.</figcaption>
           </figure>
           <p>Then we looked at competitors like Shopify, to see whether they offer similar tools and how they present them.</p>
-          <p>The logs also exposed the failure mode of the generic assistant: it answered, but its answers weren't personalized to the store. Advice that applied to everyone helped no one. So the job of the product became a decision, not more data.</p>
+          <p>The assistant could offer general guidance, but struggled to turn store specific challenges into clear, actionable next steps. The opportunity was to move beyond advice and help merchants understand what to do next.</p>
         </section>
 
         <section id="concept">
@@ -822,29 +826,26 @@ body.p-checkout .cs-body .ro-body li::before { content: "→"; position: absolut
 
         <section id="decision">
           <h2>A key decision: one benchmarked number, one action</h2>
-          <div class="pair">
-            <figure>
-              <p class="tag">Before</p>
-              <div class="ph"><span class="lbl">Generic assistant answering "Why am I not getting sales?"</span></div>
-              <figcaption>A menu of generic tips. No benchmark, no clear next step.</figcaption>
-            </figure>
-            <figure>
-              <p class="tag">After</p>
-              <div class="ph"><span class="lbl">Agent recommendation for the same store</span></div>
-              <figcaption>Grounded in the store's own data, benchmarked, and ending in one action.</figcaption>
-            </figure>
-          </div>
-          <p style="margin-top:28px">Generic advice is noise. A benchmarked number plus one button is a decision the merchant can actually make. That became the rule for every recommendation.</p>
+          <p>The goal wasn't to give merchants more information, but to help them identify where to focus. Each recommendation connected a store specific insight to a measurable benchmark, making the opportunity clear and the next step concrete.</p>
         </section>
 
         <section id="design" class="anatomy-host">
           <h2>The design: one component, one anatomy</h2>
-          <p>Every recommendation uses the same structure, so merchants learn to read it once:</p>
+          <p>I translated this principle into a reusable recommendation component. Every recommendation uses the same structure, so merchants learn to read it once and know how to act on it.</p>
           <ul class="anat-list">
-            <li data-part="tag"><strong>Tag.</strong> Which part of checkout it touches.</li>
-            <li data-part="title"><strong>Title.</strong> The action, not the problem.</li>
-            <li data-part="reason"><strong>Reasoning.</strong> Why, in one sentence, from the store's own data.</li>
-            <li data-part="action"><strong>Actions.</strong> "Let's do it" makes the change through Aria, Wix's AI assistant. "Show me how" walks the merchant through it.</li>
+            <li data-part="tag"><strong>Tag:</strong> relevant area</li>
+            <li data-part="title"><strong>Recommendation:</strong> suggested action
+              <ul class="anat-sub">
+                <li><strong>Title:</strong> the actual suggested action, which can remain relatively standard across users.</li>
+              </ul>
+            </li>
+            <li data-part="reason"><strong>Reasoning (personalized):</strong> explains why this recommendation matters, using their data.</li>
+            <li data-part="action"><strong>CTA</strong>
+              <ul class="anat-sub">
+                <li><strong>Let’s Do It:</strong> navigates to Aria and performs the action, the user only needs to approve.</li>
+                <li><strong>Show Me How:</strong> navigates to the page and opens Aria with instructions.</li>
+              </ul>
+            </li>
           </ul>
           <figure class="anatomy">
             <div class="anat-stage">
@@ -869,8 +870,8 @@ body.p-checkout .cs-body .ro-body li::before { content: "→"; position: absolut
         </section>
 
         <section id="placement">
-          <h2>Where it lives: next to the settings it changes</h2>
-          <p>The obvious home was a separate analytics tab. I put the agent inside Checkout Settings instead, beside the settings it recommends changing. Seeing a problem and fixing it happen on the same screen.</p>
+          <h2>Turning recommendations into action</h2>
+          <p>The recommendations were directly related to checkout configuration, so I placed the agent inside Checkout Settings, alongside the settings it recommends changing. This keeps the guidance close to the controls merchants need to act on.</p>
           <figure class="carousel" aria-roledescription="carousel" aria-label="Checkout Settings with the agent panel">
             <div class="car-track" tabindex="0">
               <div class="car-slide" data-title="Recommendations." data-text="The store has sales, and the panel shows actions the merchant can take to improve checkout."><img src="checkout-agent-flow-1.webp" width="1358" height="1553" alt="Checkout Settings with the Improve your checkout panel and three recommendations" loading="lazy"></div>
@@ -918,28 +919,27 @@ body.p-checkout .cs-body .ro-body li::before { content: "→"; position: absolut
 
           <h3 class="iter-part">3. Iterations on the AI output</h3>
           <div class="ai-tabs" role="tablist" aria-label="AI improvements" hidden>
-            <button type="button" role="tab" id="ait-ux" aria-controls="aip-ux" aria-selected="true">UX / Product improvements <span class="count">5</span></button>
-            <button type="button" role="tab" id="ait-kb" aria-controls="aip-kb" aria-selected="false" tabindex="-1">Assistant improvements (Knowledge Base) <span class="count">6</span></button>
+            <button type="button" role="tab" id="ait-ux" aria-controls="aip-ux" aria-selected="true">UX decisions <span class="count">3</span></button>
+            <button type="button" role="tab" id="ait-kb" aria-controls="aip-kb" aria-selected="false" tabindex="-1">Assistant improvement opportunities <span class="count">6</span></button>
           </div>
           <div class="ai-panel" id="aip-ux" role="tabpanel" aria-labelledby="ait-ux">
-            <h4 class="panel-title">UX / Product improvements</h4>
+            <h4 class="panel-title">UX decisions</h4>
+            <p class="ai-intro">The recommendations were connected to relevant checkout performance metrics to:</p>
             <ol class="ai-cards">
-                <li style="--i:0"><span class="n">01</span><div><strong>Checkout Settings Integration</strong><p>Explore integrating checkout settings with relevant areas such as payments, shipping, and boosters. Consider creating an Ecom hub to centralize user needs within the product and knowledge base.</p></div></li>
-                <li style="--i:1"><span class="n">02</span><div><strong>Flow Representation</strong><p>Provide visual explanations and detailed representations of various checkout flows, including member vs. guest checkout, digital items, and mixed carts.</p></div></li>
-                <li style="--i:2"><span class="n">03</span><div><strong>Customization Clarity</strong><p>Offer a clearer display of all available checkout customization options, ensuring users understand their possibilities.</p></div></li>
-                <li style="--i:3"><span class="n">04</span><div><strong>Ideal Configuration</strong><p>Implement best practices for setting up the "ideal" checkout configuration to optimize user experience and conversion.</p></div></li>
-                <li style="--i:4"><span class="n">05</span><div><strong>Auto Save Feedback</strong><p>Add a clear, visual indicator to confirm that changes on the page are saved automatically, reducing user confusion.</p></div></li>
+                <li style="--i:0"><span class="n">01</span><div><strong>Highlight measurable opportunities for improvement.</strong></div></li>
+                <li style="--i:1"><span class="n">02</span><div><strong>Ground suggestions in store data and benchmarks.</strong></div></li>
+                <li style="--i:2"><span class="n">03</span><div><strong>Connect insights to actionable changes.</strong></div></li>
             </ol>
           </div>
           <div class="ai-panel" id="aip-kb" role="tabpanel" aria-labelledby="ait-kb">
-            <h4 class="panel-title">Assistant improvements (Knowledge Base)</h4>
+            <h4 class="panel-title">Assistant improvement opportunities</h4>
             <ol class="ai-cards">
-                <li style="--i:0"><span class="n">01</span><div><strong>Best Practices</strong><p>Include guidelines for checkout setup and conversion optimization.</p></div></li>
-                <li style="--i:1"><span class="n">02</span><div><strong>Testing Guidance</strong><p>Provide step by step instructions on how to test the checkout process effectively.</p></div></li>
-                <li style="--i:2"><span class="n">03</span><div><strong>Mixed Cart/Verticals</strong><p>Document handling strategies for mixed cart scenarios and vertical specific setups.</p></div></li>
-                <li style="--i:3"><span class="n">04</span><div><strong>Error Handling</strong><p>Add a section for common error recognition and troubleshooting solutions.</p></div></li>
-                <li style="--i:4"><span class="n">05</span><div><strong>Third Party Apps (TPAs)</strong><p>Offer explanations of recommended checkout TPAs and detailed integration guides.</p></div></li>
-                <li style="--i:5"><span class="n">06</span><div><strong>Checkout Form</strong><p>Add detailed explanations of all checkout flows, including mixed cart handling and vertical specific variations.</p></div></li>
+                <li style="--i:0"><span class="n">01</span><div><strong>Best Practices</strong><p>Actionable guidance on setup and conversion optimization.</p></div></li>
+                <li style="--i:1"><span class="n">02</span><div><strong>Testing Guidance</strong><p>Step by step instructions for testing user flows.</p></div></li>
+                <li style="--i:2"><span class="n">03</span><div><strong>Complex Scenarios</strong><p>Support for mixed carts and different business types.</p></div></li>
+                <li style="--i:3"><span class="n">04</span><div><strong>Error Handling</strong><p>Recognition of common errors and troubleshooting guidance.</p></div></li>
+                <li style="--i:4"><span class="n">05</span><div><strong>Third Party Integrations</strong><p>Explanations and setup guidance for external tools.</p></div></li>
+                <li style="--i:5"><span class="n">06</span><div><strong>Checkout Flows</strong><p>Clear explanations of different flows and their variations.</p></div></li>
             </ol>
           </div>
         </section>
