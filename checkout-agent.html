@@ -377,10 +377,13 @@ body.p-checkout .next strong { font-weight: 500; }
 
 /* problem lists and the one-line solution */
 body.p-checkout .cs-body ul.diamonds { list-style: none; padding: 0; margin: 0 0 16px; }
-body.p-checkout .cs-body ul.diamonds li { position: relative; padding-left: 26px; margin-bottom: 8px; }
-body.p-checkout .cs-body ul.diamonds li::before { content: "◆"; position: absolute; left: 0; top: .1em; font-size: 12px; color: var(--checkout); }
-.result { margin-top: 24px; }
-body.p-checkout .cs-body .result-label { margin: 0 0 10px; font-weight: 500; color: var(--ink); }
+body.p-checkout .cs-body ul.diamonds li { position: relative; padding-left: 30px; margin-bottom: 8px; }
+body.p-checkout .cs-body ul.diamonds li::before {
+  content: ""; position: absolute; left: -2px; top: .3em; width: 17px; height: 17px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%233346F0' stroke-width='1.7' stroke-linecap='round'%3E%3Cpath d='M10.6 3.1c3.6.2 6.5 3 6.3 6.9-.2 3.7-3.4 6.6-7.1 6.4-3.6-.2-6.4-3.3-6.1-6.9.2-2.6 1.9-4.8 4.3-5.8 1.5-.6 3.4-.5 4.6.4'/%3E%3C/svg%3E") no-repeat center / contain;
+}
+.result { margin-top: 36px; }
+body.p-checkout .cs-body h3.result-head { margin: 0 0 14px; font-size: clamp(26px, 2.4vw, 32px); font-weight: 500; line-height: 1.2; letter-spacing: -0.01em; color: var(--ink); }
 body.p-checkout .cs-body .solution-line { font-size: clamp(19px, 1.7vw, 22px); line-height: 1.55; color: var(--ink); max-width: 36em; }
 body.p-checkout .cs-body .solution-line strong {
   font-weight: 500; color: var(--ink); padding-bottom: 3px;
@@ -509,6 +512,109 @@ body.p-checkout .cs-body .anat-list li { border-radius: 8px; margin-left: -8px; 
 .car-cap { min-height: 3em; text-align: center; margin-left: auto; margin-right: auto; }
 @media (prefers-reduced-motion: reduce) { .car-track { scroll-behavior: auto; } .car-slide { transition: none; } }
 
+body.p-checkout .cs-body h3.iter-part { font-size: 22px; font-weight: 500; margin: 28px 0 10px; }
+body.p-checkout .cs-body h3.iter-part:first-of-type { margin-top: 8px; }
+.carousel + h3.iter-part { margin-top: 56px !important; }
+.car-slide img { max-height: 70vh; object-fit: contain; object-position: top; cursor: zoom-in; }
+.car-slide:not(.is-current) img { cursor: pointer; }
+/* the concepts carousel: larger slides that reach past the text column */
+.carousel.wide { margin-right: clamp(-200px, -12vw, 0px); }
+.carousel.wide .car-track { padding: 24px 7%; }
+.carousel.wide .car-slide { flex-basis: 86%; }
+.carousel.wide .car-slide img { max-height: none; }
+.car-slide.final { position: relative; }
+.car-slide .chosen-badge { position: absolute; top: 12px; left: 12px; padding: 4px 12px; border-radius: 999px; background: var(--checkout); color: #fff; font-size: 13px; font-weight: 500; box-shadow: 0 6px 16px -6px rgba(38, 51, 199, .6); }
+@media (max-width: 900px) { .carousel.wide { margin-left: 0; margin-right: 0; } }
+
+/* click an image to see it large */
+.lightbox {
+  position: fixed; inset: 0; z-index: 200; display: grid; place-items: center; padding: clamp(16px, 4vw, 56px);
+  background: rgba(22, 26, 44, .8); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  cursor: zoom-out; opacity: 0; transition: opacity .3s ease;
+}
+.lightbox.show { opacity: 1; }
+.lightbox img { max-width: min(1600px, 100%); max-height: 100%; width: auto; height: auto; border-radius: 12px; box-shadow: 0 40px 100px -30px rgba(0, 0, 0, .6); transform: scale(.94); transition: transform .35s cubic-bezier(.2,.7,.2,1); }
+.lightbox.show img { transform: none; }
+.lightbox .close { position: absolute; top: 16px; right: 16px; width: 44px; height: 44px; border: 0; border-radius: 50%; background: rgba(255, 255, 255, .92); color: var(--ink); font-size: 22px; line-height: 1; cursor: pointer; }
+
+/* card iterations: four panel versions side by side, click to enlarge */
+.card-versions {
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; align-items: start;
+  margin: 20px clamp(-200px, -12vw, 0px) 0 0; padding: clamp(16px, 2.4vw, 28px); border-radius: 20px;
+  background: linear-gradient(140deg, #A9B0F6 14%, #C7BFF3 50%, #F3D3E2 86%);
+}
+.card-v { margin: 0; }
+.card-v-btn { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; border-radius: 10px; }
+.card-v img { display: block; width: 100%; height: auto; border-radius: 10px; box-shadow: 0 16px 40px -18px rgba(20, 16, 60, .45); transition: transform .3s cubic-bezier(.2,.7,.2,1); }
+.card-v-btn:hover img { transform: translateY(-4px); }
+.card-v figcaption { margin-top: 10px; text-align: center; font-size: 14px; font-weight: 500; color: var(--ink); }
+@media (max-width: 900px) { .card-versions { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-right: 0; } }
+
+/* AI improvements: two tabs once the script runs, both lists stacked without it */
+.ai-tabs { display: inline-flex; flex-wrap: wrap; gap: 4px; padding: 4px; margin: 4px 0 20px; background: #fff; border-radius: 999px; box-shadow: inset 0 0 0 1px var(--line); }
+.ai-tabs[hidden] { display: none; }
+.ai-tabs button { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border: 0; border-radius: 999px; font: inherit; font-size: 15px; font-weight: 500; color: var(--muted); background: transparent; cursor: pointer; transition: background .25s ease, color .25s ease; }
+.ai-tabs button:hover { color: var(--ink); }
+.ai-tabs button[aria-selected="true"] { background: var(--ink); color: #fff; }
+.ai-tabs .count { display: inline-grid; place-items: center; min-width: 20px; height: 20px; padding: 0 6px; border-radius: 999px; font-size: 12px; background: #E7E2FB; color: var(--checkout-ink); }
+.ai-tabs button[aria-selected="true"] .count { background: rgba(255,255,255,.18); color: #fff; }
+body.p-checkout .cs-body .ai-panel .panel-title { font-size: 18px; font-weight: 500; margin: 20px 0 10px; }
+.ai-live .ai-panel .panel-title { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+body.p-checkout .cs-body ol.ai-cards { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; max-width: none; }
+body.p-checkout .cs-body ol.ai-cards li { display: grid; grid-template-columns: 32px minmax(0, 1fr); gap: 14px; margin: 0; max-width: none; background: #fff; border-radius: 16px; padding: 18px 20px; box-shadow: 0 1px 2px rgba(22, 26, 44, .04), 0 8px 24px -16px rgba(60, 40, 140, .25); }
+.ai-cards .n { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; font-size: 13px; font-weight: 500; background: #E7E2FB; color: var(--checkout-ink); }
+.ai-cards strong { display: block; font-size: 17px; font-weight: 500; line-height: 1.4; color: var(--ink); margin: 3px 0 2px; }
+body.p-checkout .cs-body .ai-cards p { margin: 0; font-size: 15px; line-height: 1.55; color: var(--muted); max-width: none; }
+@media (prefers-reduced-motion: no-preference) {
+  .ai-live .ai-panel:not([hidden]) .ai-cards li { animation: ai-card-in .45s cubic-bezier(.2,.7,.2,1) both; animation-delay: calc(var(--i) * 70ms); }
+}
+@keyframes ai-card-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+/* concept cubes: three 3D cards joined by arrows with a light running between them */
+.cubes { display: grid; grid-template-columns: minmax(0,1fr) 64px minmax(0,1fr) 64px minmax(0,1fr); align-items: stretch; margin: 24px 0 26px; }
+.cube {
+  position: relative; padding: 20px 20px 22px; border-radius: 18px; background: #fff;
+  box-shadow: inset 0 1px 0 #fff, 0 8px 0 -1px #E4DEFA, 0 9px 0 -1px #D2C9F4, 0 22px 34px -16px rgba(60, 40, 140, .35);
+  transition: transform .3s cubic-bezier(.2,.7,.2,1), box-shadow .3s ease;
+}
+.cube:hover { transform: translateY(-3px); box-shadow: inset 0 1px 0 #fff, 0 11px 0 -1px #E4DEFA, 0 12px 0 -1px #D2C9F4, 0 28px 40px -16px rgba(60, 40, 140, .4); }
+body.p-checkout .cs-body .cube p.cube-ex { margin-top: 14px; padding: 10px 12px; border-radius: 10px; background: #F4F2FD; font-size: 14px; line-height: 1.45; }
+body.p-checkout .cs-body .cube p.cube-ex strong { color: var(--ink); font-weight: 500; }
+.cube-n { display: block; font-size: 13px; font-weight: 500; color: var(--checkout-ink); margin-bottom: 8px; }
+body.p-checkout .cs-body .cube h4 { margin: 0 0 6px; font-size: 20px; font-weight: 500; line-height: 1.3; color: var(--ink); }
+body.p-checkout .cs-body .cube p { margin: 0; font-size: 15px; line-height: 1.5; color: var(--muted); max-width: none; }
+.cube-arrow { align-self: start; margin-top: 70px; padding: 0 4px; }
+.cube-arrow svg { display: block; width: 100%; height: auto; overflow: visible; }
+@media (max-width: 900px) {
+  .cubes { grid-template-columns: 1fr; margin-right: 0; }
+  .cube-arrow { width: 56px; margin: 4px 0 4px 18px; transform: rotate(90deg); }
+}
+
+/* rollout plan: a line with three phases; the selected phase opens in a framed box */
+.rollout { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 28px 0 8px; }
+.rollout::before { content: ""; position: absolute; left: 0; right: 0; top: 22px; height: 1px; background: var(--line); }
+.ro-step { position: relative; border: 2px solid transparent; border-radius: 14px; padding: 0 14px 16px; transition: border-color .3s ease, background .3s ease; }
+.ro-head { display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; padding: 13px 0 0; border: 0; background: none; cursor: pointer; font: inherit; }
+.ro-dot { width: 18px; height: 18px; border-radius: 50%; background: var(--paper); border: 2px solid #C9CEE0; transition: background .3s ease, border-color .3s ease, transform .3s ease; }
+.ro-label { font-size: 15px; font-weight: 500; color: var(--muted); transition: color .3s ease; }
+.ro-head:hover .ro-label { color: var(--ink); }
+body.p-checkout .cs-body .ro-body ul { list-style: none; margin: 14px 0 0; padding: 0; max-width: none; }
+body.p-checkout .cs-body .ro-body li { position: relative; margin: 0 0 6px; padding-left: 22px; font-size: 15px; line-height: 1.5; color: var(--muted); max-width: none; }
+body.p-checkout .cs-body .ro-body li::before { content: "→"; position: absolute; left: 0; color: var(--checkout); }
+.ro-step.open .ro-dot { background: var(--checkout); border-color: var(--checkout); transform: scale(1.15); }
+.ro-step.open .ro-label { color: var(--checkout-ink); }
+.js-ro .ro-step:not(.open) .ro-body { display: none; }
+@media (prefers-reduced-motion: no-preference) {
+  .js-ro .ro-step.open .ro-body { animation: ro-in .35s ease both; }
+}
+@keyframes ro-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@media (max-width: 760px) {
+  .rollout { grid-template-columns: 1fr; }
+  .rollout::before { display: none; }
+  .ro-head { flex-direction: row; }
+  .js-ro .ro-step:not(.open) .ro-body { display: block; }
+}
+
 /* cover: the screenshot fills the panel */
 .cs-cover .ph.has-img { aspect-ratio: auto; padding: clamp(16px, 3.4vw, 44px); display: block; background: linear-gradient(140deg, #A9B0F6 14%, #C7BFF3 50%, #F3D3E2 86%); }
 .cs-cover .ph.has-img::before { display: none; }
@@ -560,6 +666,7 @@ body.p-checkout .cs-body .anat-list li { border-radius: 8px; margin-left: -8px; 
           <li><a href="#placement">Where it lives</a></li>
           <li><a href="#iterations">Iterations</a></li>
           <li><a href="#trust">Making AI trustworthy</a></li>
+          <li><a href="#rollout">Rollout plan</a></li>
           <li><a href="#reflection">Reflection</a></li>
         </ol>
       </nav>
@@ -585,7 +692,7 @@ body.p-checkout .cs-body .anat-list li { border-radius: 8px; margin-left: -8px; 
             <li>Existing reports are static and hard to translate into action</li>
           </ul>
           <div class="result">
-            <p class="result-label">➔ Result:</p>
+            <h3 class="result-head">Result</h3>
             <ul class="diamonds">
               <li>Missed revenue from avoidable drop offs</li>
               <li>Underused capabilities (express checkout, branded checkout, coupons, etc.)</li>
@@ -688,17 +795,28 @@ body.p-checkout .cs-body .anat-list li { border-radius: 8px; margin-left: -8px; 
 
           <h3 class="sub">The concept: data, insight, recommendation, action</h3>
           <p>A smart layer that runs in three steps:</p>
-          <ol class="flow">
-            <li><b>Collect</b><span>Buyer, item, locale, industry, season, settings</span></li>
-            <li><b>Analyze</b><span>Against a data model and similar store benchmarks</span></li>
-            <li><b>Recommend</b><span>A concrete change to a specific setting</span></li>
-          </ol>
-          <p>Every insight belongs to one of three families, and each ends in an action:</p>
-          <ul>
-            <li><strong>Funnel.</strong> "30% drop at Customer Details, higher than similar stores."</li>
-            <li><strong>Fields.</strong> "Company name is required, but most of your buyers are consumers."</li>
-            <li><strong>Configuration.</strong> "Express checkout isn't enabled."</li>
-          </ul>
+          <div class="cubes">
+            <article class="cube">
+              <span class="cube-n">01</span>
+              <h4>Collect</h4>
+              <p>Buyer, item, locale, industry, season, settings</p>
+              <p class="cube-ex"><strong>Fields.</strong> "Company name is required, but most of your buyers are consumers."</p>
+            </article>
+            <div class="cube-arrow" aria-hidden="true"><svg viewBox="0 0 64 40" fill="none" aria-hidden="true"><path id="cube-arc-1" d="M4 28 C 20 6, 42 6, 56 22" stroke="#B3A6EE" stroke-width="1.8" stroke-linecap="round"/><path d="M49 22.5 L56.5 22.5 L55 15" stroke="#9A8CE6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <article class="cube">
+              <span class="cube-n">02</span>
+              <h4>Analyze</h4>
+              <p>Against a data model and similar store benchmarks</p>
+              <p class="cube-ex"><strong>Funnel.</strong> "30% drop at Customer Details, higher than similar stores."</p>
+            </article>
+            <div class="cube-arrow second" aria-hidden="true"><svg viewBox="0 0 64 40" fill="none" aria-hidden="true"><path id="cube-arc-2" d="M4 28 C 20 6, 42 6, 56 22" stroke="#B3A6EE" stroke-width="1.8" stroke-linecap="round"/><path d="M49 22.5 L56.5 22.5 L55 15" stroke="#9A8CE6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <article class="cube">
+              <span class="cube-n">03</span>
+              <h4>Recommend</h4>
+              <p>A concrete change to a specific setting</p>
+              <p class="cube-ex"><strong>Configuration.</strong> "Express checkout isn't enabled."</p>
+            </article>
+          </div>
           <p class="kicker">Percentages are illustrative.</p>
         </section>
 
@@ -764,62 +882,97 @@ body.p-checkout .cs-body .anat-list li { border-radius: 8px; margin-left: -8px; 
               <div class="car-dots" role="tablist"></div>
               <button type="button" class="car-btn next" aria-label="Next image"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4l5 5-5 5"/></svg></button>
             </div>
-            <figcaption class="car-cap" aria-live="polite"><b>Working on a task.</b> The merchant opens a recommendation to act on it. A button lets them mark the action as done.</figcaption>
+            <figcaption class="car-cap" aria-live="polite"><b>Recommendations.</b> The store has sales, and the panel shows actions the merchant can take to improve checkout.</figcaption>
           </figure>
         </section>
 
         <section id="iterations">
           <h2>Iterations</h2>
 
-          <div class="decision">
-            <h3>One action, not a menu</h3>
-            <dl>
-              <dt>Tension</dt><dd>Early flows offered several next steps. Merchants froze.</dd>
-              <dt>Call</dt><dd>One primary action, with a quiet "Show me how" for those who want to do it themselves.</dd>
-              <dt>Why</dt><dd>A decision beats a menu.</dd>
-            </dl>
-          </div>
-
-          <div class="decision">
-            <h3>Say "nothing to fix" out loud</h3>
-            <dl>
-              <dt>Tension</dt><dd>An agent that always finds a problem reads as upselling.</dd>
-              <dt>Call</dt><dd>A positive state: "No changes needed for branding or policies."</dd>
-              <dt>Why</dt><dd>Honest silence builds trust. An advisor, not a nag.</dd>
-            </dl>
-          </div>
-
-          <div class="decision">
-            <h3>Reasoning that is grounded and short</h3>
-            <dl>
-              <dt>Tension</dt><dd>Model written reasons could ramble or invent things.</dd>
-              <dt>Call</dt><dd>Every reason tied to a real signal, capped at about 160 characters, no jargon. Enforced in the prompt and in the UI.</dd>
-              <dt>Why</dt><dd>Short, data backed reasons are the ones merchants trust.</dd>
-            </dl>
-          </div>
-
-          <figure>
-            <div class="ph"><span class="lbl">The positive state card</span></div>
-            <figcaption><b>Positive state.</b> When a checkout area is healthy, the agent says so.</figcaption>
+          <h3 class="iter-part">1. Where should the recommendations live?</h3>
+          <p>We explored several placements for the recommendations panel to find the right home for it. Placement mattered: if the panel was hidden away, most merchants would never see it, and the value would be lost.</p>
+          <figure class="carousel wide" aria-roledescription="carousel" aria-label="Placement concepts for the recommendations">
+            <div class="car-track" tabindex="0">
+              <div class="car-slide" data-title="Concept A: funnel and recommendations." data-text="A dedicated Checkout optimization tab, with the checkout funnel, an explanation for each step, and a list of recommendations."><img src="checkout-agent-concept-1.webp" width="1458" height="1245" alt="Checkout optimization tab with a funnel chart, step explanation and a recommendations list" loading="lazy"></div>
+              <div class="car-slide" data-title="Concept B: on the Customization tab." data-text="A row of recommendations at the top of the settings merchants already use, with a link to see all of them."><img src="checkout-agent-concept-2.webp" width="2000" height="1708" alt="Customization tab with two recommendation cards at the top and a See all recommendation button" loading="lazy"></div>
+              <div class="car-slide" data-title="Concept C: its own tab." data-text="A Checkout optimization tab with all the recommendations listed in one place."><img src="checkout-agent-concept-3.webp" width="2000" height="1708" alt="Checkout optimization tab listing four recommendation cards" loading="lazy"></div>
+              <div class="car-slide" data-title="Concept D: a side panel." data-text="Next to the checkout settings: a small funnel chart and short recommendations, each with an action."><img src="checkout-agent-concept-4.webp" width="2000" height="1708" alt="Customization tab with a checkout funnel chart and recommendation cards in a side panel" loading="lazy"></div>
+              <div class="car-slide final" data-title="Final: Improve your checkout, beside the settings." data-text="A panel on the Customization tab, next to the settings it recommends changing. Merchants see it where they already work, without a separate page."><img src="checkout-agent-concept-final.webp" width="1458" height="1245" alt="Customization tab with the Improve your checkout panel on the right, showing three recommendations" loading="lazy"><span class="chosen-badge">Chosen</span></div>
+            </div>
+            <div class="car-nav">
+              <button type="button" class="car-btn prev" aria-label="Previous image"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 4L6 9l5 5"/></svg></button>
+              <div class="car-dots" role="tablist"></div>
+              <button type="button" class="car-btn next" aria-label="Next image"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4l5 5-5 5"/></svg></button>
+            </div>
+            <figcaption class="car-cap" aria-live="polite"><b>Concept A: funnel and recommendations.</b> A dedicated Checkout optimization tab, with the checkout funnel, an explanation for each step, and a list of recommendations.</figcaption>
           </figure>
+
+          <h3 class="iter-part">2. How much data fits in one card?</h3>
+          <p>Each recommendation carries a lot of data. We iterated on how to show it in a single card: enough to act on, relevant to the merchant, and short enough not to overwhelm.</p>
+          <div class="card-versions">
+            <figure class="card-v"><button type="button" class="card-v-btn" aria-label="Enlarge version 1"><img src="checkout-agent-card-1.webp" width="670" height="1610" alt="Version 1: tag, title, reasoning with the benchmark inline, and a Let's Do It or Show Me How button" loading="lazy"></button><figcaption>Version 1</figcaption></figure>
+            <figure class="card-v"><button type="button" class="card-v-btn" aria-label="Enlarge version 2"><img src="checkout-agent-card-2.webp" width="670" height="1502" alt="Version 2: no tag, title, short reasoning, button, and the benchmark separated under a divider" loading="lazy"></button><figcaption>Version 2</figcaption></figure>
+            <figure class="card-v"><button type="button" class="card-v-btn" aria-label="Enlarge version 3"><img src="checkout-agent-card-3.webp" width="670" height="972" alt="Version 3: tag, title, benchmark and reasoning in one paragraph, a text link, items separated by lines" loading="lazy"></button><figcaption>Version 3</figcaption></figure>
+            <figure class="card-v"><button type="button" class="card-v-btn" aria-label="Enlarge version 4"><img src="checkout-agent-card-4.webp" width="670" height="1212" alt="Version 4: uppercase tag, title, reasoning, the benchmark in its own box, and a Let's Do It button" loading="lazy"></button><figcaption>Version 4</figcaption></figure>
+          </div>
+
+          <h3 class="iter-part">3. Iterations on the AI output</h3>
+          <div class="ai-tabs" role="tablist" aria-label="AI improvements" hidden>
+            <button type="button" role="tab" id="ait-ux" aria-controls="aip-ux" aria-selected="true">UX / Product improvements <span class="count">5</span></button>
+            <button type="button" role="tab" id="ait-kb" aria-controls="aip-kb" aria-selected="false" tabindex="-1">Assistant improvements (Knowledge Base) <span class="count">6</span></button>
+          </div>
+          <div class="ai-panel" id="aip-ux" role="tabpanel" aria-labelledby="ait-ux">
+            <h4 class="panel-title">UX / Product improvements</h4>
+            <ol class="ai-cards">
+                <li style="--i:0"><span class="n">01</span><div><strong>Checkout Settings Integration</strong><p>Explore integrating checkout settings with relevant areas such as payments, shipping, and boosters. Consider creating an Ecom hub to centralize user needs within the product and knowledge base.</p></div></li>
+                <li style="--i:1"><span class="n">02</span><div><strong>Flow Representation</strong><p>Provide visual explanations and detailed representations of various checkout flows, including member vs. guest checkout, digital items, and mixed carts.</p></div></li>
+                <li style="--i:2"><span class="n">03</span><div><strong>Customization Clarity</strong><p>Offer a clearer display of all available checkout customization options, ensuring users understand their possibilities.</p></div></li>
+                <li style="--i:3"><span class="n">04</span><div><strong>Ideal Configuration</strong><p>Implement best practices for setting up the "ideal" checkout configuration to optimize user experience and conversion.</p></div></li>
+                <li style="--i:4"><span class="n">05</span><div><strong>Auto Save Feedback</strong><p>Add a clear, visual indicator to confirm that changes on the page are saved automatically, reducing user confusion.</p></div></li>
+            </ol>
+          </div>
+          <div class="ai-panel" id="aip-kb" role="tabpanel" aria-labelledby="ait-kb">
+            <h4 class="panel-title">Assistant improvements (Knowledge Base)</h4>
+            <ol class="ai-cards">
+                <li style="--i:0"><span class="n">01</span><div><strong>Best Practices</strong><p>Include guidelines for checkout setup and conversion optimization.</p></div></li>
+                <li style="--i:1"><span class="n">02</span><div><strong>Testing Guidance</strong><p>Provide step by step instructions on how to test the checkout process effectively.</p></div></li>
+                <li style="--i:2"><span class="n">03</span><div><strong>Mixed Cart/Verticals</strong><p>Document handling strategies for mixed cart scenarios and vertical specific setups.</p></div></li>
+                <li style="--i:3"><span class="n">04</span><div><strong>Error Handling</strong><p>Add a section for common error recognition and troubleshooting solutions.</p></div></li>
+                <li style="--i:4"><span class="n">05</span><div><strong>Third Party Apps (TPAs)</strong><p>Offer explanations of recommended checkout TPAs and detailed integration guides.</p></div></li>
+                <li style="--i:5"><span class="n">06</span><div><strong>Checkout Form</strong><p>Add detailed explanations of all checkout flows, including mixed cart handling and vertical specific variations.</p></div></li>
+            </ol>
+          </div>
         </section>
 
         <section id="trust">
           <h2>Making AI trustworthy before it reaches merchants</h2>
-          <p>Under the hood, site context (checkout settings, business profile, warehouse data), a system prompt and a domain knowledge base go through the Wix AI Gateway to a language model, which returns structured recommendations. My part was the merchant facing experience, but understanding the pipeline kept the UI honest about what the data could support.</p>
-          <p>We validated in stages rather than assuming quality: manual review first, then a model judging output on a sample of sites, then repeated runs across a larger pre release group. The rubric checked:</p>
-          <ul>
-            <li>Format and length limits (action up to 80 characters, reason up to 160)</li>
-            <li>Whether each recommendation was grounded in the store's data</li>
-            <li>Category accuracy and quality of action and reasoning</li>
-            <li>Prioritization: revenue first, then drop off, then friction</li>
-          </ul>
-          <p>Success was defined as checkout conversion and online sales volume, plus how many recommendations merchants actually acted on.</p>
+          <p>The model reads the store's own data and returns structured recommendations. Before any of it reached merchants, we checked it in stages: manual review, then a model judging a sample of sites, then repeated runs on a larger group.</p>
+          <p>Every recommendation had to be short (action up to 80 characters, reason up to 160), grounded in the store's data, and prioritized: revenue first, then drop off, then friction.</p>
+        </section>
+
+        <section id="rollout">
+          <h2>Rollout plan</h2>
+          <p>A gradual release, so the recommendations could be checked on real stores before reaching everyone.</p>
+          <div class="rollout">
+            <div class="ro-step">
+              <button type="button" class="ro-head" id="ro-b0" aria-controls="ro-p0" aria-expanded="true"><span class="ro-dot"></span><span class="ro-label">Phase 1</span></button>
+              <div class="ro-body" id="ro-p0" role="region" aria-labelledby="ro-b0"><ul><li>~10K Stores users</li><li>Run for ~2 weeks</li><li>Check that recommendations are created and look good, review results and make prompt improvements if needed.</li></ul></div>
+            </div>
+            <div class="ro-step">
+              <button type="button" class="ro-head" id="ro-b1" aria-controls="ro-p1" aria-expanded="false"><span class="ro-dot"></span><span class="ro-label">Phase 2</span></button>
+              <div class="ro-body" id="ro-p1" role="region" aria-labelledby="ro-b1"><ul><li>Full Stores Rollout: Expand to all Stores users</li></ul></div>
+            </div>
+            <div class="ro-step">
+              <button type="button" class="ro-head" id="ro-b2" aria-controls="ro-p2" aria-expanded="false"><span class="ro-dot"></span><span class="ro-label">Phase 3</span></button>
+              <div class="ro-body" id="ro-p2" role="region" aria-labelledby="ro-b2"><ul><li>Gradual Expansion: Roll out to additional verticals gradually</li></ul></div>
+            </div>
+          </div>
         </section>
 
         <section id="reflection">
           <h2>Reflection</h2>
-          <p class="todo">TODO: 3–4 sentences in your voice. The hardest tension (surfacing AI insight without overwhelming a non expert merchant), what you'd do differently, and what working on a real product taught you that a concept couldn't.</p>
+          <p>The hardest part of this project was that everything was built on AI. We held weekly progress meetings to make sure we brought merchants the best experience and relevant information they could actually use, so that in the end they could improve their conversion.</p>
+          <p class="solution-line learned"><strong>Designing for AI taught me to design for output I can’t fully control.</strong></p>
         </section>
 
         <nav class="more" aria-label="More projects">
@@ -936,9 +1089,7 @@ body.p-checkout .cs-body .anat-list li { border-radius: 8px; margin-left: -8px; 
   io.observe(fig);
 })();
 // Placement carousel: snaps one image to the middle; arrows, dots, keys and swipe move between them.
-(function () {
-  var car = document.querySelector('.carousel');
-  if (!car) return;
+document.querySelectorAll('.carousel').forEach(function (car) {
   var track = car.querySelector('.car-track');
   var slides = Array.prototype.slice.call(track.querySelectorAll('.car-slide'));
   var dots = car.querySelector('.car-dots');
@@ -971,6 +1122,11 @@ body.p-checkout .cs-body .anat-list li { border-radius: 8px; margin-left: -8px; 
     prev.disabled = best === 0;
     next.disabled = best === slides.length - 1;
   }
+  slides.forEach(function (s, i) {
+    s.querySelector('img').addEventListener('click', function () {
+      if (i !== current) go(i); else openLightbox(this);
+    });
+  });
   prev.addEventListener('click', function () { go(current - 1); });
   next.addEventListener('click', function () { go(current + 1); });
   track.addEventListener('keydown', function (e) {
@@ -979,16 +1135,83 @@ body.p-checkout .cs-body .anat-list li { border-radius: 8px; margin-left: -8px; 
   });
   var t; track.addEventListener('scroll', function () { clearTimeout(t); t = setTimeout(mark, 60); }, { passive: true });
 
-  // start on the middle image, so both sides show a neighbour
+  // start on the first image (Recommendations)
   function start() {
     var behavior = track.style.scrollBehavior;
     track.style.scrollBehavior = 'auto';
-    go(1); mark();
+    go(0); mark();
     track.style.scrollBehavior = behavior;
   }
   start();
   window.addEventListener('load', start);
   window.addEventListener('resize', function () { go(current); });
+});
+document.querySelectorAll('.card-v-btn').forEach(function (b) {
+  b.addEventListener('click', function () { openLightbox(b.querySelector('img')); });
+});
+
+// Lightbox for carousel and card images: click anywhere, the X or Escape to close.
+function openLightbox(img) {
+  var last = document.activeElement;
+  var box = document.createElement('div');
+  box.className = 'lightbox';
+  box.setAttribute('role', 'dialog'); box.setAttribute('aria-modal', 'true'); box.setAttribute('aria-label', img.alt || 'Enlarged image');
+  var big = document.createElement('img'); big.src = img.currentSrc || img.src; big.alt = img.alt;
+  var x = document.createElement('button'); x.type = 'button'; x.className = 'close'; x.setAttribute('aria-label', 'Close'); x.textContent = '×';
+  box.appendChild(big); box.appendChild(x);
+  function close() {
+    box.classList.remove('show');
+    setTimeout(function () { box.remove(); }, 300);
+    document.removeEventListener('keydown', onKey);
+    if (last) last.focus();
+  }
+  function onKey(e) { if (e.key === 'Escape') close(); }
+  box.addEventListener('click', close);
+  document.addEventListener('keydown', onKey);
+  document.body.appendChild(box);
+  requestAnimationFrame(function () { box.classList.add('show'); });
+  x.focus();
+}
+// AI improvements tabs (click or arrow keys).
+(function () {
+  var list = document.querySelector('.ai-tabs');
+  if (!list) return;
+  var tabs = Array.prototype.slice.call(list.querySelectorAll('[role="tab"]'));
+  list.hidden = false;
+  list.closest('section').classList.add('ai-live');
+  function select(tab, focus) {
+    tabs.forEach(function (t) {
+      var on = t === tab;
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      t.tabIndex = on ? 0 : -1;
+      document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+    });
+    if (focus) tab.focus();
+  }
+  tabs.forEach(function (t, i) {
+    t.addEventListener('click', function () { select(t); });
+    t.addEventListener('keydown', function (e) {
+      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+      e.preventDefault();
+      select(tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length], true);
+    });
+  });
+  select(tabs[0]);
+})();
+// Rollout plan: clicking a phase opens it (one at a time).
+(function () {
+  var steps = Array.prototype.slice.call(document.querySelectorAll('.ro-step'));
+  if (!steps.length) return;
+  document.documentElement.classList.add('js-ro');
+  function open(step) {
+    steps.forEach(function (s) {
+      var on = s === step;
+      s.classList.toggle('open', on);
+      s.querySelector('.ro-head').setAttribute('aria-expanded', on ? 'true' : 'false');
+    });
+  }
+  steps.forEach(function (s) { s.querySelector('.ro-head').addEventListener('click', function () { open(s); }); });
+  open(steps[0]);
 })();
 </script>
 </body>
