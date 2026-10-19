@@ -583,6 +583,50 @@ body.p-dream {
 }
 @keyframes dj-card-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 
+/* research journey: four layers, staggered like steps, each with its place on the track */
+.p-dream .cs-body .rj-lead { font-size: 20px; line-height: 1.55; color: var(--ink); max-width: 640px; margin-bottom: 28px; }
+.p-dream .cs-body .rj-lead em {
+  font-style: normal; color: var(--ink); padding-bottom: 3px;
+  background: linear-gradient(#5B3FC4, #5B3FC4) no-repeat 0 100% / 100% 2px;
+}
+/* the underline draws itself when the line scrolls in */
+@media (prefers-reduced-motion: no-preference) {
+  .rv-on .p-dream .cs-body .rj-lead em { background-size: 0% 2px; transition: background-size 1.4s cubic-bezier(.4,0,.2,1) .5s; }
+  .rv-on .p-dream .cs-body .rj-lead.rv-in em { background-size: 100% 2px; }
+}
+.p-dream .cs-body ol.rj { list-style: none; padding: 0 0 56px; margin: 0 clamp(-200px, -12vw, 0px) 0 0; max-width: none; display: flex; gap: 18px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; scrollbar-width: none; }
+.p-dream .cs-body ol.rj::-webkit-scrollbar { display: none; }
+.p-dream .cs-body .rj-card { flex: 0 0 min(300px, 78%); scroll-snap-align: start; margin: 0; max-width: none; padding: 20px 20px 22px; border-radius: 20px; color: var(--ink); }
+.p-dream .cs-body .rj-2, .p-dream .cs-body .rj-4 { transform: translateY(56px); }
+.rj-1 { background: #EDE9FB; } .rj-2 { background: #E3DCF8; } .rj-3 { background: #DCE3F7; }
+.p-dream .cs-body .rj-4 { background: #2C2470; color: #fff; }
+.rj-track { position: relative; display: flex; justify-content: space-between; margin: 0 0 28px; }
+.rj-track::before { content: ""; position: absolute; left: 6px; right: 6px; top: 50%; height: 1px; background: rgba(22, 26, 44, .25); }
+.rj-track span { position: relative; width: 12px; height: 12px; border-radius: 50%; background: inherit; border: 1.5px solid rgba(22, 26, 44, .4); }
+.rj-card .rj-track span { background: transparent; }
+.rj-track span.on { background: #5B3FC4; border-color: #5B3FC4; transform: scale(1.25); }
+.rj-4 .rj-track::before { background: rgba(255,255,255,.35); }
+.rj-4 .rj-track span { border-color: rgba(255,255,255,.6); }
+.rj-4 .rj-track span.on { background: #B58BE2; border-color: #B58BE2; }
+.rj-n { display: block; font-size: 13px; font-weight: 500; letter-spacing: .06em; color: #7A5FD6; margin-bottom: 6px; }
+.rj-4 .rj-n { color: #C9B6F2; }
+.p-dream .cs-body .rj-card h3 { margin: 0 0 10px; font-family: var(--sans); font-size: 22px; font-weight: 500; line-height: 1.25; letter-spacing: -0.01em; color: inherit; }
+.p-dream .cs-body .rj-card p { margin: 0 0 16px; font-size: 15px; line-height: 1.55; color: var(--muted); max-width: none; }
+.p-dream .cs-body .rj-4 p { color: rgba(255,255,255,.78); }
+.p-dream .cs-body ul.rj-chips { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 6px; max-width: none; }
+.p-dream .cs-body ul.rj-chips li { margin: 0; padding: 3px 10px; border: 1px solid rgba(22, 26, 44, .3); border-radius: 999px; font-size: 12px; line-height: 1.5; color: var(--ink); max-width: none; }
+.p-dream .cs-body .rj-4 ul.rj-chips li { border-color: rgba(255,255,255,.45); color: #fff; }
+.rj-nav { display: flex; gap: 10px; margin: 6px 0 24px; }
+.rj-btn { display: grid; place-items: center; width: 38px; height: 38px; padding: 0; border: 0; border-radius: 50%; background: #111210; color: #fff; cursor: pointer; transition: background .2s ease, opacity .2s ease; }
+.rj-btn:hover { background: #000; }
+.rj-btn:disabled { opacity: .3; cursor: default; }
+.rj-btn svg { width: 16px; height: 16px; }
+.p-dream .cs-body .rj-close { font-size: 17px; color: var(--ink); max-width: 640px; }
+@media (max-width: 640px) {
+  .p-dream .cs-body ol.rj { margin-right: 0; padding-bottom: 0; }
+  .p-dream .cs-body .rj-2, .p-dream .cs-body .rj-4 { transform: none; }
+}
+
 @media (max-width: 900px) {
   .dj-screens { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
@@ -685,14 +729,45 @@ body.p-dream {
         </section>
 
         <section id="research">
-          <h2>Research : how to read a dream</h2>
-          <p class="black">I grounded the analysis in three things, and each one shaped the app</p>
-          <ul class="black">
-            <li>Dream criteria. Each dream is read by type, intensity, frequency, realism and how it feels after waking. So every dream is broken down the same way, which is what makes patterns visible over time.</li>
-            <li>A symbol map. Drawing on Jungian readings: water as emotion, falling as loss of control, a chase as pressure, a house as the self. So the app can name what a symbol usually means.</li>
-            <li>The dreamer's context. A symbol means something different to each person. So every reading combines the general meaning with the user's own associations.</li>
-          </ul>
-          <p>All of it was tested against real, anonymized dream accounts.</p>
+          <h2>Research</h2>
+          <p class="rj-lead">The research took several directions, each answering a different part of the question: <em>What can visual dream imagery tell us, and how can we turn it into something people can explore?</em></p>
+          <div class="rj-wrap">
+          <ol class="rj" tabindex="0" aria-label="Research layers">
+            <li class="rj-card rj-1">
+              <div class="rj-track" aria-hidden="true"><span class="on"></span><span class=""></span><span class=""></span><span class=""></span></div>
+              <span class="rj-n">01</span>
+              <h3>The cultural lens</h3>
+              <p>I explored visual imagery in contemporary Israeli dreams, looking for recurring themes, emotions, colors, and situations. This included academic research alongside a collection of anonymized dream accounts.</p>
+              <ul class="rj-chips"><li>Themes</li><li>Emotions</li><li>Colors</li><li>Situations</li></ul>
+            </li>
+            <li class="rj-card rj-2">
+              <div class="rj-track" aria-hidden="true"><span class=""></span><span class="on"></span><span class=""></span><span class=""></span></div>
+              <span class="rj-n">02</span>
+              <h3>The symbolic lens</h3>
+              <p>I looked at how dreams have been interpreted across psychological and semiotic frameworks, including Jungian archetypes and the relationship between symbols, emotions, and personal meaning.</p>
+              <ul class="rj-chips"><li>Jungian archetypes</li><li>Symbols</li><li>Personal meaning</li></ul>
+            </li>
+            <li class="rj-card rj-3">
+              <div class="rj-track" aria-hidden="true"><span class=""></span><span class=""></span><span class="on"></span><span class=""></span></div>
+              <span class="rj-n">03</span>
+              <h3>The personal lens</h3>
+              <p>I examined how the same image can carry completely different meanings depending on the dreamer's experiences and associations. This became an important constraint: the app could suggest interpretations, but couldn't treat them as universal truths.</p>
+              <ul class="rj-chips"><li>Experiences</li><li>Associations</li></ul>
+            </li>
+            <li class="rj-card rj-4">
+              <div class="rj-track" aria-hidden="true"><span class=""></span><span class=""></span><span class=""></span><span class="on"></span></div>
+              <span class="rj-n">04</span>
+              <h3>Turning research into a system</h3>
+              <p>The different research paths were translated into a framework for reading dreams consistently, considering their imagery, emotional intensity, recurring elements, and the dreamer's own context.</p>
+              <ul class="rj-chips"><li>Imagery</li><li>Emotional intensity</li><li>Recurring elements</li><li>Context</li></ul>
+            </li>
+          </ol>
+          <div class="rj-nav">
+            <button type="button" class="rj-btn prev" aria-label="Previous layer"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 4L6 9l5 5"/></svg></button>
+            <button type="button" class="rj-btn next" aria-label="Next layer"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4l5 5-5 5"/></svg></button>
+          </div>
+          </div>
+          <p class="rj-close">All of these layers were tested against real, anonymized dream accounts and became the foundation for the product's visual language, interpretation model, and core features.</p>
         </section>
 
         <section id="decisions" class="dj-decisions">
@@ -944,6 +1019,26 @@ body.p-dream {
   select(tabs[0]);
 })();
 
+// Research layers: arrows move one card at a time; buttons dim at the ends.
+(function () {
+  var row = document.querySelector('ol.rj');
+  if (!row) return;
+  var prev = document.querySelector('.rj-btn.prev'), next = document.querySelector('.rj-btn.next');
+  function step() { var c = row.querySelector('.rj-card'); return c ? c.offsetWidth + 18 : 300; }
+  function update() {
+    prev.disabled = row.scrollLeft <= 4;
+    next.disabled = row.scrollLeft + row.clientWidth >= row.scrollWidth - 4;
+  }
+  prev.addEventListener('click', function () { row.scrollBy({ left: -step() }); });
+  next.addEventListener('click', function () { row.scrollBy({ left: step() }); });
+  row.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { e.preventDefault(); next.click(); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); prev.click(); }
+  });
+  row.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+})();
 </script>
 </body>
 </html>
