@@ -198,6 +198,22 @@ a { color: inherit; text-decoration: none; }
 .explore .badge { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: #30312F; }
 .explore svg { width: 16px; height: 16px; }
 
+/* Tiny Cart card: the Main tab, a click on Settings, then a click on Design.
+   Plays once when the card first shows, then stays still; hovering the card plays it again. */
+.tc-stage { position: relative; width: calc(100% - 40px); border-radius: 8px; overflow: hidden; box-shadow: 0 20px 50px -20px rgba(80, 50, 10, .45); transition: transform .5s cubic-bezier(.2,.7,.2,1); }
+.card:hover .tc-stage { transform: scale(1.03); }
+.tc-stage img { display: block; width: 100%; height: auto; }
+.tc-stage .tc-settings, .tc-stage .tc-main { position: absolute; inset: 0; height: 100%; opacity: 0; transition: opacity .6s cubic-bezier(.4,0,.2,1); }
+.tc-stage[data-s="main"] .tc-main, .tc-stage[data-s="main"] .tc-settings, .tc-stage[data-s="settings"] .tc-settings { opacity: 1; }
+.tc-cursor { position: absolute; left: 70%; top: 70%; width: 22px; height: 22px; opacity: 0; filter: drop-shadow(0 2px 4px rgba(0,0,0,.3)); transition: left 1s cubic-bezier(.45,0,.2,1), top 1s cubic-bezier(.45,0,.2,1), opacity .3s ease, transform .15s ease; pointer-events: none; z-index: 3; }
+.tc-stage.cursor .tc-cursor { opacity: 1; }
+.tc-stage[data-c="1"] .tc-cursor { left: 45.7%; top: 31%; }
+.tc-stage[data-c="2"] .tc-cursor { left: 45.5%; top: 34.8%; }
+.tc-stage.press .tc-cursor { transform: scale(.85); }
+.tc-ring { position: absolute; left: 46.12%; top: 31.73%; width: 30px; height: 30px; margin: -15px 0 0 -15px; border-radius: 50%; border: 2px solid rgba(51, 70, 240, .75); opacity: 0; transform: scale(.3); pointer-events: none; z-index: 2; }
+.tc-stage[data-c="2"] .tc-ring { left: 45.89%; top: 35.51%; }
+.tc-stage.press .tc-ring { animation: hj-ring .6s ease-out; }
+
 .divider { height: 1px; background: var(--line); }
 
 /* ---------- About / tools ---------- */
@@ -338,7 +354,7 @@ a { color: inherit; text-decoration: none; }
         </li>
         <li>
           <a class="card" href="tiny-cart.html">
-            <div class="cover c-cart"><img class="shot" src="tiny-cart-cover.png" alt="" loading="lazy"></div>
+            <div class="cover c-cart"><div class="tc-stage" data-s="main"><img class="tc-done" src="tinycart-card-done.webp" width="1600" height="907" alt=""><img class="tc-settings" src="tinycart-card-settings.webp" width="1600" height="907" alt=""><img class="tc-main" src="tinycart-card-main.webp" width="1600" height="907" alt=""><span class="tc-ring"></span><svg class="tc-cursor" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3l14 8.2-6.3 1.5L9.6 19z" fill="#20211F" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/></svg></div></div>
             <span class="name">Tiny Cart</span>
             <span class="disciplines"><span class="tag sm t-pink">Product design</span><span class="tag sm t-orange">UI</span><span class="tag sm t-blue">Wix</span><span class="tag sm t-cream">Complex UX</span></span>
           </a>
@@ -518,6 +534,36 @@ a { color: inherit; text-decoration: none; }
       io.disconnect();
       play();
     }, { threshold: 0.5 });
+    io.observe(stage);
+  } else play();
+  stage.closest('.card').addEventListener('mouseenter', play);
+})();
+
+// Tiny Cart card: Main, then Settings, then Design. Plays once in view; hovering the card plays it again.
+(function () {
+  var stage = document.querySelector('.tc-stage');
+  if (!stage || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var running = false;
+  function play() {
+    if (running) return;
+    running = true;
+    var t = 0, at = function (ms, fn) { t += ms; setTimeout(fn, t); };
+    stage.classList.remove('press', 'cursor');
+    stage.removeAttribute('data-c');
+    stage.setAttribute('data-s', 'main');
+    at(600, function () { stage.classList.add('cursor'); });
+    at(300, function () { stage.setAttribute('data-c', '1'); });
+    at(1100, function () { stage.classList.add('press'); });
+    at(220, function () { stage.setAttribute('data-s', 'settings'); });
+    at(380, function () { stage.classList.remove('press'); });
+    at(900, function () { stage.setAttribute('data-c', '2'); });
+    at(900, function () { stage.classList.add('press'); });
+    at(220, function () { stage.setAttribute('data-s', 'done'); });
+    at(500, function () { stage.classList.remove('cursor', 'press'); });
+    at(400, function () { stage.removeAttribute('data-c'); running = false; });
+  }
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (e) { if (e[0].isIntersecting) { io.disconnect(); play(); } }, { threshold: 0.5 });
     io.observe(stage);
   } else play();
   stage.closest('.card').addEventListener('mouseenter', play);
