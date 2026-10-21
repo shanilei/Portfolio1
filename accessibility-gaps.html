@@ -551,6 +551,82 @@ body.p-hotjar .cs-body .ro-body li::before { content: "→"; position: absolute;
   .js-ro .ro-step:not(.open) .ro-body { display: block; }
 }
 
+/* iterations: one big card per decision; on scroll the next card slides up and stacks over the last */
+.iter-stack { position: relative; margin-top: 16px; }
+.iter-card {
+  position: sticky; top: calc(24px + var(--i) * 16px);
+  background: #fff; border-radius: 22px; padding: 26px 28px 28px; margin-bottom: 40px;
+  box-shadow: 0 1px 2px rgba(22, 26, 44, .04), 0 -10px 40px -20px rgba(80, 20, 20, .25), 0 24px 50px -30px rgba(80, 20, 20, .3);
+}
+.iter-card:last-child { margin-bottom: 0; }
+.iter-card .iter-head h3 { margin: 0 0 12px !important; font-family: var(--display); font-weight: 500; font-size: 20px; line-height: 1.3; }
+.iter-card .iter-head dl { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 8px 20px; margin: 0; }
+.iter-card .iter-head dt { font-size: 14px; font-weight: 600; color: var(--hotjar-ink); padding-top: 2px; }
+.iter-card .iter-head dd { margin: 0; font-size: 16px; line-height: 1.55; color: var(--muted); }
+.iter-stack { margin-right: clamp(-200px, -12vw, 0px); }
+.iter-card .iter-head { max-width: 760px; }
+/* before/after: drag the handle to compare the explored option with the final design */
+.cmp { position: relative; margin-top: 20px; border-radius: 12px; overflow: hidden; touch-action: pan-y; user-select: none; cursor: ew-resize; box-shadow: 0 0 0 1px var(--line); }
+.cmp img { display: block; width: 100%; height: auto; pointer-events: none; }
+.cmp .cmp-explored { position: absolute; inset: 0; height: 100%; clip-path: inset(0 calc(100% - var(--pos)) 0 0); }
+.cmp-line { position: absolute; top: 0; bottom: 0; left: var(--pos); width: 2px; margin-left: -1px; background: #fff; box-shadow: 0 0 0 1px rgba(184, 41, 30, .35); pointer-events: none; }
+.cmp-knob { position: absolute; top: 50%; left: 50%; display: grid; place-items: center; width: 40px; height: 40px; margin: -20px 0 0 -20px; border-radius: 50%; background: #fff; color: var(--hotjar-ink); box-shadow: 0 6px 18px -6px rgba(0, 0, 0, .35); }
+.cmp-knob svg { width: 18px; height: 18px; }
+.cmp-tag { position: absolute; top: 12px; padding: 4px 10px; border-radius: 999px; font-size: 13px; font-weight: 500; background: rgba(255,255,255,.92); color: var(--ink); pointer-events: none; transition: opacity .2s ease; }
+.cmp-tag.left { left: 12px; } .cmp-tag.right { right: 12px; background: var(--hotjar-ink); color: #fff; }
+.cmp-range { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; }
+.cmp-range:focus-visible + * , .cmp:focus-within { outline: 2px solid var(--hotjar-ink); outline-offset: 3px; }
+@media (max-width: 640px) {
+  .iter-card { padding: 20px 18px 22px; }
+  .iter-card .iter-head dl { grid-template-columns: 1fr; gap: 2px; }
+  .iter-card .iter-head dd { margin-bottom: 10px; }
+  .iter-stack { margin-right: 0; }
+}
+/* research staircase: dark pills step down, each dotted line drops to the finding it led to */
+.rs { position: relative; display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); column-gap: 16px; row-gap: 18px; margin: 24px clamp(-200px, -12vw, 0px) 0 0; scroll-margin-top: 32px; }
+.rs-step { position: relative; z-index: 1; }
+.rs-step.s1 { grid-column: 1 / 6; grid-row: 1; }
+.rs-step.s2 { grid-column: 4 / 9; grid-row: 2; }
+.rs-step.s3 { grid-column: 7 / 11; grid-row: 3; margin-left: -8%; }
+.rs-pill {
+  display: flex; align-items: center; gap: 14px; width: 100%; padding: 10px 16px 10px 10px; border: 0; border-radius: 18px; cursor: pointer; text-align: left;
+  background: #111210; color: #fff; font: inherit; box-shadow: 0 14px 30px -18px rgba(17, 18, 16, .6);
+  transition: transform .25s cubic-bezier(.2,.7,.2,1);
+}
+.rs-pill:hover { transform: translateY(-2px); }
+.rs-icon { display: grid; place-items: center; flex: none; width: 52px; height: 52px; border-radius: 13px; color: #fff; }
+.rs-icon svg { width: 26px; height: 26px; }
+.s1 .rs-icon, .f1 .rs-chip { background: #D9382D; }
+.s2 .rs-icon, .f2 .rs-chip { background: #EE7F66; }
+.s3 .rs-icon, .f3 .rs-chip { background: #B8291E; }
+.rs-title { flex: 1; font-size: 16px; font-weight: 500; line-height: 1.3; }
+.rs-plus { position: relative; flex: none; width: 22px; height: 22px; border-radius: 50%; background: rgba(255,255,255,.12); }
+.rs-plus::before, .rs-plus::after { content: ""; position: absolute; left: 6px; right: 6px; top: 50%; height: 1.6px; margin-top: -.8px; background: #fff; transition: transform .25s ease; }
+.rs-plus::after { transform: rotate(90deg); }
+.rs-pill[aria-expanded="true"] .rs-plus::after { transform: rotate(0deg); }
+body.p-hotjar .cs-body .rs-desc { margin: 10px 4px 0 !important; font-size: 15px !important; line-height: 1.55 !important; color: var(--muted); max-width: none; }
+.js-rs .rs-desc { display: none; }
+.js-rs .rs-step.open .rs-desc { display: block; animation: rs-in .3s ease both; }
+@keyframes rs-in { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+.rs-line { grid-row: 1 / 6; align-self: stretch; justify-self: start; width: 0; margin-left: 35px; border-left: 1.5px dashed #C9CEE0; z-index: 0; }
+.rs-line.l1 { grid-column: 1; grid-row: 1 / 6; }
+.rs-line.l2 { grid-column: 4; grid-row: 2 / 6; }
+.rs-line.l3 { grid-column: 7; grid-row: 3 / 6; margin-left: calc(35px - 8%); }
+body.p-hotjar .cs-body .rs-findings-head { grid-column: 1 / -1; grid-row: 4; justify-self: start; position: relative; z-index: 1; margin: 40px 0 0 !important; padding: 4px 14px 4px 0; background: var(--paper); font-size: clamp(26px, 2.4vw, 32px); }
+.rs-find { grid-row: 5; position: relative; z-index: 1; padding-top: 6px; background: var(--paper); }
+.rs-find.f1 { grid-column: 1 / 4; } .rs-find.f2 { grid-column: 4 / 7; } .rs-find.f3 { grid-column: 7 / 11; }
+.rs-big { position: relative; display: inline-block; font-size: clamp(56px, 6vw, 84px); font-weight: 500; line-height: 1; letter-spacing: -0.04em; color: #D9DCE4; }
+.rs-chip { position: absolute; right: -18px; bottom: 6px; display: grid; place-items: center; width: 38px; height: 26px; border-radius: 999px; color: #fff; }
+.rs-chip svg { width: 15px; height: 15px; }
+body.p-hotjar .cs-body .rs-find p.rs-rule { display: flex; gap: 8px; margin: 12px 0 0 !important; font-size: 14px !important; color: var(--muted); }
+body.p-hotjar .cs-body .rs-find p.rs-rule b { color: var(--hotjar-ink); font-weight: 600; }
+body.p-hotjar .cs-body .rs-find p { margin: 14px 0 0 !important; font-size: 16px !important; line-height: 1.5 !important; color: var(--ink); max-width: none; padding-right: 8px; }
+@media (max-width: 900px) {
+  .rs { grid-template-columns: 1fr; margin-right: 0; }
+  .rs-step.s1, .rs-step.s2, .rs-step.s3 { grid-column: 1; grid-row: auto; margin-left: 0; }
+  .rs-line { display: none; }
+  body.p-hotjar .cs-body .rs-findings-head, .rs-find.f1, .rs-find.f2, .rs-find.f3 { grid-column: 1; grid-row: auto; }
+}
 </style>
   <link rel="stylesheet" href="reveal.css">
   <script>document.documentElement.classList.add('rv-on');setTimeout(function(){if(!window.__rv)document.documentElement.classList.remove('rv-on');},2500);</script>
@@ -591,7 +667,6 @@ body.p-hotjar .cs-body .ro-body li::before { content: "→"; position: absolute;
             <li><a href="#problem">The problem</a></li>
             <li><a href="#research">Research</a></li>
             <li><a href="#findings">Findings</a></li>
-            <li><a href="#rules">Design rules</a></li>
             <li><a href="#solution">The solution</a></li>
             <li><a href="#architecture">Architecture</a></li>
             <li><a href="#flow">The flow</a></li>
@@ -628,28 +703,50 @@ body.p-hotjar .cs-body .ro-body li::before { content: "→"; position: absolute;
 
         <section id="research">
           <h2>Research</h2>
-          <div class="methods">
-            <div class="method"><span class="num">01</span><b>Understanding cultural signals beyond the data</b><span>Cultural gaps don't always surface as bugs. The challenge lies in how they are surfaced and communicated. This process helps identify which indicators are truly relevant and how to present them clearly.</span></div>
-            <div class="method"><span class="num">02</span><b>Identifying existing patterns</b><span>We reviewed recurring usage patterns in Hotjar, with a strong emphasis on table based data exploration.</span></div>
-            <div class="method"><span class="num">03</span><b>Validating insights across teams</b><span>To validate and sharpen these insights, we spoke with Product Managers and Business Analysts to understand how issues are currently detected, interpreted, and prioritized across teams.</span></div>
-          </div>
-        </section>
-
-        <section id="findings">
-          <h2>Findings</h2>
-          <ol class="findings">
-            <li><span class="n">01</span><span>The problem is cultural, not only technical. Gaps appear only when the data is split by age, device and location.</span></li>
-            <li><span class="n">02</span><span>Teams explore data mostly through tables. The feature had to speak the same language.</span></li>
-            <li><span class="n">03</span><span>A number alone doesn't drive action. An issue needs a clear name, the group it affects, and a link to the evidence.</span></li>
-          </ol>
-        </section>
-
-        <section id="rules">
-          <h2>Design rules</h2>
-          <div class="rules">
-            <div class="rule"><span class="from">From finding 02</span><b>Build on what users already know</b><span>Heatmaps, recordings and tables, not a new tool to learn.</span></div>
-            <div class="rule"><span class="from">From finding 01</span><b>Organize every gap by population</b><span>The affected group is the point of each issue.</span></div>
-            <div class="rule"><span class="from">From findings 01 + 03</span><b>Measure against the average</b><span>Deviation from the overall average is the signal.</span></div>
+          <div class="rs">
+            <div class="rs-step s1">
+              <button type="button" class="rs-pill" aria-expanded="false" aria-controls="rs-d0">
+                <span class="rs-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.6 2.4 3.9 5.2 3.9 8.5s-1.3 6.1-3.9 8.5c-2.6-2.4-3.9-5.2-3.9-8.5s1.3-6.1 3.9-8.5z"/></svg></span>
+                <span class="rs-title">Understanding cultural signals beyond the data</span>
+                <span class="rs-plus" aria-hidden="true"></span>
+              </button>
+              <p class="rs-desc" id="rs-d0">Cultural gaps don't always surface as bugs. The challenge lies in how they are surfaced and communicated. This process helps identify which indicators are truly relevant and how to present them clearly.</p>
+            </div>
+            <span class="rs-line l1" aria-hidden="true"></span>
+            <div class="rs-step s2">
+              <button type="button" class="rs-pill" aria-expanded="false" aria-controls="rs-d1">
+                <span class="rs-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4.5" width="17" height="15" rx="2"/><path d="M3.5 9.5h17M3.5 14.5h17M9.5 9.5v10"/></svg></span>
+                <span class="rs-title">Identifying existing patterns</span>
+                <span class="rs-plus" aria-hidden="true"></span>
+              </button>
+              <p class="rs-desc" id="rs-d1">We reviewed recurring usage patterns in Hotjar, with a strong emphasis on table based data exploration.</p>
+            </div>
+            <span class="rs-line l2" aria-hidden="true"></span>
+            <div class="rs-step s3">
+              <button type="button" class="rs-pill" aria-expanded="false" aria-controls="rs-d2">
+                <span class="rs-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8.5" r="3"/><circle cx="16.5" cy="9.5" r="2.4"/><path d="M3.5 19c.6-3.2 2.8-5 5.5-5s4.9 1.8 5.5 5M14.5 14.6c2.6-.4 4.9 1.1 5.5 4.4"/></svg></span>
+                <span class="rs-title">Validating insights across teams</span>
+                <span class="rs-plus" aria-hidden="true"></span>
+              </button>
+              <p class="rs-desc" id="rs-d2">To validate and sharpen these insights, we spoke with Product Managers and Business Analysts to understand how issues are currently detected, interpreted, and prioritized across teams.</p>
+            </div>
+            <span class="rs-line l3" aria-hidden="true"></span>
+            <h2 class="rs-findings-head" id="findings">Findings</h2>
+            <div class="rs-find f1">
+              <span class="rs-big">01<span class="rs-chip" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.6 2.4 3.9 5.2 3.9 8.5s-1.3 6.1-3.9 8.5c-2.6-2.4-3.9-5.2-3.9-8.5s1.3-6.1 3.9-8.5z"/></svg></span></span>
+              <p>The problem is cultural, not only technical.</p>
+              <p class="rs-rule"><span><b>Design rule:</b> Organize every gap by population. The affected group is the point of each issue.</span></p>
+            </div>
+            <div class="rs-find f2">
+              <span class="rs-big">02<span class="rs-chip" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4.5" width="17" height="15" rx="2"/><path d="M3.5 9.5h17M3.5 14.5h17M9.5 9.5v10"/></svg></span></span>
+              <p>Teams explore data mostly through tables.</p>
+              <p class="rs-rule"><span><b>Design rule:</b> Build on what users already know. Heatmaps, recordings and tables, not a new tool to learn.</span></p>
+            </div>
+            <div class="rs-find f3">
+              <span class="rs-big">03<span class="rs-chip" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8.5" r="3"/><circle cx="16.5" cy="9.5" r="2.4"/><path d="M3.5 19c.6-3.2 2.8-5 5.5-5s4.9 1.8 5.5 5M14.5 14.6c2.6-.4 4.9 1.1 5.5 4.4"/></svg></span></span>
+              <p>A number alone doesn't drive action.</p>
+              <p class="rs-rule"><span><b>Design rule:</b> Measure against the average. Deviation from the overall average is the signal.</span></p>
+            </div>
           </div>
         </section>
 
@@ -709,30 +806,41 @@ body.p-hotjar .cs-body .ro-body li::before { content: "→"; position: absolute;
           <h2>Iterations</h2>
           <p class="iter-sub">9 options explored across 2 decisions</p>
 
-          <div class="iter">
-            <h3>01. How a table row explains an issue (5 options)</h3>
+          <div class="iter-stack">
+            <article class="iter-card" style="--i:0">
+              <div class="iter-head">
+                <h3>01. How a table row explains an issue</h3>
             <dl>
               <dt>Explored</dt><dd>A minimal table, expandable rows, everything inline, demographic tags.</dd>
               <dt>Why not</dt><dd>The issue wasn't understood, key details were hidden, visual overload, tags looked clickable.</dd>
               <dt>Final</dt><dd>The issue first, then the affected group, in one readable row, with heatmap and replay links.</dd>
             </dl>
-          </div>
-          <div class="iter-shots">
-            <div><p class="tag">A rejected option</p><figure class="shot"><div class="frame"><img src="hotjar-iteration-1-rejected.png" alt="A rejected table row design" loading="lazy" onerror="this.parentNode.classList.add('missing')"><span class="lbl">A rejected option</span></div></figure></div>
-            <div><p class="tag">Final</p><figure class="shot"><div class="frame"><img src="hotjar-iteration-1-final.png" alt="The final table row design" loading="lazy" onerror="this.parentNode.classList.add('missing')"><span class="lbl">Final</span></div></figure></div>
-          </div>
-
-          <div class="iter">
-            <h3>02. Where the feature lives (4 options)</h3>
+              </div>
+              <div class="cmp" style="--pos:50%">
+                <img class="cmp-final" src="hotjar-iteration-1-final.png" width="1893" height="1105" alt="The final table row design" loading="lazy">
+                <img class="cmp-explored" src="hotjar-iteration-1-rejected.png" width="1893" height="1105" alt="An explored table row design" loading="lazy">
+                <span class="cmp-tag left">Explored option</span><span class="cmp-tag right">Final</span>
+                <span class="cmp-line" aria-hidden="true"><span class="cmp-knob"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 5L2 10l5 5M13 5l5 5-5 5"/></svg></span></span>
+                <input class="cmp-range" type="range" min="0" max="100" value="50" aria-label="Compare the explored option and the final design">
+                            </div>
+            </article>
+            <article class="iter-card" style="--i:1">
+              <div class="iter-head">
+                <h3>02. Where the feature lives</h3>
             <dl>
               <dt>Explored</dt><dd>A standalone tab with alerts, a tab inside the main dashboard, a layer inside Heatmaps.</dd>
               <dt>Why not</dt><dd>Off Hotjar's language, unclear it was about accessibility, added complexity.</dd>
               <dt>Final</dt><dd>A dedicated tab in the primary navigation, easy to find and close to existing tools.</dd>
             </dl>
-          </div>
-          <div class="iter-shots">
-            <div><p class="tag">A rejected option</p><figure class="shot"><div class="frame"><img src="hotjar-iteration-2-rejected.png" alt="A rejected placement for the feature" loading="lazy" onerror="this.parentNode.classList.add('missing')"><span class="lbl">A rejected option</span></div></figure></div>
-            <div><p class="tag">Final</p><figure class="shot"><div class="frame"><img src="hotjar-iteration-2-final.png" alt="The final placement: a tab in the primary navigation" loading="lazy" onerror="this.parentNode.classList.add('missing')"><span class="lbl">Final</span></div></figure></div>
+              </div>
+              <div class="cmp" style="--pos:50%">
+                <img class="cmp-final" src="hotjar-iteration-2-final.png" width="1865" height="1080" alt="The final placement: a tab in the primary navigation" loading="lazy">
+                <img class="cmp-explored" src="hotjar-iteration-2-rejected.png" width="1865" height="1080" alt="An explored placement for the feature" loading="lazy">
+                <span class="cmp-tag left">Explored option</span><span class="cmp-tag right">Final</span>
+                <span class="cmp-line" aria-hidden="true"><span class="cmp-knob"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 5L2 10l5 5M13 5l5 5-5 5"/></svg></span></span>
+                <input class="cmp-range" type="range" min="0" max="100" value="50" aria-label="Compare the explored option and the final design">
+                            </div>
+            </article>
           </div>
         </section>
 
@@ -907,6 +1015,32 @@ body.p-hotjar .cs-body .ro-body li::before { content: "→"; position: absolute;
   }
   steps.forEach(function (s) { s.querySelector('.ro-head').addEventListener('click', function () { open(s); }); });
   open(steps[0]);
+})();
+// Iteration compare sliders: drag (or use the arrow keys) to move between explored and final.
+document.querySelectorAll('.cmp').forEach(function (cmp) {
+  var range = cmp.querySelector('.cmp-range');
+  function set(v) {
+    v = Math.max(0, Math.min(100, v));
+    cmp.style.setProperty('--pos', v + '%');
+    range.value = v;
+    cmp.querySelector('.cmp-tag.left').style.opacity = v < 12 ? 0 : 1;
+    cmp.querySelector('.cmp-tag.right').style.opacity = v > 88 ? 0 : 1;
+  }
+  range.addEventListener('input', function () { set(+range.value); });
+});
+// Research steps: click a step to show what it covered.
+(function () {
+  var steps = document.querySelectorAll('.rs-step');
+  if (!steps.length) return;
+  document.documentElement.classList.add('js-rs');
+  steps.forEach(function (s) {
+    var b = s.querySelector('.rs-pill');
+    b.addEventListener('click', function () {
+      var open = !s.classList.contains('open');
+      s.classList.toggle('open', open);
+      b.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  });
 })();
 </script>
 </body>
