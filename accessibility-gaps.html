@@ -347,7 +347,7 @@ figcaption b { color: var(--ink); font-weight: 500; }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 900px) {
-  .cs-layout { grid-template-columns: 1fr; gap: 0; }
+  .cs-layout { grid-template-columns: minmax(0, 1fr); gap: 0; }
   .cs-side { display: none; }
   .about { grid-template-columns: 1fr; gap: 24px; }
 }

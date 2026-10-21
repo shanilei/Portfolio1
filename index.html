@@ -106,7 +106,7 @@ a { color: inherit; text-decoration: none; }
 /* row view: one scrolling row that bleeds off the right edge */
 .works[data-view="row"] .gallery {
   display: flex; gap: 24px; margin-right: calc(var(--pad) * -1); padding-right: var(--pad);
-  overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; cursor: grab;
+  overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; scrollbar-width: none; cursor: grab;
 }
 .works[data-view="row"] .gallery::-webkit-scrollbar { display: none; }
 .works[data-view="row"] .gallery.dragging { cursor: grabbing; scroll-snap-type: none; }
@@ -257,12 +257,13 @@ a { color: inherit; text-decoration: none; }
   .nav .action { padding-left: 6px; gap: 0; }
   .intro { min-height: 0; padding-bottom: 96px; }
   .statement { padding-top: 72px; }
-  .works[data-view="row"] .gallery li { flex-basis: 80vw; }
-  .works[data-view="grid"] .gallery { grid-template-columns: 1fr; }
+  /* phones: always a vertical list, whichever view is selected */
+  .works[data-view] .gallery { display: grid; grid-template-columns: 1fr; gap: 36px; margin-right: 0; padding-right: 0; overflow: visible; scroll-snap-type: none; cursor: auto; }
+  .works[data-view] .gallery li { flex: none; }
   .block { flex-direction: column; }
   .col, .col.fill { flex: none; width: 100%; }
   .about { padding-bottom: 150px; }
-  .seal { right: -30px; bottom: 16px; width: 112px; height: 112px; gap: 6px; }
+  .seal { right: 16px; bottom: 16px; width: 104px; height: 104px; gap: 6px; }
   .seal .invite { font-size: 9px; }
   .seal svg { width: 24px; height: 24px; }
   .seal .sig { font-size: 18px; }
