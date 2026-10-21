@@ -543,16 +543,35 @@ body.p-dream {
 .timeline .desc { display: block; margin: 2px 0 0 34px; max-width: 568px; font-size: 15px; line-height: 1.5; color: var(--muted); transition: color .35s ease; }
 .tl-live .timeline li:not(.is-on) .desc { color: var(--soft); }
 
-.dj-learned {
-  margin: 32px 0 0; padding: 26px 28px 24px; border-radius: 18px;
-  background: linear-gradient(150deg, #FFFFFF 0%, #F3EFFD 100%);
-  box-shadow: inset 0 0 0 1px #E4DCFA;
+.dj-learned { margin: 40px 0 0; }
+.p-dream .cs-body .dj-learned h3 { font-family: var(--sans); font-weight: 500; font-size: 22px; margin: 0 0 18px; color: var(--ink); }
+.p-dream .cs-body ol.lt-stairs { list-style: none; padding: 0; margin: 0 clamp(-200px, -12vw, 0px) 0 0; max-width: none; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); row-gap: 14px; }
+.p-dream .cs-body .lt { margin: 0; max-width: none; display: flex; flex-direction: column; align-items: flex-start; }
+.lt.s1 { grid-column: 1 / 8; } .lt.s2 { grid-column: 3 / 10; } .lt.s3 { grid-column: 5 / 12; } .lt.s4 { grid-column: 6 / 13; }
+.lt-pill { display: flex; align-items: center; gap: 12px; padding: 8px 14px 8px 8px; border: 0; border-radius: 16px; background: #13102B; color: #fff; font: inherit; text-align: left; cursor: pointer; box-shadow: 0 14px 30px -18px rgba(20, 15, 61, .7); white-space: nowrap; transition: transform .2s ease; }
+.lt-pill:hover { transform: translateY(-2px); }
+.lt-plus { position: relative; flex: none; width: 22px; height: 22px; margin-left: 4px; border-radius: 50%; background: rgba(255,255,255,.12); }
+.lt-plus::before, .lt-plus::after { content: ""; position: absolute; left: 6px; right: 6px; top: 50%; height: 1.6px; margin-top: -.8px; background: #fff; transition: transform .25s ease; }
+.lt-plus::after { transform: rotate(90deg); }
+.lt-pill[aria-expanded="true"] .lt-plus::after { transform: rotate(0deg); }
+.lt-icon { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 11px; color: #fff; flex: none; }
+.lt-icon svg { width: 22px; height: 22px; }
+.s1 .lt-icon { background: #5B3FC4; } .s2 .lt-icon { background: #7A5FD6; } .s3 .lt-icon { background: #B58BE2; } .s4 .lt-icon { background: #3B2E8F; }
+.lt-title { font-size: 16px; font-weight: 500; }
+.lt-n { margin-left: 8px; font-size: 12px; color: rgba(255,255,255,.45); font-variant-numeric: tabular-nums; }
+.p-dream .cs-body .lt-text { display: block; margin: 10px 4px 0; font-size: 16px; line-height: 1.5; color: var(--ink); max-width: 34ch; }
+.js-lt .p-dream .cs-body .lt:not(.open) .lt-text { display: none; }
+.js-lt .lt.open .lt-text { animation: lt-in .3s ease both; }
+@keyframes lt-in { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+.p-dream .cs-body .lt-close { margin: 28px 0 0 !important; font-size: clamp(19px, 1.7vw, 22px) !important; line-height: 1.5 !important; color: var(--muted); max-width: 640px; }
+.p-dream .cs-body .lt-close span { color: var(--ink); font-weight: 500; }
+@media (max-width: 900px) {
+  .p-dream .cs-body ol.lt-stairs { margin-right: 0; }
+  .lt.s1, .lt.s2, .lt.s3, .lt.s4 { grid-column: 1 / -1; }
 }
-.p-dream .cs-body .dj-learned h3 { font-family: var(--sans); font-weight: 500; font-size: 21px; line-height: 1.3; margin: 0 0 14px; color: var(--ink); }
-.p-dream .cs-body .dj-learned ul { list-style: none; padding: 0; margin: 0 0 18px; max-width: none; display: grid; grid-template-columns: 1fr 1fr; gap: 14px 28px; }
-.p-dream .cs-body .dj-learned li { margin: 0; font-size: 16px; line-height: 1.5; color: var(--muted); }
-.p-dream .cs-body .dj-learned li strong { display: block; color: var(--ink); font-weight: 500; margin-bottom: 2px; }
-.p-dream .cs-body .dj-learned p { margin: 0; padding-top: 16px; border-top: 1px solid #E4DCFA; font-size: 16px; color: var(--ink); max-width: none; }
+@media (max-width: 640px) {
+  .lt-pill { white-space: normal; }
+}
 
 /* key learnings / future direction: tabs once the script runs, both lists stacked without it */
 .dj-tabs { display: inline-flex; gap: 4px; padding: 4px; margin: 4px 0 20px; background: #fff; border-radius: 999px; box-shadow: inset 0 0 0 1px var(--line); }
@@ -600,7 +619,7 @@ body.p-dream {
 .p-dream .cs-body .rj-2, .p-dream .cs-body .rj-4 { transform: translateY(56px); }
 .rj-1 { background: #EDE9FB; } .rj-2 { background: #E3DCF8; } .rj-3 { background: #DCE3F7; }
 .p-dream .cs-body .rj-4 { background: #2C2470; color: #fff; }
-.rj-track { position: relative; display: flex; justify-content: space-between; margin: 0 0 28px; }
+.rj-track { position: relative; display: flex; justify-content: space-between; margin: 0 0 28px; padding: 6px 0; cursor: pointer; }
 .rj-track::before { content: ""; position: absolute; left: 6px; right: 6px; top: 50%; height: 1px; background: rgba(22, 26, 44, .25); }
 .rj-track span { position: relative; width: 12px; height: 12px; border-radius: 50%; background: inherit; border: 1.5px solid rgba(22, 26, 44, .4); }
 .rj-card .rj-track span { background: transparent; }
@@ -617,10 +636,10 @@ body.p-dream {
 .p-dream .cs-body ul.rj-chips li { margin: 0; padding: 3px 10px; border: 1px solid rgba(22, 26, 44, .3); border-radius: 999px; font-size: 12px; line-height: 1.5; color: var(--ink); max-width: none; }
 .p-dream .cs-body .rj-4 ul.rj-chips li { border-color: rgba(255,255,255,.45); color: #fff; }
 .rj-nav { display: flex; gap: 10px; margin: 6px 0 24px; }
-.rj-btn { display: grid; place-items: center; width: 38px; height: 38px; padding: 0; border: 0; border-radius: 50%; background: #111210; color: #fff; cursor: pointer; transition: background .2s ease, opacity .2s ease; }
-.rj-btn:hover { background: #000; }
+.rj-btn { display: grid; place-items: center; width: 28px; height: 28px; padding: 0; border: 0; background: none; color: var(--ink); cursor: pointer; transition: color .2s ease, opacity .2s ease; }
+.rj-btn:hover { color: #5B3FC4; }
 .rj-btn:disabled { opacity: .3; cursor: default; }
-.rj-btn svg { width: 16px; height: 16px; }
+.rj-btn svg { width: 18px; height: 18px; }
 .p-dream .cs-body .rj-close { font-size: 17px; color: var(--ink); max-width: 640px; }
 @media (max-width: 640px) {
   .p-dream .cs-body ol.rj { margin-right: 0; padding-bottom: 0; }
@@ -649,14 +668,58 @@ body.p-dream {
 @media (max-width: 900px) { .ob.gs { margin-right: 0; grid-template-columns: 1fr; } .gs-screens figure:nth-child(2) { margin-top: 0; } }
 @media (max-width: 640px) { .ob, .ob-flip, .ob.gs { grid-template-columns: 1fr; } .gs-screens { grid-template-columns: 1fr; max-width: 260px; margin: 0 auto; } .ob-flip .ob-text, .gs .ob-text { order: -1; } .ob-media { width: 240px; margin: 0 auto; } }
 
+/* key screens: coverflow carousel; the middle phone flips to show its explanation */
+.p-dream .cs-body .sc-lead { color: var(--muted); }
+.sc { position: relative; margin: 8px clamp(-200px, -12vw, 0px) 0 0; }
+.sc-track { position: relative; list-style: none; margin: 0; padding: 0; height: 660px; perspective: 1400px; touch-action: pan-y; user-select: none; }
+.p-dream .cs-body ul.sc-track { max-width: none; padding: 0; margin: 0; }
+.sc-item { left: 50% !important; }
+.sc-track { perspective-origin: 50% 50%; }
+.sc-item { position: absolute; left: 50%; top: 20px; width: 260px; margin: 0 0 0 -130px; transition: transform .6s cubic-bezier(.22,1,.36,1), opacity .5s ease, filter .5s ease; transform-style: preserve-3d; }
+.sc-card { position: relative; display: block; width: 100%; aspect-ratio: 600 / 1212; padding: 0; border: 0; background: none; cursor: pointer; transform-style: preserve-3d; transition: transform .7s cubic-bezier(.22,1,.36,1); font: inherit; text-align: left; }
+.sc-item.flipped .sc-card { transform: rotateY(180deg); }
+.sc-front, .sc-back { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.sc-front .phone { position: absolute; inset: 0; }
+.sc-front video.screen { position: absolute; display: block; max-width: none; background: #0b0b24; }
+.sc-back {
+  transform: rotateY(180deg); display: flex; flex-direction: column; padding: 30px 24px 22px; border-radius: 36px;
+  background: linear-gradient(160deg, #241E5C 0%, #5B3FC4 60%, #B58BE2 100%); color: #fff; overflow: hidden;
+  box-shadow: 0 30px 60px -30px rgba(20, 15, 61, .6);
+}
+.sc-n { font-size: 13px; font-weight: 500; letter-spacing: .08em; color: rgba(255,255,255,.65); }
+.sc-title { margin: 6px 0 18px; font-size: 24px; font-weight: 500; line-height: 1.2; }
+.sc-back dl { margin: 0; }
+.sc-back dt { margin: 14px 0 0; font-size: 16px; font-weight: 500; }
+.sc-back dt:first-child { margin-top: 0; }
+.sc-back dd { margin: 3px 0 0; font-size: 14px; line-height: 1.5; color: rgba(255,255,255,.78); }
+.p-dream .cs-body .sc-cap { margin: 14px 0 0; text-align: center; font-size: 12px; line-height: 1.45; color: var(--muted); max-width: none; transition: opacity .4s ease; }
+.sc-cap b { display: block; font-size: 13px; font-weight: 500; color: var(--ink); margin-bottom: 2px; }
+.sc-item:not(.center) .sc-cap { opacity: .55; }
+.sc-hint { margin-top: auto; font-size: 12px; color: rgba(255,255,255,.55); }
+.sc-item:not(.center) .sc-card { cursor: pointer; }
+.sc-item:not(.center) { filter: saturate(.85); }
+.sc-nav { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 4px; }
+.sc-btn { display: grid; place-items: center; width: 38px; height: 38px; padding: 0; border: 0; border-radius: 50%; background: #111210; color: #fff; cursor: pointer; transition: background .2s ease, opacity .2s ease; }
+.sc-btn:hover { background: #000; }
+.sc-btn:disabled { opacity: .3; cursor: default; }
+.sc-btn svg { width: 16px; height: 16px; }
+.sc-count { min-width: 44px; text-align: center; font-size: 14px; color: var(--muted); font-variant-numeric: tabular-nums; }
+@media (prefers-reduced-motion: reduce) { .sc-item, .sc-card { transition: none; } }
+@media (max-width: 900px) { .sc { margin-right: 0; } }
+@media (max-width: 640px) {
+  .sc-track { height: 600px; overflow: hidden; }
+  html body .cs-body .sc-item p.sc-cap { font-size: 12px !important; line-height: 1.45 !important; }
+  .sc-item { width: 230px; margin-left: -115px; left: 50% !important; }
+  .sc-title { font-size: 20px; }
+  .sc-back { padding: 24px 18px 18px; border-radius: 28px; }
+}
+
 @media (max-width: 900px) {
   .dj-screens { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 @media (max-width: 640px) {
   body.p-dream { --phone-shadow: drop-shadow(24px 12px 30px rgba(9, 20, 50, .15)); }
   .p-dream .cs-body .timeline li { font-size: 16px; }
-  .p-dream .cs-body .dj-learned ul { grid-template-columns: 1fr; }
-  .dj-learned { padding: 22px 20px 20px; }
   .dj-cover .panel { margin: 0; border-radius: 14px; }
   .p-dream .cs-body h2.h3 { font-size: 24px; }
 
@@ -722,12 +785,9 @@ body.p-dream {
           <li><a href="#decisions">UX decisions</a></li>
           <li><a href="#concept">The concept</a></li>
           <li><a href="#design">The design</a></li>
-          <li><a href="#onboarding">Onboarding</a></li>
-          <li><a href="#record">Record and loader</a></li>
-          <li><a href="#gallery-screens">Gallery and photos</a></li>
+          <li><a href="#screens">Key screens</a></li>
           <li><a href="#build">Building it</a></li>
           <li><a href="#learnings">Key learnings</a></li>
-          <li><a href="#reflection">Reflection</a></li>
         </ol>
       </nav>
       </aside>
@@ -855,46 +915,51 @@ body.p-dream {
           </figure>
         </section>
 
-        <section id="onboarding">
-          <div class="ob">
-            <div class="ob-text">
-              <h2>Onboarding</h2>
-              <dl class="beats">
-                <dt>Before it fades</dt><dd>Capture your dream while the details are still fresh.</dd>
-                <dt>Look closer</dt><dd>Turn fleeting memories into symbols, emotions, and visual stories.</dd>
-                <dt>See what returns</dt><dd>Discover the patterns hiding across your dreams.</dd>
-              </dl>
-            </div>
-            <figure class="ob-media">
-              <div class="phone"><video class="screen" src="dream-onboarding.mp4" poster="dream-onboarding-poster.jpg" muted playsinline preload="metadata" aria-label="Onboarding: intro screens, sign in, then the record screen"></video><img class="frame" src="dream-phone-frame.png" alt=""></div>
-            </figure>
-          </div>
-        </section>
-
-        <section id="record">
-          <div class="ob ob-flip">
-            <figure class="ob-media">
-              <div class="phone"><video class="screen" src="dream-record.mp4" poster="dream-record-poster.jpg" muted playsinline preload="metadata" aria-label="Recording a dream: tap to record, the app listens, tap again to analyze, then the loader"></video><img class="frame" src="dream-phone-frame.png" alt=""></div>
-            </figure>
-            <div class="ob-text">
-              <h2>Record and loader</h2>
-              <dl class="beats">
-                <dt>Tell me what you remember</dt><dd>Speak freely while Lucid captures the details of your dream.</dd>
-                <dt>Something is taking shape</dt><dd>Your dream is being translated into symbols, emotions, and imagery.</dd>
-              </dl>
-            </div>
-          </div>
-        </section>
-
-        <section id="gallery-screens">
-          <div class="ob gs">
-            <div class="ob-text">
-              <h2>Gallery and photo screens</h2>
-            </div>
-            <div class="gs-screens">
-              <figure><div class="phone"><img class="screen" src="dream-screen-gallery-date.jpg" width="540" height="1168" alt="Dream Journal calendar where each night shows its dream image" loading="lazy"><img class="frame" src="dream-phone-frame.png" alt=""></div><figcaption><span class="gs-n">01</span><b>A night worth remembering</b><span>Explore the dreams you captured on a single night.</span></figcaption></figure>
-              <figure><div class="phone"><img class="screen" src="dream-screen-photo.jpg" width="540" height="1168" alt="A single dream, Sweet Cotton Fields, with its generated image and the What does it say? reading" loading="lazy"><img class="frame" src="dream-phone-frame.png" alt=""></div><figcaption><span class="gs-n">02</span><b>What stayed with you</b><span>A visual interpretation of the dream, shaped by its symbols, emotions, and details.</span></figcaption></figure>
-              <figure><div class="phone"><img class="screen" src="dream-screen-gallery-2.jpg" width="540" height="1168" alt="Dream Journal gallery grouped by type: Fear, Confused, Sweet, Sad, Angry" loading="lazy"><img class="frame" src="dream-phone-frame.png" alt=""></div><figcaption><span class="gs-n">03</span><b>The patterns begin to emerge</b><span>See recurring symbols and themes across your dreams.</span></figcaption></figure>
+        <section id="screens">
+          <h2>Key screens</h2>
+          <p class="sc-lead">Swipe through the screens. Tap the one in the middle to flip it and read what it does.</p>
+          <div class="sc" aria-roledescription="carousel" aria-label="Key screens">
+            <ul class="sc-track">
+            <li class="sc-item" data-i="0">
+              <button type="button" class="sc-card" aria-label="Onboarding: show the explanation">
+                <span class="sc-front"><span class="phone"><video class="screen" src="dream-onboarding.mp4" poster="dream-onboarding-poster.jpg" muted playsinline preload="metadata" aria-label="Onboarding: intro screens, sign in, then the record screen"></video><img class="frame" src="dream-phone-frame.png" alt=""></span></span>
+                <span class="sc-back"><span class="sc-n">01</span><span class="sc-title">Onboarding</span><dl><dt>Before it fades</dt><dd>Capture your dream while the details are still fresh.</dd><dt>Look closer</dt><dd>Turn fleeting memories into symbols, emotions, and visual stories.</dd><dt>See what returns</dt><dd>Discover the patterns hiding across your dreams.</dd></dl><span class="sc-hint">Tap to flip back</span></span>
+              </button>
+              <p class="sc-cap"><b>Onboarding</b>Capture your dream while the details are still fresh.</p>
+            </li>
+            <li class="sc-item" data-i="1">
+              <button type="button" class="sc-card" aria-label="Record and loader: show the explanation">
+                <span class="sc-front"><span class="phone"><video class="screen" src="dream-record.mp4" poster="dream-record-poster.jpg" muted playsinline preload="metadata" aria-label="Recording a dream: tap to record, the app listens, tap again to analyze, then the loader"></video><img class="frame" src="dream-phone-frame.png" alt=""></span></span>
+                <span class="sc-back"><span class="sc-n">02</span><span class="sc-title">Record and loader</span><dl><dt>Tell me what you remember</dt><dd>Speak freely while Lucid captures the details of your dream.</dd><dt>Something is taking shape</dt><dd>Your dream is being translated into symbols, emotions, and imagery.</dd></dl><span class="sc-hint">Tap to flip back</span></span>
+              </button>
+              <p class="sc-cap"><b>Record and loader</b>Speak freely while Lucid captures the details of your dream.</p>
+            </li>
+            <li class="sc-item" data-i="2">
+              <button type="button" class="sc-card" aria-label="Date gallery: show the explanation">
+                <span class="sc-front"><span class="phone"><img class="screen" src="dream-screen-gallery-date.jpg" width="540" height="1168" alt="Dream Journal calendar where each night shows its dream image" loading="lazy"><img class="frame" src="dream-phone-frame.png" alt=""></span></span>
+                <span class="sc-back"><span class="sc-n">03</span><span class="sc-title">Date gallery</span><dl><dt>A night worth remembering</dt><dd>Explore the dreams you captured on a single night.</dd></dl><span class="sc-hint">Tap to flip back</span></span>
+              </button>
+              <p class="sc-cap"><b>Date gallery</b>Explore the dreams you captured on a single night.</p>
+            </li>
+            <li class="sc-item" data-i="3">
+              <button type="button" class="sc-card" aria-label="Individual dream: show the explanation">
+                <span class="sc-front"><span class="phone"><img class="screen" src="dream-screen-photo.jpg" width="540" height="1168" alt="A single dream, Sweet Cotton Fields, with its generated image and the What does it say? reading" loading="lazy"><img class="frame" src="dream-phone-frame.png" alt=""></span></span>
+                <span class="sc-back"><span class="sc-n">04</span><span class="sc-title">Individual dream</span><dl><dt>What stayed with you</dt><dd>A visual interpretation of the dream, shaped by its symbols, emotions, and details.</dd></dl><span class="sc-hint">Tap to flip back</span></span>
+              </button>
+              <p class="sc-cap"><b>Individual dream</b>A visual interpretation of the dream, shaped by its symbols, emotions, and details.</p>
+            </li>
+            <li class="sc-item" data-i="4">
+              <button type="button" class="sc-card" aria-label="Category gallery: show the explanation">
+                <span class="sc-front"><span class="phone"><img class="screen" src="dream-screen-gallery-2.jpg" width="540" height="1168" alt="Dream Journal gallery grouped by type: Fear, Confused, Sweet, Sad, Angry" loading="lazy"><img class="frame" src="dream-phone-frame.png" alt=""></span></span>
+                <span class="sc-back"><span class="sc-n">05</span><span class="sc-title">Category gallery</span><dl><dt>The patterns begin to emerge</dt><dd>See recurring symbols and themes across your dreams.</dd></dl><span class="sc-hint">Tap to flip back</span></span>
+              </button>
+              <p class="sc-cap"><b>Category gallery</b>See recurring symbols and themes across your dreams.</p>
+            </li>
+            </ul>
+            <div class="sc-nav">
+              <button type="button" class="sc-btn prev" aria-label="Previous screen"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 4L6 9l5 5"/></svg></button>
+              <span class="sc-count" aria-live="polite">1 / 5</span>
+              <button type="button" class="sc-btn next" aria-label="Next screen"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4l5 5-5 5"/></svg></button>
             </div>
           </div>
         </section>
@@ -917,16 +982,28 @@ body.p-dream {
             </ol>
           </div>
           <p>A full design token system and a written prompt guide let me move designs into code with exact values, not approximations. The analysis engine is a TypeScript service that uses Claude through the Anthropic SDK, with tool use to return structured output: symbols, emotions and interpretation as data the UI can render.</p>
-          <aside class="dj-learned">
+          <div class="dj-learned">
             <h3>What building it taught me</h3>
-            <ul>
-              <li><strong>New tools, fast.</strong> I picked up tools I had never used and learned them by building.</li>
-              <li><strong>Teaching myself.</strong> When something didn't work, I found the way through on my own.</li>
-              <li><strong>Everything has to connect.</strong> Screens, APIs, data and voice only become an app once every piece is wired together.</li>
-              <li><strong>CSS from the inside.</strong> Building the layouts myself showed me how the design actually becomes a page.</li>
-            </ul>
-            <p>Designing for AI from the inside changed how I design for it. Structure the output, and the interface can be calm.</p>
-          </aside>
+            <ol class="lt-stairs">
+              <li class="lt s1">
+                <button type="button" class="lt-pill" aria-expanded="false" aria-controls="lt-d0"><span class="lt-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3.5 17.5l3 3 5.8-5.8a4 4 0 0 0 5.4-5.4l-2.4 2.4-2.6-.4-.4-2.6z"/></svg></span><span class="lt-title">New tools, fast.</span><span class="lt-n">01</span><span class="lt-plus" aria-hidden="true"></span></button>
+                <span class="lt-text" id="lt-d0">I picked up tools I had never used and learned them by building.</span>
+              </li>
+              <li class="lt s2">
+                <button type="button" class="lt-pill" aria-expanded="false" aria-controls="lt-d1"><span class="lt-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0-3.5 10.9V17h7v-3.1A6 6 0 0 0 12 3zM9.5 20.5h5"/></svg></span><span class="lt-title">Teaching myself.</span><span class="lt-n">02</span><span class="lt-plus" aria-hidden="true"></span></button>
+                <span class="lt-text" id="lt-d1">When something didn't work, I found the way through on my own.</span>
+              </li>
+              <li class="lt s3">
+                <button type="button" class="lt-pill" aria-expanded="false" aria-controls="lt-d2"><span class="lt-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 7H6a4 4 0 0 0 0 8h3M15 7h3a4 4 0 0 1 0 8h-3M8 11h8"/></svg></span><span class="lt-title">Everything has to connect.</span><span class="lt-n">03</span><span class="lt-plus" aria-hidden="true"></span></button>
+                <span class="lt-text" id="lt-d2">Screens, APIs, data and voice only become an app once every piece is wired together.</span>
+              </li>
+              <li class="lt s4">
+                <button type="button" class="lt-pill" aria-expanded="false" aria-controls="lt-d3"><span class="lt-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M13.5 4.5l-3 15"/></svg></span><span class="lt-title">CSS from the inside.</span><span class="lt-n">04</span><span class="lt-plus" aria-hidden="true"></span></button>
+                <span class="lt-text" id="lt-d3">Building the layouts myself showed me how the design actually becomes a page.</span>
+              </li>
+            </ol>
+            <p class="lt-close">Designing for AI from the inside changed how I design for it. <span>Structure the output, and the interface can be calm.</span></p>
+          </div>
         </section>
 
         <section id="learnings">
@@ -950,11 +1027,6 @@ body.p-dream {
               <li style="--i:1"><span class="n">02</span><div><strong>Interpretation length.</strong><p>Some wanted it shorter, others wanted more room for it. Next step: test both.</p></div></li>
             </ol>
           </div>
-        </section>
-
-        <section id="reflection">
-          <h2>Reflection</h2>
-          <p class="todo">TODO: 3–4 sentences in your voice. What was hardest about designing for something this personal, what building it yourself taught you, and what you'd change.</p>
         </section>
 
         <nav class="more" aria-label="More projects">
@@ -1098,6 +1170,14 @@ body.p-dream {
     prev.disabled = row.scrollLeft <= 4;
     next.disabled = row.scrollLeft + row.clientWidth >= row.scrollWidth - 4;
   }
+  // Clicking a card's progress bar moves on to the next card (the last one goes back to the first).
+  var cards = row.querySelectorAll('.rj-card');
+  cards.forEach(function (c, i) {
+    c.querySelector('.rj-track').addEventListener('click', function () {
+      var t = cards[(i + 1) % cards.length];
+      row.scrollTo({ left: t.getBoundingClientRect().left - row.getBoundingClientRect().left + row.scrollLeft });
+    });
+  });
   prev.addEventListener('click', function () { row.scrollBy({ left: -step() }); });
   next.addEventListener('click', function () { row.scrollBy({ left: step() }); });
   row.addEventListener('keydown', function (e) {
@@ -1108,16 +1188,84 @@ body.p-dream {
   window.addEventListener('resize', update);
   update();
 })();
-// Section videos: each plays once when it comes into view; hovering it plays it again from the start.
-document.querySelectorAll('.ob-media video').forEach(function (v) {
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  function play() { if (!v.paused && !v.ended) return; v.currentTime = 0; v.play(); }
-  if ('IntersectionObserver' in window) {
-    var io = new IntersectionObserver(function (e) { if (e[0].isIntersecting) { io.disconnect(); play(); } }, { threshold: 0.5 });
-    io.observe(v);
+
+// Key screens carousel: the middle phone is large, the others smaller and angled. Click a side phone (or
+// swipe, arrows, keys) to bring it to the middle; click the middle one to flip it. A video plays once when
+// its screen comes to the middle.
+(function () {
+  var root = document.querySelector('.sc');
+  if (!root) return;
+  var items = Array.prototype.slice.call(root.querySelectorAll('.sc-item'));
+  var prev = root.querySelector('.prev'), next = root.querySelector('.next'), count = root.querySelector('.sc-count');
+  var cur = 0, n = 0, small = matchMedia('(max-width: 640px)');
+  function layout() {
+    var gap = small.matches ? 150 : 240;
+    n = items.length;
+    items.forEach(function (it, i) {
+      var d = ((i - cur) % n + n + Math.floor(n / 2)) % n - Math.floor(n / 2), a = Math.abs(d);
+      if (small.matches) {
+        // phones: one screen at a time, sliding in flat from the side
+        it.style.transform = 'translateX(' + (d * 115) + '%)';
+        it.style.zIndex = String(10 - a);
+        it.style.opacity = d === 0 ? '1' : '0';
+        it.style.pointerEvents = d === 0 ? '' : 'none';
+      } else {
+        // the middle screen is full size; each step out is smaller, so the row stays inside the content area
+        var x = [0, 175, 320][a] * Math.sign(d), sc = [1, .8, .62][a];
+        it.style.transform = 'translateX(' + x + 'px) scale(' + sc + ') rotateY(' + (-Math.sign(d) * a * 16) + 'deg)';
+        it.style.zIndex = String(10 - a);
+        it.style.opacity = a === 2 ? '.55' : '1';
+        it.style.pointerEvents = '';
+      }
+      it.classList.toggle('center', d === 0);
+      if (d !== 0) it.classList.remove('flipped');
+    });
+    count.textContent = (cur + 1) + ' / ' + items.length;
+    var v = items[cur].querySelector('video');
+    items.forEach(function (it, i) { var x = it.querySelector('video'); if (x && i !== cur) x.pause(); });
+    if (v && !matchMedia('(prefers-reduced-motion: reduce)').matches) { v.currentTime = 0; v.play(); }
   }
-  v.closest('.ob-media').addEventListener('mouseenter', play);
-});
+  function go(i) { cur = (i % items.length + items.length) % items.length; layout(); }
+  items.forEach(function (it, i) {
+    it.querySelector('.sc-card').addEventListener('click', function () {
+      if (dragged) return;
+      if (i === cur) it.classList.toggle('flipped'); else go(i);
+    });
+  });
+  prev.addEventListener('click', function () { go(cur - 1); });
+  next.addEventListener('click', function () { go(cur + 1); });
+  root.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowLeft') { e.preventDefault(); go(cur - 1); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); go(cur + 1); }
+  });
+  var track = root.querySelector('.sc-track'), sx = null, dragged = false;
+  track.addEventListener('pointerdown', function (e) { sx = e.clientX; dragged = false; });
+  window.addEventListener('pointerup', function (e) {
+    if (sx === null) return;
+    var dx = e.clientX - sx; sx = null;
+    if (Math.abs(dx) > 40) { dragged = true; go(cur + (dx < 0 ? 1 : -1)); setTimeout(function () { dragged = false; }, 50); }
+  });
+  small.addEventListener('change', layout);
+  // play the first video only once the carousel is on screen
+  layout();
+  var v0 = items[cur].querySelector('video'); if (v0) v0.pause();
+  var io = new IntersectionObserver(function (e) { if (e[0].isIntersecting) { io.disconnect(); layout(); } }, { threshold: 0.4 });
+  io.observe(root);
+})();
+// Learnings: click a pill to open what it taught me.
+(function () {
+  var items = document.querySelectorAll('.lt');
+  if (!items.length) return;
+  document.documentElement.classList.add('js-lt');
+  items.forEach(function (s) {
+    var b = s.querySelector('.lt-pill');
+    b.addEventListener('click', function () {
+      var open = !s.classList.contains('open');
+      s.classList.toggle('open', open);
+      b.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  });
+})();
 </script>
 </body>
 </html>
