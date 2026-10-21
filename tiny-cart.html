@@ -443,6 +443,35 @@ body.p-cart .cs-body p, body.p-cart .cs-body li { font-size: 18px; line-height: 
   .js-reveal .reveal.is-visible .frame { clip-path: inset(0 0 0 0 round 20px); }
   .js-reveal .reveal.is-visible img { opacity: 1; transform: none; }
 }
+/* key decision: concepts in a horizontal row; the chosen one is last */
+.concept-stack {
+  display: flex; gap: 18px; margin: 16px clamp(-200px, -12vw, 0px) 0 0; padding: 4px 4px 24px 0;
+  overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; scroll-behavior: smooth; scrollbar-width: none;
+}
+.concept-stack::-webkit-scrollbar { display: none; }
+.concept-stack .concept {
+  flex: 0 0 min(520px, 86%); scroll-snap-align: start; margin: 0;
+  display: flex; flex-direction: column; gap: 18px; padding: 16px 16px 20px; border-radius: 20px; background: #fff;
+  box-shadow: 0 1px 2px rgba(22, 26, 44, .04), 0 18px 40px -26px rgba(80, 50, 10, .35);
+}
+.concept-stack .concept.chosen { box-shadow: inset 0 0 0 2px #DB870F, 0 18px 40px -26px rgba(80, 50, 10, .35); }
+.concept-stack .concept-shot { margin: 0; }
+.concept-stack .concept-shot .frame { height: 340px; min-height: 0; padding: 20px; border-radius: 14px; overflow: hidden; }
+.concept-stack .concept-shot img { width: auto; height: auto; max-width: 100%; max-height: 300px; border-radius: 8px; }
+.concept-stack .concept-text { padding: 0 4px; }
+.concept-stack .concept h3 { margin-top: 0 !important; }
+.concept-stack .concept dl { grid-template-columns: 1fr; gap: 2px; }
+.concept-stack .concept dd { margin-bottom: 0; }
+.cs-nav { display: flex; gap: 10px; margin: 4px 0 0; }
+.cs-btn { display: grid; place-items: center; width: 38px; height: 38px; padding: 0; border: 0; border-radius: 50%; background: #111210; color: #fff; cursor: pointer; transition: background .2s ease, opacity .2s ease; }
+.cs-btn:hover { background: #000; }
+.cs-btn:disabled { opacity: .3; cursor: default; }
+.cs-btn svg { width: 16px; height: 16px; }
+@media (max-width: 640px) {
+  .concept-stack { margin-right: 0; }
+  .concept-stack .concept-shot .frame { height: 240px; }
+  .concept-stack .concept-shot img { max-height: 200px; }
+}
 </style>
   <link rel="stylesheet" href="reveal.css">
   <script>document.documentElement.classList.add('rv-on');setTimeout(function(){if(!window.__rv)document.documentElement.classList.remove('rv-on');},2500);</script>
@@ -512,8 +541,7 @@ body.p-cart .cs-body p, body.p-cart .cs-body li { font-size: 18px; line-height: 
 
         <section id="starting-point">
           <h2>Starting point</h2>
-          <p>Shoppers reach the Tiny Cart from three places: the cart icon, and the “Add to Cart” button on product and category pages.</p>
-          <p>Store owners could only design it through the cart icon settings, and had to set its behavior in three different places. Design options were limited: button text, fonts, colors, backgrounds, and styling for the success pop up. And they designed it without seeing it: there was no preview of the pop up.</p>
+          <p>Tiny Cart configuration was fragmented and limited: store owners had to manage settings across three places, with few customization options and no preview of the success pop up.</p>
           <figure class="shot">
           <div class="frame"><img src="tiny-cart-before.webp" alt="Before: the cart icon settings panel" loading="lazy" onerror="this.parentNode.classList.add('missing')"><span class="lbl">Before: the cart icon settings panel</span></div>
           <figcaption>The only way into Tiny Cart design, with no preview.</figcaption>
@@ -546,33 +574,41 @@ body.p-cart .cs-body p, body.p-cart .cs-body li { font-size: 18px; line-height: 
 
         <section id="decision">
           <h2>Key decision: Where store owners design the Tiny Cart</h2>
-          <p class="kicker-cart">3 concepts explored</p>
 
+          <div class="concept-stack" tabindex="0" aria-label="Concepts explored">
           <div class="concept">
-            <figure class="shot concept-shot reveal">
-              <div class="frame"><img src="tiny-cart-concept-1.png" alt="Cart Icon panel with a Settings tab where store owners choose between showing the side cart or opening the full cart page" loading="lazy" onerror="this.parentNode.classList.add('missing')"><span class="lbl">Concept 1</span></div>
+            <figure class="shot concept-shot">
+              <div class="frame"><img src="tiny-cart-concept-3.webp" decoding="async" alt="Unified Cart item panel with tabs for cart icon, pop up, setting and manage, showing pop up customization options" onerror="this.parentNode.classList.add('missing')"><span class="lbl">Concept 1</span></div>
             </figure>
-            <h3>Concept 1. Inside the cart icon panel</h3>
-            <p>Store owners choose what happens when shoppers click the cart icon: Side Cart, full cart page, or pop up.</p>
-            <dl><dt>Why not</dt><dd>Editing stays hidden in the cart icon, with no preview of the pop up.</dd></dl>
-          </div>
-
-          <div class="concept chosen">
-            <figure class="shot concept-shot reveal">
-              <div class="frame"><img src="tiny-cart-concept-2.png" alt="Editor pages menu listing Side Cart and the pop up cart under Cart and Thank You in Store Pages" loading="lazy" onerror="this.parentNode.classList.add('missing')"><span class="lbl">Concept 2</span></div>
-            </figure>
-            <h3>Concept 2. Its own page in the Editor<span class="badge">Chosen</span></h3>
-            <p>The pop up cart appears under Store Pages, right next to the Side Cart.</p>
-            <dl><dt>Why</dt><dd>It follows a pattern store owners already know from the Side Cart, gives the Tiny Cart a clear entry point, and opens editing with a live preview. Access from the cart icon stayed, so existing users didn't face a dramatic change.</dd></dl>
-          </div>
-
-          <div class="concept">
-            <figure class="shot concept-shot reveal">
-              <div class="frame"><img src="tiny-cart-concept-3.png" alt="Unified Cart item panel with tabs for cart icon, pop up, setting and manage, showing pop up customization options" loading="lazy" onerror="this.parentNode.classList.add('missing')"><span class="lbl">Concept 3</span></div>
-            </figure>
-            <h3>Concept 3. One unified cart panel</h3>
+            <div class="concept-text">
+            <h3>Concept 1. One unified cart panel</h3>
             <p>A single side panel with tabs for the cart icon, pop up, settings and management.</p>
             <dl><dt>Why not</dt><dd>Everything in one panel made it crowded, and the pop up was still reached through the cart.</dd></dl>
+            </div>
+          </div>
+          <div class="concept">
+            <figure class="shot concept-shot">
+              <div class="frame"><img src="tiny-cart-concept-1.webp" decoding="async" alt="Cart Icon panel with a Settings tab where store owners choose between showing the side cart or opening the full cart page" onerror="this.parentNode.classList.add('missing')"><span class="lbl">Concept 2</span></div>
+            </figure>
+            <div class="concept-text">
+            <h3>Concept 2. Inside the cart icon panel</h3>
+            <p>Store owners choose what happens when shoppers click the cart icon: Side Cart, full cart page, or pop up.</p>
+            <dl><dt>Why not</dt><dd>Editing stays hidden in the cart icon, with no preview of the pop up.</dd></dl>
+            </div>
+          </div>
+          <div class="concept chosen">
+            <figure class="shot concept-shot">
+              <div class="frame"><img src="tiny-cart-concept-2.webp" decoding="async" alt="Editor pages menu listing Side Cart and the pop up cart under Cart and Thank You in Store Pages" onerror="this.parentNode.classList.add('missing')"><span class="lbl">Concept 3</span></div>
+            </figure>
+            <div class="concept-text">
+            <h3>Concept 3. Its own page in the Editor<span class="badge">Chosen</span></h3>
+            <p>The pop up cart appears under Store Pages, right next to the Side Cart.</p>
+            <dl><dt>Why</dt><dd>It follows a pattern store owners already know from the Side Cart, gives the Tiny Cart a clear entry point, and opens editing with a live preview. Access from the cart icon stayed, so existing users didn't face a dramatic change.</dd></dl>
+            </div>
+          </div>
+          <div class="cs-nav">
+            <button type="button" class="cs-btn prev" aria-label="Previous concept"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 4L6 9l5 5"/></svg></button>
+            <button type="button" class="cs-btn next" aria-label="Next concept"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4l5 5-5 5"/></svg></button>
           </div>
         </section>
 
@@ -709,6 +745,26 @@ body.p-cart .cs-body p, body.p-cart .cs-body li { font-size: 18px; line-height: 
   items.forEach(function (el) { observer.observe(el); });
 })();
 
+// Key decision concepts: arrows move one card at a time; buttons dim at the ends.
+(function () {
+  var row = document.querySelector('.concept-stack');
+  if (!row) return;
+  var prev = document.querySelector('.cs-btn.prev'), next = document.querySelector('.cs-btn.next');
+  function step() { var c = row.querySelector('.concept'); return c ? c.offsetWidth + 18 : 300; }
+  function update() {
+    prev.disabled = row.scrollLeft <= 4;
+    next.disabled = row.scrollLeft + row.clientWidth >= row.scrollWidth - 4;
+  }
+  prev.addEventListener('click', function () { row.scrollBy({ left: -step() }); });
+  next.addEventListener('click', function () { row.scrollBy({ left: step() }); });
+  row.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { e.preventDefault(); next.click(); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); prev.click(); }
+  });
+  row.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+})();
 </script>
 </body>
 </html>
