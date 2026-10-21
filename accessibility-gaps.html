@@ -445,19 +445,38 @@ body.p-hotjar .cs-cover .shot .frame img { border-radius: 10px; box-shadow: 0 20
 .rule span { display: block; font-size: 14px; line-height: 1.5; color: var(--muted); }
 .sol-cards { max-width: 1230px; }
 .problems b { font-size: 19px; }
-/* flow: two staggered columns along a center line */
-.flow-steps { position: relative; display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); column-gap: clamp(24px, 2.6vw, 40px); margin-top: 28px; }
-/* images reach a little past their column toward the outer edges, so they read larger */
-@media (min-width: 901px) {
-  .flow-col:not(.right) .fstep .shot { margin-left: -36px; }
-  .flow-col.right .fstep .shot { margin-right: -36px; }
+/* flow: a dashed line with step badges; short text on the left, a large screen on the right */
+.flow-tl { position: relative; display: grid; gap: clamp(56px, 7vw, 96px); margin-top: 36px; }
+.flow-tl::before { content: ""; position: absolute; left: calc((100% - 104px) * .3 + 52px); top: 0; bottom: 0; border-left: 1.5px dashed #C9CEE0; transform: translateX(-50%); }
+.fstep { position: relative; display: grid; grid-template-columns: minmax(0,.6fr) 64px minmax(0,1.4fr); column-gap: 20px; align-items: start; }
+.ft-text { grid-column: 1; grid-row: 1; padding-top: 6px; }
+.ft-badge { grid-column: 2; grid-row: 1; }
+.ft-media { grid-column: 3; grid-row: 1; }
+.cs-body .ft-text h3 { margin: 0 0 8px; font-family: var(--display); font-weight: 500; font-size: 16px; line-height: 1.4; letter-spacing: -0.01em; color: var(--ink); }
+.cs-body .ft-text p { margin: 0 !important; font-size: 18px; line-height: 1.6; color: var(--muted); }
+.ft-badge {
+  position: relative; z-index: 1; justify-self: center; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  width: 68px; height: 68px; border-radius: 50%; border: 0; background: var(--paper);
+  font-family: var(--display); font-weight: 600; font-size: 20px; line-height: 1; color: var(--ink);
 }
-
-.flow-col { display: grid; gap: clamp(64px, 9vw, 140px); align-content: start; }
-.flow-col.right { padding-top: clamp(120px, 18vw, 260px); }
-.fstep .pill { display: inline-block; background: #E4E4E4; border-radius: 999px; padding: 8px 28px; font-weight: 500; font-size: 19px; line-height: 1.3; color: var(--ink); margin: 0 0 14px; }
-.fstep p { margin: 0 0 16px !important; }
-.fstep .shot { margin: 0; }
+.ft-badge small { margin-bottom: 4px; font-family: var(--text, inherit); font-size: 9px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; }
+.ft-media .shot { margin: 0; }
+/* step 03: heatmap and session replay share one spot, with a switch above */
+.ft-tabs { display: inline-flex; gap: 4px; margin: 0 0 12px; padding: 4px; border-radius: 999px; background: #E9EAEF; }
+.ft-tabs button { padding: 6px 14px; border: 0; border-radius: 999px; background: none; font: inherit; font-size: 14px; font-weight: 500; color: var(--muted); cursor: pointer; transition: background .2s ease, color .2s ease; }
+.ft-tabs button[aria-selected="true"] { background: #fff; color: var(--ink); box-shadow: 0 1px 3px rgba(22, 26, 44, .12); }
+.ft-view[hidden] { display: none; }
+/* screens reach past the column toward the outer edges, so they read larger */
+@media (min-width: 901px) {
+  .fstep .ft-media .shot { margin-right: calc(-1 * min(260px, 24px + max(0px, (100vw - 1180px) / 2))); }
+}
+@media (max-width: 900px) {
+  .flow-tl::before { left: 32px; }
+  .fstep, .fstep.flip { grid-template-columns: 64px minmax(0,1fr); column-gap: 18px; row-gap: 18px; }
+  .ft-badge, .fstep.flip .ft-badge { grid-column: 1; grid-row: 1 / 3; align-self: start; width: 58px; height: 58px; font-size: 18px; }
+  .ft-text, .fstep.flip .ft-text { grid-column: 2; grid-row: 1; padding-top: 0; }
+  .ft-media, .fstep.flip .ft-media { grid-column: 2; grid-row: 2; }
+}
 /* iterations */
 .iter-sub { font-size: 14px !important; font-weight: 600; color: var(--hotjar-ink) !important; margin: -6px 0 16px !important; }
 .iter { background: #fff; border-radius: 18px; padding: 22px 26px 18px; margin-top: 16px; }
@@ -475,6 +494,45 @@ body.p-hotjar .cs-cover .shot .frame img { border-radius: 10px; box-shadow: 0 20
 .future span { font-size: 15px; line-height: 1.5; color: var(--muted); }
 .cs-body h3.sub { font-family: var(--display); font-weight: 500; font-size: 21px; margin: 32px 0 0; }
 .cs-body section > p, .cs-body section > .problems, .cs-body section > .sol-cards { max-width: 760px; }
+/* guiding rules */
+.guide { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px; margin: 20px 0 0; padding: 0; }
+.cs-body .guide li { display: flex; flex-direction: column; gap: 14px; margin: 0; padding: 20px 20px 22px; border-radius: 16px; background: #fff; font-size: 16px; line-height: 1.5; color: var(--ink); max-width: none; }
+.g-n { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 10px; background: #FCE6DE; color: var(--hotjar-ink); font-size: 13px; font-weight: 600; }
+@media (max-width: 900px) { .guide { grid-template-columns: 1fr; } }
+/* guiding rules and how-it-works cards reach a little past the column on the right, so each card is wider */
+@media (min-width: 901px) {
+  .cs-body .guide, body .cs-body ol.hw { margin-right: calc(-1 * min(140px, 24px + max(0px, (100vw - 1180px) / 2))); }
+}
+/* how the experience works: a row of cards with a progress bar on each; arrows or the bar move to the next card */
+.cs-body ol.hw { list-style: none; padding: 0 0 56px; margin: 22px 0 0; max-width: none; display: flex; gap: 18px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; scrollbar-width: none; outline: none; }
+.cs-body ol.hw::-webkit-scrollbar { display: none; }
+.cs-body .hw-card { flex: 0 0 calc((100% - 36px) / 3); scroll-snap-align: start; margin: 0; max-width: none; padding: 20px 20px 22px; border-radius: 20px; color: var(--ink); }
+.cs-body .hw-2 { transform: translateY(56px); }
+.hw-1 { background: #FDEDE8; } .hw-2 { background: #FBE1D8; }
+.cs-body .hw-3 { background: #3A1C17; color: #fff; }
+.hw-track { position: relative; display: flex; justify-content: space-between; margin: 0 0 28px; padding: 6px 0; cursor: pointer; }
+.hw-track::before { content: ""; position: absolute; left: 6px; right: 6px; top: 50%; height: 1px; background: rgba(22, 26, 44, .25); }
+.hw-track span { position: relative; width: 12px; height: 12px; border-radius: 50%; background: transparent; border: 1.5px solid rgba(22, 26, 44, .4); }
+.hw-track span.on { background: #D9382D; border-color: #D9382D; transform: scale(1.25); }
+.hw-3 .hw-track::before { background: rgba(255,255,255,.35); }
+.hw-3 .hw-track span { border-color: rgba(255,255,255,.6); }
+.hw-3 .hw-track span.on { background: #EE7F66; border-color: #EE7F66; }
+.hw-n { display: block; font-size: 13px; font-weight: 500; letter-spacing: .06em; color: var(--hotjar-ink); margin-bottom: 6px; }
+.hw-3 .hw-n { color: #F6C2AA; }
+.cs-body .hw-card h3 { margin: 0 0 10px; font-size: 22px; font-weight: 500; line-height: 1.25; letter-spacing: -0.01em; color: inherit; }
+.cs-body .hw-card p { margin: 0 !important; font-size: 15px; line-height: 1.55; color: var(--muted); max-width: none; }
+.cs-body .hw-3 p { color: rgba(255,255,255,.78); }
+.hw-nav { display: flex; gap: 10px; margin: 6px 0 0; }
+.hw-nav[hidden] { display: none; }
+.hw-btn { display: grid; place-items: center; width: 28px; height: 28px; padding: 0; border: 0; background: none; color: var(--ink); cursor: pointer; transition: color .2s ease, opacity .2s ease; }
+.hw-btn:hover { color: var(--hotjar-ink); }
+.hw-btn:disabled { opacity: .3; cursor: default; }
+.hw-btn svg { width: 18px; height: 18px; }
+@media (max-width: 900px) {
+  .cs-body ol.hw { padding-bottom: 0; }
+  .cs-body .hw-2 { transform: none; }
+  .cs-body .hw-card { flex-basis: min(280px, 78%); }
+}
 @media (max-width: 900px) {
   .methods, .future { grid-template-columns: 1fr; }
   .rules { grid-template-columns: 1fr; padding: 8px 4px; }
@@ -482,10 +540,6 @@ body.p-hotjar .cs-cover .shot .frame img { border-radius: 10px; box-shadow: 0 20
 
 }
 @media (max-width: 720px) {
-  .flow-steps { display: flex; flex-direction: column; gap: 48px; }
-  .flow-steps::before { display: none; }
-  .flow-col { display: contents; }
-  .fstep { order: var(--o); }
   .iter dl { grid-template-columns: 1fr; gap: 2px; }
   .iter dd { margin-bottom: 10px; }
   .findings li { grid-template-columns: 28px minmax(0,1fr); gap: 12px; }
@@ -665,13 +719,15 @@ body.p-hotjar .cs-body .rs-find p { margin: 14px 0 0 !important; font-size: 16px
             <li><a href="#intro">Introduction</a></li>
             <li><a href="#what">What is Hotjar</a></li>
             <li><a href="#problem">The problem</a></li>
+            <li><a href="#solution">The solution</a></li>
             <li><a href="#research">Research</a></li>
             <li><a href="#findings">Findings</a></li>
-            <li><a href="#solution">The solution</a></li>
-            <li><a href="#architecture">Architecture</a></li>
+            <li><a href="#rules">Guiding rules</a></li>
             <li><a href="#flow">The flow</a></li>
+            <li><a href="#how">How it works</a></li>
             <li><a href="#iterations">Iterations</a></li>
             <li><a href="#testing">User testing</a></li>
+            <li><a href="#future">Future direction</a></li>
             <li><a href="#learnings">Learnings</a></li>
           </ol>
         </nav>
@@ -699,6 +755,11 @@ body.p-hotjar .cs-body .rs-find p { margin: 14px 0 0 !important; font-size: 16px
             <li><b>Hotjar sees behavior, not who is left behind.</b><span>It records how people use a site, but shows nothing about accessibility issues or their impact.</span></li>
             <li><b>The gaps don't look like bugs.</b><span>When interfaces ignore differences in ability, culture or digital literacy, some groups get unequal access, and nobody goes looking for it.</span></li>
           </ul>
+        </section>
+
+        <section id="solution">
+          <h2>The solution</h2>
+          <p>A centralized Accessibility Issues page that transforms accessibility into actionable user insights.</p>
         </section>
 
         <section id="research">
@@ -750,55 +811,69 @@ body.p-hotjar .cs-body .rs-find p { margin: 14px 0 0 !important; font-size: 16px
           </div>
         </section>
 
-        <section id="solution">
-          <h2>The solution</h2>
-          <p>An Accessibility Analysis page that shows who struggles, where, and how much.</p>
-          <figure class="shot"><div class="frame sol-anim"><div class="hj-stage" role="img" aria-label="From the Hotjar home dashboard, a click on Accessibility analysis opens the issues table"><img class="hj-heat" src="hotjar-card-heatmap.webp" width="1865" height="1080" alt=""><img class="hj-analysis" src="hotjar-card-analysis.webp" width="1865" height="1080" alt=""><img class="hj-home" src="hotjar-card-home.webp" width="1865" height="1080" alt=""><span class="hj-pill"></span><span class="hj-ring"></span><svg class="hj-cursor" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3l14 8.2-6.3 1.5L9.6 19z" fill="#20211F" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/></svg></div></div><figcaption><b>Issues table.</b> The affected group is the point of each row. Data is illustrative.</figcaption></figure>
-          <div class="sol-cards">
-            <div class="sol-card"><b>1. Detects</b><span>Finds behavior that deviates from the average, like early exits, repeated clicks or partial scrolling.</span></div>
-            <div class="sol-card"><b>2. Shows who it affects</b><span>Every issue comes with the affected group (age, device, location) and the share of users impacted.</span></div>
-            <div class="sol-card"><b>3. Links to the evidence</b><span>Each issue opens straight into a heatmap or session replay.</span></div>
-          </div>
-        </section>
-
-        <section id="architecture">
-          <h2>Architecture</h2>
-          <ul class="problems">
-            <li><b>Primary navigation</b><span>A new Accessibility Analysis item, next to Heatmaps and Session Replay.</span></li>
-            <li><b>Home dashboard</b><span>An Accessibility issue impact card that opens a panel with a chart, a guide to reading it, and links to issues.</span></li>
-            <li><b>The issues table</b><span>Each row is one issue, with the affected group, the page and the share of users impacted. Issues can be saved to Favorites.</span></li>
-            <li><b>Existing tools</b><span>Every row links to a heatmap or session replay, already filtered to the affected group.</span></li>
-          </ul>
+        <section id="rules">
+          <h2>Guiding rules</h2>
+          <ol class="guide">
+            <li><span class="g-n">01</span><span>Builds on behavioral data and existing Hotjar tools (heatmaps, recordings, and flow data).</span></li>
+            <li><span class="g-n">02</span><span>Surfaces accessibility gaps by user populations.</span></li>
+            <li><span class="g-n">03</span><span>Identifies behavioral patterns in comparison to the overall average.</span></li>
+          </ol>
         </section>
 
         <section id="flow">
           <h2>The flow</h2>
           <p>A product manager checks the site on Monday morning:</p>
-          <div class="flow-steps">
-            <div class="flow-col">
-              <div class="fstep" style="--o:1">
-                <h3 class="pill">Step 01. Notice</h3>
-                <p>On the home dashboard, the Accessibility issue impact card shows how many new issues.</p>
-                <figure class="shot"><div class="frame"><img src="hotjar-flow-1.webp" alt="Home dashboard with the Accessibility issue impact card" loading="lazy" onerror="this.parentNode.classList.add('missing')"><span class="lbl">Home dashboard with the impact card</span></div></figure>
-              </div>
-              <div class="fstep" style="--o:3">
-                <h3 class="pill">Step 03. Investigate</h3>
-                <p>She opens the heatmap, already filtered to users aged 60+, and sees where they get stuck.</p>
-                <figure class="shot"><div class="frame"><video src="hotjar-flow-3.mp4" poster="hotjar-flow-3-poster.jpg" aria-label="Heatmap filtered to users aged 60+" autoplay muted loop playsinline preload="metadata"></video></div></figure>
+          <div class="flow-tl">
+            <div class="fstep">
+              <div class="ft-text"><h3>Notice</h3><p>On the home dashboard, the Accessibility issue impact card shows how many new issues.</p></div>
+              <span class="ft-badge" aria-hidden="true"><small>Step</small>01</span>
+              <div class="ft-media"><figure class="shot"><div class="frame"><img src="hotjar-card-home.webp" width="1865" height="1080" alt="Home dashboard with the Accessibility issue impact card" loading="lazy" onerror="this.parentNode.classList.add('missing')"><span class="lbl">Home dashboard with the impact card</span></div></figure></div>
+            </div>
+            <div class="fstep">
+              <div class="ft-text"><h3>Accessibility Dashboard</h3><p>The table shows that users aged 60+ on desktop leave the homepage more than average, 7% of users.</p></div>
+              <span class="ft-badge" aria-hidden="true"><small>Step</small>02</span>
+              <div class="ft-media"><figure class="shot"><div class="frame"><img src="hotjar-card-analysis.webp" width="1865" height="1080" alt="Issues table showing users aged 60+ on desktop leaving the homepage" loading="lazy" onerror="this.parentNode.classList.add('missing')"><span class="lbl">Issues table</span></div></figure></div>
+            </div>
+            <div class="fstep">
+              <div class="ft-text"><h3>Heatmap and session replay</h3><p>She opens the heatmap and the session replays, already filtered to users aged 60+, and sees where they get stuck.</p></div>
+              <span class="ft-badge" aria-hidden="true"><small>Step</small>03</span>
+              <div class="ft-media">
+                <div class="ft-tabs" role="tablist" aria-label="Investigate the issue">
+                  <button type="button" role="tab" id="ft-t0" aria-controls="ft-v0" aria-selected="true">Heatmap</button>
+                  <button type="button" role="tab" id="ft-t1" aria-controls="ft-v1" aria-selected="false" tabindex="-1">Session replay</button>
+                </div>
+                <figure class="shot ft-view" id="ft-v0" role="tabpanel" aria-labelledby="ft-t0"><div class="frame"><video src="hotjar-flow-3.mp4" poster="hotjar-flow-3-poster.jpg" aria-label="Heatmap filtered to users aged 60+" autoplay muted loop playsinline preload="metadata"></video></div></figure>
+                <figure class="shot ft-view" id="ft-v1" role="tabpanel" aria-labelledby="ft-t1" hidden><div class="frame"><img src="hotjar-session-replay.webp" width="1920" height="1104" alt="Session Replay page with a recorded session ready to play" loading="lazy"></div></figure>
               </div>
             </div>
-            <div class="flow-col right">
-              <div class="fstep" style="--o:2">
-                <h3 class="pill">Step 02. Understand</h3>
-                <p>The table shows that users aged 60+ on desktop leave the homepage more than average, 7% of users.</p>
-                <figure class="shot"><div class="frame"><img src="hotjar-flow-2.webp" alt="Issues table showing users aged 60+ on desktop leaving the homepage" loading="lazy" onerror="this.parentNode.classList.add('missing')"><span class="lbl">Issues table</span></div></figure>
-              </div>
-              <div class="fstep" style="--o:4">
-                <h3 class="pill">Step 04. Track</h3>
-                <p>She saves the issue to Favorites to check whether the fix works.</p>
-                <figure class="shot"><div class="frame"><img src="hotjar-flow-4.png" alt="The issue saved to Favorites" loading="lazy" onerror="this.parentNode.classList.add('missing')"><span class="lbl">Issue saved to Favorites</span></div></figure>
-              </div>
-            </div>
+          </div>
+        </section>
+
+        <section id="how">
+          <h2>How the experience works</h2>
+          <ol class="hw" tabindex="0" aria-label="How the experience works">
+            <li class="hw-card hw-1">
+              <div class="hw-track" title="Next"><span class="on"></span><span></span><span></span></div>
+              <span class="hw-n">01</span>
+              <h3>Detects</h3>
+              <p>Finds behavior that deviates from the average, like early exits, repeated clicks or partial scrolling.</p>
+            </li>
+            <li class="hw-card hw-2">
+              <div class="hw-track" title="Next"><span></span><span class="on"></span><span></span></div>
+              <span class="hw-n">02</span>
+              <h3>Shows who it affects</h3>
+              <p>Every issue comes with the affected group (age, device, location) and the share of users impacted.</p>
+            </li>
+            <li class="hw-card hw-3">
+              <div class="hw-track" title="Next"><span></span><span></span><span class="on"></span></div>
+              <span class="hw-n">03</span>
+              <h3>Links to the evidence</h3>
+              <p>Each issue opens straight into a heatmap or session replay.</p>
+            </li>
+          </ol>
+          <div class="hw-nav">
+            <button type="button" class="hw-btn prev" aria-label="Previous card"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 4L6 9l5 5"/></svg></button>
+            <button type="button" class="hw-btn next" aria-label="Next card"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4l5 5-5 5"/></svg></button>
           </div>
         </section>
 
@@ -849,12 +924,8 @@ body.p-hotjar .cs-body .rs-find p { margin: 14px 0 0 !important; font-size: 16px
           <p>We tested the prototype with a product manager from the industry (not from Hotjar), and with students and lecturers. Some participants found parts of the feature hard to understand, which showed us what to develop next.</p>
         </section>
 
-        <section id="learnings">
-          <h2>Learnings</h2>
-          <p class="learn"><b>1. Accessibility is also cultural.</b><span>Gaps between groups don't show up as bugs. You only see them when you split the data by population.</span></p>
-          <p class="learn"><b>2. A new feature has to speak the product's language.</b><span>Most of the options we rejected failed because they didn't feel like part of Hotjar.</span></p>
-          <p class="learn"><b>3. Data needs explaining.</b><span>In testing, not everyone found the data easy to read. Making the metrics clearer is the first thing to improve.</span></p>
-          <h3 class="sub">Future direction</h3>
+        <section id="future">
+          <h2>Future direction</h2>
           <div class="rollout">
             <div class="ro-step">
               <button type="button" class="ro-head" id="ro-b0" aria-controls="ro-p0" aria-expanded="true"><span class="ro-dot"></span><span class="ro-label">Today</span></button>
@@ -869,6 +940,13 @@ body.p-hotjar .cs-body .rs-find p { margin: 14px 0 0 !important; font-size: 16px
               <div class="ro-body" id="ro-p2" role="region" aria-labelledby="ro-b2"><p>AI driven recommendations for corrective actions.</p></div>
             </div>
           </div>
+        </section>
+
+        <section id="learnings">
+          <h2>Learnings</h2>
+          <p class="learn"><b>1. Accessibility is also cultural.</b><span>Gaps between groups don't show up as bugs. You only see them when you split the data by population.</span></p>
+          <p class="learn"><b>2. A new feature has to speak the product's language.</b><span>Most of the options we rejected failed because they didn't feel like part of Hotjar.</span></p>
+          <p class="learn"><b>3. Data needs explaining.</b><span>In testing, not everyone found the data easy to read. Making the metrics clearer is the first thing to improve.</span></p>
           <!-- TODO: add "See the interactive prototype" link once the URL is ready -->
         </section>
 
@@ -1039,6 +1117,55 @@ document.querySelectorAll('.cmp').forEach(function (cmp) {
       var open = !s.classList.contains('open');
       s.classList.toggle('open', open);
       b.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  });
+})();
+// How the experience works: arrows move one card at a time; clicking a card's progress bar moves to the next card.
+(function () {
+  var row = document.querySelector('ol.hw');
+  if (!row) return;
+  var prev = document.querySelector('.hw-btn.prev'), next = document.querySelector('.hw-btn.next');
+  var cards = row.querySelectorAll('.hw-card');
+  function step() { return cards[0].offsetWidth + 18; }
+  function update() {
+    prev.disabled = row.scrollLeft <= 4;
+    next.disabled = row.scrollLeft + row.clientWidth >= row.scrollWidth - 4;
+    prev.parentNode.hidden = row.scrollWidth <= row.clientWidth + 4;
+  }
+  function go(c) { row.scrollTo({ left: c.getBoundingClientRect().left - row.getBoundingClientRect().left + row.scrollLeft }); }
+  cards.forEach(function (c, i) {
+    c.querySelector('.hw-track').addEventListener('click', function () { go(cards[(i + 1) % cards.length]); });
+  });
+  prev.addEventListener('click', function () { row.scrollBy({ left: -step() }); });
+  next.addEventListener('click', function () { row.scrollBy({ left: step() }); });
+  row.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { e.preventDefault(); next.click(); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); prev.click(); }
+  });
+  row.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+})();
+// Flow step 03: switch between the heatmap and the session replay in the same spot.
+(function () {
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.ft-tabs [role="tab"]'));
+  if (!tabs.length) return;
+  function pick(t) {
+    tabs.forEach(function (b) {
+      var on = b === t, panel = document.getElementById(b.getAttribute('aria-controls'));
+      b.setAttribute('aria-selected', on ? 'true' : 'false');
+      b.tabIndex = on ? 0 : -1;
+      panel.hidden = !on;
+      var v = panel.querySelector('video');
+      if (v) { if (on) { v.currentTime = 0; v.play().catch(function () {}); } else v.pause(); }
+    });
+  }
+  tabs.forEach(function (t, i) {
+    t.addEventListener('click', function () { pick(t); });
+    t.addEventListener('keydown', function (e) {
+      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+      var n = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length];
+      pick(n); n.focus();
     });
   });
 })();

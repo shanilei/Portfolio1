@@ -563,7 +563,7 @@ body.p-dream {
 .js-lt .p-dream .cs-body .lt:not(.open) .lt-text { display: none; }
 .js-lt .lt.open .lt-text { animation: lt-in .3s ease both; }
 @keyframes lt-in { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
-.p-dream .cs-body .lt-close { margin: 28px 0 0 !important; font-size: clamp(19px, 1.7vw, 22px) !important; line-height: 1.5 !important; color: var(--muted); max-width: 640px; }
+.p-dream .cs-body .lt-close { margin: 0 0 20px; }
 .p-dream .cs-body .lt-close span { color: var(--ink); font-weight: 500; }
 @media (max-width: 900px) {
   .p-dream .cs-body ol.lt-stairs { margin-right: 0; }
@@ -571,6 +571,10 @@ body.p-dream {
 }
 @media (max-width: 640px) {
   .lt-pill { white-space: normal; }
+  .lt-title { font-size: 14px; }
+  .p-dream .cs-body .lt-text { font-size: 14px; }
+  /* text under screens: 12px everywhere on this page */
+  html body.p-dream figcaption, html body.p-dream figcaption b, html body.p-dream figcaption span { font-size: 12px !important; }
 }
 
 /* key learnings / future direction: tabs once the script runs, both lists stacked without it */
@@ -984,6 +988,7 @@ body.p-dream {
           <p>A full design token system and a written prompt guide let me move designs into code with exact values, not approximations. The analysis engine is a TypeScript service that uses Claude through the Anthropic SDK, with tool use to return structured output: symbols, emotions and interpretation as data the UI can render.</p>
           <div class="dj-learned">
             <h3>What building it taught me</h3>
+            <p class="lt-close">Designing for AI from the inside changed how I design for it. <span>Structure the output, and the interface can be calm.</span></p>
             <ol class="lt-stairs">
               <li class="lt s1">
                 <button type="button" class="lt-pill" aria-expanded="false" aria-controls="lt-d0"><span class="lt-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3.5 17.5l3 3 5.8-5.8a4 4 0 0 0 5.4-5.4l-2.4 2.4-2.6-.4-.4-2.6z"/></svg></span><span class="lt-title">New tools, fast.</span><span class="lt-n">01</span><span class="lt-plus" aria-hidden="true"></span></button>
@@ -1002,7 +1007,6 @@ body.p-dream {
                 <span class="lt-text" id="lt-d3">Building the layouts myself showed me how the design actually becomes a page.</span>
               </li>
             </ol>
-            <p class="lt-close">Designing for AI from the inside changed how I design for it. <span>Structure the output, and the interface can be calm.</span></p>
           </div>
         </section>
 
