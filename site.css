@@ -63,3 +63,95 @@
   html body .about-copy, html body .col p { font-size: 14px !important; }
   html body .cs-body .problems b, html body .cs-body .learn b { font-size: 18px !important; font-weight: 400 !important; }
 }
+
+/* ---------- Contact: cards scattered across the screen ---------- */
+.ct {
+  position: fixed; inset: 0; z-index: 10000; overflow: hidden;
+  background: rgba(17, 18, 16, .42); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  font-family: "Poppins", "Helvetica Neue", Arial, sans-serif; text-align: left;
+  opacity: 0; transition: opacity .3s ease;
+}
+.ct[hidden] { display: none; }
+.ct.show { opacity: 1; }
+html.ct-lock { overflow: hidden; }
+.ct-field { position: absolute; inset: 0; }
+.ct-close { position: absolute; right: clamp(16px, 2.5vw, 32px); top: clamp(16px, 2.5vw, 32px); z-index: 200; display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 0; border-radius: 50%; background: #fff; color: #111210; cursor: pointer; transition: transform .25s ease; }
+.ct-close:hover { transform: rotate(90deg); }
+.ct-close svg { width: 18px; height: 18px; }
+.ct-hint { position: absolute; left: 50%; bottom: 22px; margin: 0; transform: translateX(-50%); font-size: 13px; color: rgba(255,255,255,.75); opacity: 0; transition: opacity .4s ease 1s; pointer-events: none; }
+.ct.show .ct-hint { opacity: 1; }
+
+/* each card: placed by --x/--y (centre point) and tilted by --r; flies out from the click (--fx/--fy) */
+.ct-card {
+  position: absolute; left: var(--x); top: var(--y); width: 236px; min-height: 290px; margin: 0;
+  display: flex; flex-direction: column; padding: 20px 20px 18px; border-radius: 26px;
+  background: #EEEAF7; color: #1B1640; box-shadow: 0 30px 60px -28px rgba(17, 18, 16, .55);
+  cursor: grab; user-select: none; touch-action: none;
+  transform: translate(calc(-50% + var(--fx, 0px)), calc(-50% + var(--fy, 0px))) rotate(0deg) scale(.2); opacity: 0;
+  transition: transform .9s cubic-bezier(.2, 1.25, .35, 1) calc(var(--i) * 70ms), opacity .3s ease calc(var(--i) * 70ms), box-shadow .25s ease;
+}
+.ct.show .ct-card { transform: translate(calc(-50% + var(--dx, 0px)), calc(-50% + var(--dy, 0px))) rotate(var(--r)) scale(var(--s, 1)); opacity: 1; }
+.ct.show .ct-card:hover { transform: translate(calc(-50% + var(--dx, 0px)), calc(-50% + var(--dy, 0px))) rotate(0deg) scale(calc(var(--s, 1) * 1.04)); transition-delay: 0s; transition-duration: .35s; box-shadow: 0 40px 70px -26px rgba(17, 18, 16, .6); }
+.ct.show .ct-card.drag { transition: none; cursor: grabbing; }
+.ct-mail { --x: 50%; --y: 47%; --r: 3deg; width: 268px; background: #fff; z-index: 6; }
+.ct-cv   { --x: 26%; --y: 31%; --r: -9deg; background: #FBE3EC; }
+.ct-li   { --x: 75%; --y: 28%; --r: 8deg;  background: #E3E9FB; }
+.ct-talk { --x: 29%; --y: 73%; --r: 6deg;  background: #FCEBCD; }
+.ct-me   { --x: 72%; --y: 72%; --r: -6deg; background: #111210; color: #fff; }
+
+.ct-ic { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 15px; background: rgba(27, 22, 64, .08); }
+.ct-ic svg { width: 24px; height: 24px; }
+.ct-mail .ct-ic { background: #111210; color: #fff; }
+.ct-li .ct-ic { color: #0A66C2; }
+.ct-emoji { font-size: 36px; line-height: 1; }
+.ct-title { margin-top: auto; padding-top: 28px; font-size: 26px; font-weight: 500; line-height: 1.1; letter-spacing: -0.02em; }
+.ct-text { margin-top: 6px; font-size: 14px; line-height: 1.45; color: rgba(27, 22, 64, .65); overflow-wrap: anywhere; }
+.ct-me .ct-text { color: rgba(255,255,255,.6); margin-top: 0; }
+.ct-actions { display: flex; gap: 6px; margin-top: 16px; }
+.ct-btn { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; height: 36px; padding: 0 12px; border: 0; border-radius: 999px; background: rgba(27, 22, 64, .08); color: #1B1640; font: inherit; font-size: 13px; font-weight: 500; text-decoration: none; cursor: pointer; transition: background .2s ease, transform .2s ease; }
+.ct-btn:hover { transform: translateY(-1px); }
+.ct-btn.dark { background: #111210; color: #fff; }
+.ct-btn.done { background: #7BE08B; color: #111210; }
+.ct-btn svg { width: 15px; height: 15px; }
+.ct-soon { align-self: flex-start; margin-top: 16px; padding: 6px 12px; border-radius: 999px; border: 1px dashed rgba(27, 22, 64, .35); font-size: 12px; color: rgba(27, 22, 64, .7); }
+.ct-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+.ct-chips span { padding: 5px 10px; border-radius: 999px; background: rgba(255,255,255,.75); font-size: 12px; }
+.ct-role { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.6); }
+.ct-sig { margin: auto 0 10px; font-family: "Instrument Serif", Georgia, serif; font-size: 72px; line-height: 1; }
+.ct-toast { position: absolute; left: 50%; top: 26px; z-index: 300; padding: 8px 14px; border-radius: 999px; background: #fff; color: #111210; font-size: 13px; font-weight: 500; opacity: 0; transform: translate(-50%, -6px); transition: opacity .2s ease, transform .2s ease; pointer-events: none; }
+.ct-toast.on { opacity: 1; transform: translate(-50%, 0); }
+
+/* desktop: larger cards, spread a little wider */
+@media (min-width: 901px) {
+  .ct-card { width: 284px; min-height: 350px; padding: 24px 24px 22px; border-radius: 30px; }
+  .ct-mail { width: 322px; }
+  .ct-cv   { --x: 24%; --y: 30%; }
+  .ct-li   { --x: 77%; --y: 29%; }
+  .ct-talk { --x: 27%; --y: 74%; }
+  .ct-me   { --x: 74%; --y: 73%; }
+  .ct-ic { width: 56px; height: 56px; border-radius: 17px; }
+  .ct-ic svg { width: 28px; height: 28px; }
+  .ct-emoji { font-size: 42px; }
+  .ct-title { font-size: 31px; }
+  .ct-text { font-size: 15px; }
+  .ct-btn { height: 40px; padding: 0 14px; font-size: 14px; }
+  .ct-soon, .ct-chips span { font-size: 13px; }
+  .ct-sig { font-size: 88px; }
+}
+/* shorter desktop screens: the same cards, scaled down so they keep their spacing */
+@media (min-width: 901px) and (max-height: 860px) { .ct-card { --s: .86; } }
+@media (min-width: 901px) and (max-height: 760px) { .ct-card { --s: .74; } }
+/* phones: the cards stack down the screen, still a little tilted, and the overlay scrolls */
+@media (max-width: 900px) {
+  .ct { overflow-y: auto; }
+  .ct-field { position: relative; inset: auto; display: flex; flex-direction: column; align-items: center; gap: 0; padding: 84px 16px 48px; }
+  .ct-card { position: relative; left: auto; top: auto; width: min(320px, 88%); min-height: 0; margin-top: -18px; cursor: default; touch-action: auto;
+    transform: translate(var(--fx, 0px), var(--fy, 0px)) scale(.2); }
+  .ct-card:first-child { margin-top: 0; }
+  .ct.show .ct-card, .ct.show .ct-card:hover { transform: rotate(var(--r)); }
+  .ct-mail { --r: 2deg; order: 1; } .ct-cv { --r: -3deg; order: 2; } .ct-li { --r: 3deg; order: 3; } .ct-talk { --r: -2deg; order: 4; } .ct-me { --r: 2deg; order: 5; }
+  .ct-title { padding-top: 18px; font-size: 22px; }
+  .ct-sig { font-size: 56px; margin: 18px 0 8px; }
+  .ct-hint { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { .ct, .ct-card { transition: none; } }
