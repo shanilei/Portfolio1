@@ -27,8 +27,8 @@
 // They fly out from where you clicked and land tilted; hover straightens a card, and on desktop they can be dragged.
 (function () {
   var EMAIL = 'shanilei.st2@gmail.com';
-  var LINKEDIN = '';   // profile link; until it's set the card says it's on the way
-  var CV = '';         // CV file; until it's set the card says it's on the way
+  var LINKEDIN = 'https://www.linkedin.com/in/shani-leibner-78ba64358/';
+  var CV = 'shani-leibner-cv.pdf';
   if (!document.querySelector('link[href*="Instrument+Serif"]')) {
     var f = document.createElement('link');
     f.rel = 'stylesheet';

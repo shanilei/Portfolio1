@@ -459,7 +459,7 @@ body.p-checkout .cs-body h3.sub { font-size: 21px; font-weight: 500; margin: 0 0
 .anat-data .ln { display: block; margin: 0 -8px; padding: 0 8px; border-radius: 6px; transition: background .25s ease, color .25s ease; }
 .anat-arrow { font-size: 26px; color: #fff; text-shadow: 0 2px 10px rgba(22, 26, 44, .2); }
 .rec-card {
-  display: flex; flex-direction: column; align-items: flex-start; gap: 8px; padding: 22px 22px 20px; border-radius: 14px;
+  display: flex; flex-direction: column; align-items: flex-start; gap: 8px; padding: 22px 22px 20px 48px; border-radius: 14px;
   background: #fff; border: 1px solid #C9D8F7; box-shadow: 0 20px 50px -20px rgba(20, 16, 60, .4);
   font-family: "Helvetica Neue", Arial, sans-serif; color: #20303C;
 }
@@ -469,8 +469,15 @@ body.p-checkout .cs-body h3.sub { font-size: 21px; font-weight: 500; margin: 0 0
 body.p-checkout .cs-body .rc-reason { margin: 0; font-family: inherit; font-size: 15px; line-height: 1.45; color: #4F5D6B; max-width: none; letter-spacing: 0; }
 .rc-btn { display: inline-flex; align-items: center; gap: 6px; margin-top: 6px; padding: 6px 14px; border: 1px solid #C9D8F7; border-radius: 999px; font-size: 15px; font-weight: 600; color: #116DFF; }
 .rc-btn svg { width: 16px; height: 16px; }
+/* numbers that tie the list, the data and the card together without needing a hover */
+.anat-n { display: inline-grid; place-items: center; width: 20px; height: 20px; margin-right: 8px; border-radius: 50%; background: #3346F0; color: #fff; font-size: 11px; font-weight: 600; line-height: 1; vertical-align: 2px; font-family: "Poppins", sans-serif; }
+.anat-n.sm { width: 16px; height: 16px; margin-right: 6px; font-size: 10px; background: rgba(124, 140, 255, .45); vertical-align: 0; }
+.anat-pin { position: absolute; left: -36px; top: 50%; display: grid; place-items: center; width: 20px; height: 20px; margin-top: -10px; border-radius: 50%; background: #3346F0; color: #fff; font-size: 11px; font-weight: 600; line-height: 1; font-family: "Poppins", sans-serif; box-shadow: 0 0 0 3px #fff; transition: transform .25s ease; }
+.anatomy-host[data-active="tag"] [data-part="tag"] .anat-pin, .anatomy-host[data-active="title"] [data-part="title"] .anat-pin, .anatomy-host[data-active="reason"] [data-part="reason"] .anat-pin, .anatomy-host[data-active="action"] [data-part="action"] .anat-pin { transform: scale(1.2); }
 .rec-card [data-part] { position: relative; border-radius: 6px; transition: box-shadow .25s ease, background-color .25s ease; }
 body.p-checkout .cs-body .anat-list li { border-radius: 8px; margin-left: -8px; padding: 2px 8px; cursor: default; transition: background .25s ease; }
+body.p-checkout .cs-body ul.anat-list { list-style: none; padding-left: 0; }
+body.p-checkout .cs-body ul.anat-list ul.anat-sub { margin-left: 28px; }
 /* highlight the hovered part everywhere it appears */
 .anatomy-host[data-active="tag"] [data-part="tag"],
 .anatomy-host[data-active="title"] [data-part="title"],
@@ -698,8 +705,7 @@ body.p-checkout .cs-body ul.voices.chat .who { font-size: 12px; }
           <li><a href="#voices">User voices</a></li>
           <li><a href="#research">Research</a></li>
           <li><a href="#concept">The concept</a></li>
-          <li><a href="#decision">A key decision</a></li>
-          <li><a href="#design">The design</a></li>
+          <li><a href="#design">A key decision</a></li>
           <li><a href="#placement">Where it lives</a></li>
           <li><a href="#iterations">Iterations</a></li>
           <li><a href="#trust">Making AI trustworthy</a></li>
@@ -860,23 +866,19 @@ body.p-checkout .cs-body ul.voices.chat .who { font-size: 12px; }
           <p class="kicker">Percentages are illustrative.</p>
         </section>
 
-        <section id="decision">
+        <section id="design" class="anatomy-host">
           <h2>A key decision: one benchmarked number, one action</h2>
           <p>The goal wasn't to give merchants more information, but to help them identify where to focus. Each recommendation connected a store specific insight to a measurable benchmark, making the opportunity clear and the next step concrete.</p>
-        </section>
-
-        <section id="design" class="anatomy-host">
-          <h2>The design: one component, one anatomy</h2>
           <p>I translated this principle into a reusable recommendation component. Every recommendation uses the same structure, so merchants learn to read it once and know how to act on it.</p>
           <ul class="anat-list">
-            <li data-part="tag"><strong>Tag:</strong> relevant area</li>
-            <li data-part="title"><strong>Recommendation:</strong> suggested action
+            <li data-part="tag"><span class="anat-n" aria-hidden="true">1</span><strong>Tag:</strong> relevant area</li>
+            <li data-part="title"><span class="anat-n" aria-hidden="true">2</span><strong>Recommendation:</strong> suggested action
               <ul class="anat-sub">
                 <li><strong>Title:</strong> the actual suggested action, which can remain relatively standard across users.</li>
               </ul>
             </li>
-            <li data-part="reason"><strong>Reasoning (personalized):</strong> explains why this recommendation matters, using their data.</li>
-            <li data-part="action"><strong>CTA</strong>
+            <li data-part="reason"><span class="anat-n" aria-hidden="true">3</span><strong>Reasoning (personalized):</strong> explains why this recommendation matters, using their data.</li>
+            <li data-part="action"><span class="anat-n" aria-hidden="true">4</span><strong>CTA</strong>
               <ul class="anat-sub">
                 <li><strong>Let’s Do It:</strong> navigates to Aria and performs the action, the user only needs to approve.</li>
                 <li><strong>Show Me How:</strong> navigates to the page and opens Aria with instructions.</li>
@@ -887,21 +889,21 @@ body.p-checkout .cs-body ul.voices.chat .who { font-size: 12px; }
             <div class="anat-stage">
               <div class="anat-data" aria-label="Simplified structured output from the model">
                 <span class="anat-cap">Data from the model</span>
-<pre><code>{<span class="ln" data-part="tag">  "category": "Delivery",</span><span class="ln" data-part="title">  "action": "Add Free Shipping above a minimum amount",</span><span class="ln" data-part="reason">  "reason": "Paid shipping only increases drop off.",
-  "metric": { "store": 0.41, "benchmark": 0.57 },</span><span class="ln" data-part="action">  "cta": { "label": "Let's Do It", "via": "Aria" }</span>}</code></pre>
+<pre><code>{<span class="ln" data-part="tag"><span class="anat-n sm" aria-hidden="true">1</span>  "category": "Delivery",</span><span class="ln" data-part="title"><span class="anat-n sm" aria-hidden="true">2</span>  "action": "Add Free Shipping above a minimum amount",</span><span class="ln" data-part="reason"><span class="anat-n sm" aria-hidden="true">3</span>  "reason": "Paid shipping only increases drop off.",
+  "metric": { "store": 0.41, "benchmark": 0.57 },</span><span class="ln" data-part="action"><span class="anat-n sm" aria-hidden="true">4</span>  "cta": { "label": "Let's Do It", "via": "Aria" }</span>}</code></pre>
               </div>
               <div class="anat-arrow" aria-hidden="true">→</div>
               <div class="anat-card-wrap">
                 <span class="anat-cap">What the merchant sees</span>
                 <div class="rec-card">
-                  <span class="rc-tag" data-part="tag"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 5h9v8h-9zM11.5 8h3.2l2.3 2.6V13h-5.5z"/><circle cx="6" cy="14" r="1.6" fill="#fff"/><circle cx="14.5" cy="14" r="1.6" fill="#fff"/></svg>Delivery</span>
-                  <strong class="rc-title" data-part="title">Add Free Shipping above a minimum amount</strong>
-                  <p class="rc-reason" data-part="reason">Paid shipping only increases drop off. Adding free shipping may improve progression (41% vs. 57%).</p>
-                  <span class="rc-btn" data-part="action"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" aria-hidden="true"><path d="M8 2.5l1.6 4.4L14 8.5l-4.4 1.6L8 14.5l-1.6-4.4L2 8.5l4.4-1.6zM15 12l.7 1.8 1.8.7-1.8.7L15 17l-.7-1.8-1.8-.7 1.8-.7z"/></svg>Let’s Do It</span>
+                  <span class="rc-tag" data-part="tag"><span class="anat-pin" aria-hidden="true">1</span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 5h9v8h-9zM11.5 8h3.2l2.3 2.6V13h-5.5z"/><circle cx="6" cy="14" r="1.6" fill="#fff"/><circle cx="14.5" cy="14" r="1.6" fill="#fff"/></svg>Delivery</span>
+                  <strong class="rc-title" data-part="title"><span class="anat-pin" aria-hidden="true">2</span>Add Free Shipping above a minimum amount</strong>
+                  <p class="rc-reason" data-part="reason"><span class="anat-pin" aria-hidden="true">3</span>Paid shipping only increases drop off. Adding free shipping may improve progression (41% vs. 57%).</p>
+                  <span class="rc-btn" data-part="action"><span class="anat-pin" aria-hidden="true">4</span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" aria-hidden="true"><path d="M8 2.5l1.6 4.4L14 8.5l-4.4 1.6L8 14.5l-1.6-4.4L2 8.5l4.4-1.6zM15 12l.7 1.8 1.8.7-1.8.7L15 17l-.7-1.8-1.8-.7 1.8-.7z"/></svg>Let’s Do It</span>
                 </div>
               </div>
             </div>
-            <figcaption><b>Recommendation card.</b> The model returns structured data, and every field has one place in the card. Hover a part to see where it comes from. Simplified.</figcaption>
+            <figcaption><b>Recommendation card.</b> The model returns structured data, and the numbers show where each field lands in the card. Simplified.</figcaption>
           </figure>
         </section>
 
@@ -1019,7 +1021,7 @@ body.p-checkout .cs-body ul.voices.chat .who { font-size: 12px; }
           <div class="more-list">
             <a class="more-card mc-dream" href="dream-journal.html">
               <span class="meta">Self initiated, 2025–26</span>
-              <strong>Dream Journal</strong>
+              <strong>Lucid · Dream app</strong>
               <span class="desc">A bilingual app that turns a fragment of a dream into symbols, emotion and meaning. Designed and built solo.</span>
               <span class="go">View project →</span>
             </a>
@@ -1094,13 +1096,15 @@ body.p-checkout .cs-body ul.voices.chat .who { font-size: 12px; }
   });
 })();
 
-// Design anatomy: hovering a part (list, data or card) highlights it in all three; the card assembles on first view.
+// Design anatomy: numbers tie each list item, data line and card part together. Hovering a part highlights it
+// in all three; on first view the card assembles and each part lights up in turn, once.
 (function () {
   var host = document.querySelector('.anatomy-host');
   if (!host) return;
+  var hovering = false;
   host.querySelectorAll('[data-part]').forEach(function (el) {
-    el.addEventListener('mouseenter', function () { host.setAttribute('data-active', el.getAttribute('data-part')); });
-    el.addEventListener('mouseleave', function () { host.removeAttribute('data-active'); });
+    el.addEventListener('mouseenter', function () { hovering = true; host.setAttribute('data-active', el.getAttribute('data-part')); });
+    el.addEventListener('mouseleave', function () { hovering = false; host.removeAttribute('data-active'); });
   });
 
   var fig = host.querySelector('.anatomy');
@@ -1118,6 +1122,11 @@ body.p-checkout .cs-body ul.voices.chat .who { font-size: 12px; }
       });
     });
     requestAnimationFrame(function () { fig.classList.remove('build'); });
+    // light up each part as it lands, then let go
+    order.forEach(function (part, i) {
+      setTimeout(function () { if (!hovering) host.setAttribute('data-active', part); }, 400 + i * 550 + 260);
+    });
+    setTimeout(function () { if (!hovering) host.removeAttribute('data-active'); }, 400 + order.length * 550 + 700);
     setTimeout(function () {
       fig.querySelectorAll('[style*="transition-delay"]').forEach(function (el) { el.style.transitionDelay = ''; });
     }, 400 + order.length * 550 + 900);
