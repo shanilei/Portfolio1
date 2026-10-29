@@ -274,7 +274,7 @@ body.p-cart     { --grad: linear-gradient(118deg, #9C5806 0%, #DB870F 52%, #F0B9
 .cs-side .back { display: inline-block; color: var(--muted); text-decoration: none; margin-bottom: 36px; }
 .cs-side .back:hover { color: var(--ink); }
 .toc ol { list-style: none; margin: 0; padding: 0; }
-.toc a { display: block; padding: 5px 0; color: #9AA0B0; text-decoration: none; transition: color .2s; }
+.toc a { display: block; padding: 5px 0; color: #666B79; text-decoration: none; transition: color .2s; }
 .toc a:hover { color: var(--ink); }
 .toc a.is-active { color: var(--ink); font-weight: 500; }
 
@@ -285,7 +285,7 @@ body.p-cart     { --grad: linear-gradient(118deg, #9C5806 0%, #DB870F 52%, #F0B9
 }
 .facts { margin: 40px 0 0; padding: 0; display: grid; gap: 12px; }
 .facts div { display: grid; grid-template-columns: 160px minmax(0, 1fr); gap: 16px; }
-.facts dt { color: #9AA0B0; font-size: 16px; }
+.facts dt { color: #666B79; font-size: 16px; }
 .facts dd { margin: 0; font-size: 16px; color: var(--ink); }
 
 .cs-body section { padding-bottom: 80px; scroll-margin-top: 32px; }
@@ -303,7 +303,7 @@ body.p-cart     { --grad: linear-gradient(118deg, #9C5806 0%, #DB870F 52%, #F0B9
 .cs-body strong { color: var(--ink); font-weight: 600; }
 .cs-body ul { padding-left: 1.1em; margin: 0 0 1em; }
 .cs-body li { margin-bottom: 0.4em; }
-.cs-body .kicker { font-size: 14px; color: #9AA0B0; margin: 0 0 10px; }
+.cs-body .kicker { font-size: 14px; color: #666B79; margin: 0 0 10px; }
 
 blockquote.voice {
   margin: 28px 0; padding: 4px 0 4px 22px; border-left: 3px solid var(--accent);
@@ -328,7 +328,7 @@ blockquote.voice {
 .decision dd { margin: 0; font-size: 17px; line-height: 1.55; color: var(--muted); }
 
 figure { margin: 36px 0; }
-figcaption { font-size: 15px; color: #9AA0B0; margin-top: 12px; max-width: 64ch; line-height: 1.5; }
+figcaption { font-size: 15px; color: #666B79; margin-top: 12px; max-width: 64ch; line-height: 1.5; }
 figcaption b { color: var(--ink); font-weight: 500; }
 .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 .pair figure { margin: 0; }
@@ -341,7 +341,7 @@ figcaption b { color: var(--ink); font-weight: 500; }
 }
 
 .next { display: block; text-decoration: none; border-top: 1px solid var(--line); padding: 36px 0 56px; }
-.next span { font-size: 15px; color: #9AA0B0; display: block; margin-bottom: 8px; }
+.next span { font-size: 15px; color: #666B79; display: block; margin-bottom: 8px; }
 .next strong { font-family: var(--text); font-weight: 500; font-size: clamp(30px, 4vw, 48px); line-height: 1.05; }
 .next:hover strong { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.14em; }
 
@@ -825,12 +825,12 @@ body.p-hotjar .cs-body .rs-find p { margin: 14px 0 0 !important; font-size: 16px
           <p>A product manager checks the site on Monday morning:</p>
           <div class="flow-tl">
             <div class="fstep">
-              <div class="ft-text"><h3>Notice</h3><p>On the home dashboard, the Accessibility issue impact card shows how many new issues.</p></div>
+              <div class="ft-text"><h3>Notice</h3><p>On the home dashboard, the Accessibility issue impact card shows how many new issues there are.</p></div>
               <span class="ft-badge" aria-hidden="true"><small>Step</small>01</span>
               <div class="ft-media"><figure class="shot"><div class="frame"><img src="hotjar-card-home.webp" width="1865" height="1080" alt="Home dashboard with the Accessibility issue impact card" loading="lazy" onerror="this.parentNode.classList.add('missing')"><span class="lbl">Home dashboard with the impact card</span></div></figure></div>
             </div>
             <div class="fstep">
-              <div class="ft-text"><h3>Accessibility Dashboard</h3><p>The table shows that users aged 60+ on desktop leave the homepage more than average, 7% of users.</p></div>
+              <div class="ft-text"><h3>Accessibility Dashboard</h3><p>The table shows that users aged 60+ on desktop leave the homepage more than average: 7% of users.</p></div>
               <span class="ft-badge" aria-hidden="true"><small>Step</small>02</span>
               <div class="ft-media"><figure class="shot"><div class="frame"><img src="hotjar-card-analysis.webp" width="1865" height="1080" alt="Issues table showing users aged 60+ on desktop leaving the homepage" loading="lazy" onerror="this.parentNode.classList.add('missing')"><span class="lbl">Issues table</span></div></figure></div>
             </div>
@@ -842,7 +842,7 @@ body.p-hotjar .cs-body .rs-find p { margin: 14px 0 0 !important; font-size: 16px
                   <button type="button" role="tab" id="ft-t0" aria-controls="ft-v0" aria-selected="true">Heatmap</button>
                   <button type="button" role="tab" id="ft-t1" aria-controls="ft-v1" aria-selected="false" tabindex="-1">Session replay</button>
                 </div>
-                <figure class="shot ft-view" id="ft-v0" role="tabpanel" aria-labelledby="ft-t0"><div class="frame"><video src="hotjar-flow-3.mp4" poster="hotjar-flow-3-poster.jpg" aria-label="Heatmap filtered to users aged 60+" autoplay muted loop playsinline preload="metadata"></video></div></figure>
+                <figure class="shot ft-view" id="ft-v0" role="tabpanel" aria-labelledby="ft-t0"><div class="frame"><video src="hotjar-flow-3.mp4" poster="hotjar-flow-3-poster.jpg" aria-label="Heatmap filtered to users aged 60+" autoplay muted playsinline preload="metadata"></video></div></figure>
                 <figure class="shot ft-view" id="ft-v1" role="tabpanel" aria-labelledby="ft-t1" hidden><div class="frame"><img src="hotjar-session-replay.webp" width="1920" height="1104" alt="Session Replay page with a recorded session ready to play" loading="lazy"></div></figure>
               </div>
             </div>
@@ -1040,7 +1040,7 @@ body.p-hotjar .cs-body .rs-find p { margin: 14px 0 0 !important; font-size: 16px
   document.querySelectorAll('.fstep .frame img, .fstep .frame video').forEach(function (m) {
     if (m.parentNode.classList.contains('missing')) return;
     m.setAttribute('tabindex', '0');
-    m.setAttribute('role', 'button');
+    if (m.tagName === 'IMG') m.setAttribute('role', 'button');
     m.addEventListener('click', function () { if (!m.parentNode.classList.contains('missing')) open(m); });
     m.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(m); } });
   });
